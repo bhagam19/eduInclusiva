@@ -9,7 +9,7 @@
 //Establecer conexion
 	include('./cnx.php');
 
-	echo "<div> <a href='index.php'>Volver</a> || <a href='mostrarTablasenBD.php'>Mostrar Base de Datos</a> <br><br></div>";
+	echo "<div> <a href='../../index.php'>Volver</a><br><br></div>";
 	echo "<div> <H1>===== RESUMEN DE INSTALACIÓN ===== </H1><br><br></div>";
 
 //################### Creamos las funciones ejecutarConsulta() e insertar(). ###################		
@@ -2457,7 +2457,7 @@
 //Cerrar
 	mysqli_close($cnx);
 	
-	echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='index.php'>Volver</a> </div>";
+	echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='../../index.php'>Volver</a> </div>";
 
 	
 
