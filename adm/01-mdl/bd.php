@@ -2142,6 +2142,20 @@
 	//Ejecutar
 	ejecutarConsulta();
     
+//########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
+	// Preparamos la consulta SQL
+    $tabla = 'apoyosAbarreras';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.'(
+				id int(11) NOT NULL AUTO_INCREMENT,
+                nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+				PRIMARY KEY(id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+   
 //########## CREAR UNA TABLA DE "OCUPACIONES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'ocupaciones';
@@ -2156,7 +2170,7 @@
 	//Ejecutar
 	ejecutarConsulta();
 
-    //########## INGRESAR CONTENIDO A LA TABLA "GRUPOS ÉTNICOS" ##########
+    //########## INGRESAR CONTENIDO A LA TABLA "OCUPACIONES" ##########
         $ocupaciones = array(
             array(1,"Ama de Casa"),
             array(2,"Enfermero(a)"),
@@ -2358,14 +2372,13 @@
                 FOREIGN KEY(idAfiliacion) REFERENCES afiliaciones (id),
                 FOREIGN KEY(idDiagnostico) REFERENCES diagnosticos (id),
                 FOREIGN KEY(idTratamiento) REFERENCES tratamientos (id),
-                FOREIGN KEY(idApoyo) REFERENCES apoyos (id),
+                FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id),
                 FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id)
 
 
 			)
 		';
 	//Ejecutar
-    echo $sql;
 	ejecutarConsulta();
 
 //################### CREAR UNA TABLA DE "USUARIOS". ###################
@@ -2378,7 +2391,7 @@
                 usuarioCED int(11) NOT NULL,
                 usuario varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 contrasena varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                email varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                correo varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 nombres varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 apellidos varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 defUsuario int NOT NULL ,
