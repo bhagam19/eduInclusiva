@@ -2332,6 +2332,22 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "INFORME PEDAGÓGICO" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'informePedagogico';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				idOpcion int(2) NOT NULL,
+                razon varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                archivo blob,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idOpcion) REFERENCES opciones (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'estudiantes';
@@ -2362,6 +2378,8 @@
                 idApoyo int(2) NOT NULL,
                 idEntornoFamiliar int(11) NOT NULL,
                 idAspiraAlGrado int(2) NOT NULL,
+                ultimoGrado int(2) NOT NULL,
+                idInformePedagogico int(2) NOT NULL,
 				PRIMARY KEY(id),
                 FOREIGN KEY(idGrupo) REFERENCES gruposXgrado (id),
                 FOREIGN KEY(idTipoDoc) REFERENCES tiposDocumento (id),
@@ -2372,7 +2390,9 @@
                 FOREIGN KEY(idTratamiento) REFERENCES tratamientos (id),
                 FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id),
                 FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
-                FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id)
+                FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id),
+                FOREIGN KEY(ultimoGrado) REFERENCES grados (id),
+                FOREIGN KEY(idInformePedagogico) REFERENCES informePedagogico (id)
 
 
 			)
@@ -2484,11 +2504,11 @@
 			segundo varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			ip varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			navegador varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-			idUsuario varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+			idUsuario int(2) NOT NULL,
 			contrasena varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			pagVisitada varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
             PRIMARY KEY(id),
-            FOREIGN KEY(idUsuario) REFERENCES usuarios (usuario)
+            FOREIGN KEY(idUsuario) REFERENCES usuarios (usuarioID)
 		)';		
 	//Ejecutar	
 	ejecutarConsulta();
@@ -2499,8 +2519,8 @@
 	$tabla='logs';
 	$sql=
 		'
-			INSERT INTO '.$tabla.' (utc, anio, mes, dia, hora, minuto, segundo, ip, navegador, usuario, contrasena,pagVisitada)
-			VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome","Administrador","**********","<a href=http://../principal.php>principal</a>")			
+			INSERT INTO '.$tabla.' (utc, anio, mes, dia, hora, minuto, segundo, ip, navegador, idUsuario, contrasena,pagVisitada)
+			VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
 		';	
 	//Insertar
 	insertar();
