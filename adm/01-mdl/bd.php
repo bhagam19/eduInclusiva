@@ -2362,7 +2362,6 @@
                 idApoyo int(2) NOT NULL,
                 idEntornoFamiliar int(11) NOT NULL,
                 idAspiraAlGrado int(2) NOT NULL,
-                idVinculOtrasInst int(2) NOT NULL,
 				PRIMARY KEY(id),
                 FOREIGN KEY(idGrupo) REFERENCES gruposXgrado (id),
                 FOREIGN KEY(idTipoDoc) REFERENCES tiposDocumento (id),
@@ -2373,8 +2372,7 @@
                 FOREIGN KEY(idTratamiento) REFERENCES tratamientos (id),
                 FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id),
                 FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
-                FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id),
-                FOREIGN KEY(idVinculOtrasInst) REFERENCES vinculOtrasInst (id)
+                FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id)
 
 
 			)
