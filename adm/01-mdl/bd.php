@@ -2388,6 +2388,7 @@
 		'
 			CREATE TABLE IF NOT EXISTS '.$tabla.'(			
                 usuarioID int NOT NULL AUTO_INCREMENT,
+                foto varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 usuarioCED int(11) NOT NULL,
                 usuario varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 contrasena varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -2419,13 +2420,13 @@
 				6	Usuario 	//Usuario SuperAdministrador Frontend y Backend (Desarrollador) 
 		*/
 
-		array(71379517,71379517,"inventApp","Adolfo León","Ruiz Hernández",1,6),
-		    array(12345,12345,"admin12345","Super","Admin IE",1,6)
+		array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
+		    array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6)
 		);
 	
 	foreach ($usuarios as $usuario){
-		$sql='INSERT INTO '.$tabla.' (usuarioCED, usuario, contrasena, nombres, apellidos, defUsuario, permiso) 
-			VALUES ('.$usuario[0].','.$usuario[1].',"'.$usuario[2].'","'.$usuario[3].'","'.$usuario[4].'",'.$usuario[5].','.$usuario[6].')';
+		$sql='INSERT INTO '.$tabla.' (foto,usuarioCED, usuario, contrasena, correo, nombres, apellidos, defUsuario, permiso) 
+			VALUES ("'.$usuario[0].'",'.$usuario[1].','.$usuario[2].',"'.$usuario[3].'","'.$usuario[4].'","'.$usuario[5].'","'.$usuario[6].'",'.$usuario[7].','.$usuario[8].')';
 			insertar();		
 	}	
 
