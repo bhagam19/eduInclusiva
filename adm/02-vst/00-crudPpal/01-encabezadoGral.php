@@ -19,7 +19,7 @@
 		if(!isset($_SESSION['usuario'])){
 			echo 
 				'
-					<div class="appsInicioSesionCinta" title="Clicko para iniciar sesión." onclick="mostrarLogin()">
+					<div class="appsInicioSesionCinta" title="Click para iniciar sesión." onclick="mostrarLogin()">
 						Iniciar Sesión
 					</div>
 				';

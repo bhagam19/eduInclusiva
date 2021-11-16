@@ -182,6 +182,7 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 	//valor=ucwords(valor.toLowerCase());
 	var nombres= document.getElementById("nombres").value;
 	var apellidos= document.getElementById("apellidos").value;
+	var usuarioCED= document.getElementById("usuarioCED").value;
 	var correo= document.getElementById("correo").value;
 	var usuario= document.getElementById("usuario").value;
 	var contrasena= document.getElementById("contrasena").value;
@@ -195,6 +196,11 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 		alert("Por favor, ingrese los apellidos.");
 		document.getElementById("apellidos").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
 		document.getElementById("apellidos").focus();
+		return false;
+	}else if(usuarioCED===""){
+		alert("Por favor, ingrese número de identidad.");
+		document.getElementById("usuarioCED").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
+		document.getElementById("usuarioCED").focus();
 		return false;
 	}else if(correo===""){
 		alert("Por favor, ingrese un correo.");
@@ -223,9 +229,9 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 		}
 		if(contrasena===confirmarContrasena){
 			var xmlhttp = new XMLHttpRequest();
-	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?nombres="+nombres+"&apellidos="+apellidos+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
+	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?nombres="+nombres+"&apellidos="+apellidos+"&usuarioCED="+usuarioCED+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
 	        xmlhttp.send();
-            alert(xmlhttp.responseText);
+            //alert(xmlhttp.responseText);
 	        if(xmlhttp.responseText.trim()==="si"){
 				if(id===1){
 					var elemento=$("#handler").parent();		
@@ -242,12 +248,21 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 				if(xmlhttp.responseText.trim()==="NoUsuario"){
 					//alert(xmlhttp.responseText.trim());
 					alert("Ya existe un usuario "+usuario+". Intenta con otro.");
+					document.getElementById("usuario").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
 					document.getElementById("usuario").value="";
 					document.getElementById("usuario").focus();
+					return false;
+				}else if(xmlhttp.responseText.trim()==="NoUsuarioCED"){
+					//alert(xmlhttp.responseText.trim());
+					alert("Ya existe un registro con el número de identificación "+usuarioCED+".");
+					document.getElementById("usuarioCED").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
+					document.getElementById("usuarioCED").value="";
+					document.getElementById("usuarioCED").focus();
 					return false;
 				}else if(xmlhttp.responseText.trim()==="NoCorreo"){
 					//alert(xmlhttp.responseText.trim());
 					alert("Ya hay registrado un correo "+correo+". Intenta con otro.");
+					document.getElementById("correo").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
 					document.getElementById("correo").value="";
 					document.getElementById("correo").focus();
 					return false;
@@ -297,21 +312,17 @@ function validarNuevaContrasena(actual,nueva,confirmacion){
 	    	document.getElementById("confirmacionContrasena").value=confirmacionContrasena;
 	    	document.getElementById("confirmacionContrasena").focus();
 		}else{
-			var xmlhttp = new XMLHttpRequest();
-			        
-	        xmlhttp.open("GET", "../login/cambiarContrasena.php?actual="+actual+"&nueva="+nueva, false);
+			var xmlhttp = new XMLHttpRequest();			        
+	        xmlhttp.open("GET", "adm/03-cnt/01-crudLogin/04-cambiarContrasena.php?actual="+actual+"&nueva="+nueva, false);
 	        xmlhttp.send();
-
-	        // alert(xmlhttp.responseText.trim());
-	        
+	        //alert(xmlhttp.responseText.trim());	        
 	        if("si" === xmlhttp.responseText.trim()){
 	        	alert("La contraseña se cambió exitosamente");
-
 	        	document.getElementById("contrasenaActual").value="";
 	        	document.getElementById("nuevaContrasena").value="";
 		    	document.getElementById("confirmacionContrasena").value="";
-		    	$('.formularioNuevaContrasena').css('visibility', 'hidden');
-	        	
+		    	$('.appsFormularioNuevaContrasena').css('visibility', 'hidden');
+				document.getElementById("contrasenaCheckList").style.visibility="hidden";	        	
 	        }else{        	
 	        	alert("La contraseña no se pudo cambiar");
 	        }		
