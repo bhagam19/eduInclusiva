@@ -2105,24 +2105,7 @@
     }*/
 
     
-//########## CREAR UNA TABLA DE "CONSUMOS" ##########
-	// Preparamos la consulta SQL
-    $tabla = 'consumos';
-	$sql=
-		'
-			CREATE TABLE IF NOT EXISTS '.$tabla.'(
-				id int NOT NULL AUTO_INCREMENT,
-                idMedicamento int(2) NOT NULL,
-                idFrecuencia int(2) NOT NULL,
-                horario varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-				PRIMARY KEY(id),
-                FOREIGN KEY(idMedicamento) REFERENCES medicamentos (id),
-                FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id)
-			)
-		';
-	//Ejecutar
-	ejecutarConsulta();
-    
+
 //########## CREAR UNA TABLA DE "TERAPIAS" ##########
 	// Preparamos la consulta SQL
     $tabla = 'terapias';
@@ -2334,7 +2317,21 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
-   
+
+//########## CREAR UNA TABLA DE "ASPIRA AL GRADO" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'aspiraAlGrado';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				idGrado int(2) NOT NULL,
+				PRIMARY KEY(id),
+                FOREIGN KEY(idGrado) REFERENCES grados (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'estudiantes';
@@ -2364,6 +2361,8 @@
                 idTratamiento int(2) NOT NULL,
                 idApoyo int(2) NOT NULL,
                 idEntornoFamiliar int(11) NOT NULL,
+                idAspiraAlGrado int(2) NOT NULL,
+                idVinculOtrasInst int(2) NOT NULL,
 				PRIMARY KEY(id),
                 FOREIGN KEY(idGrupo) REFERENCES gruposXgrado (id),
                 FOREIGN KEY(idTipoDoc) REFERENCES tiposDocumento (id),
@@ -2373,14 +2372,52 @@
                 FOREIGN KEY(idDiagnostico) REFERENCES diagnosticos (id),
                 FOREIGN KEY(idTratamiento) REFERENCES tratamientos (id),
                 FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id),
-                FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id)
+                FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
+                FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id),
+                FOREIGN KEY(idVinculOtrasInst) REFERENCES vinculOtrasInst (id)
 
 
 			)
 		';
 	//Ejecutar
 	ejecutarConsulta();
-
+//########## CREAR UNA TABLA DE "VINCULADO A OTRAS INSTITUCIONES" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'vinculOtrasInst';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+                idEstudiante int(2) NOT NULL,
+				idOpciones int(2) NOT NULL,
+                razon varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+				PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                FOREIGN KEY(idOpciones) REFERENCES opciones (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "CONSUMOS" ##########
+	// Preparamos la consulta SQL
+    $tabla = 'consumos';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.'(
+				id int NOT NULL AUTO_INCREMENT,
+                idEstudiante int(2) NOT NULL,
+                idMedicamento int(2) NOT NULL,
+                idFrecuencia int(2) NOT NULL,
+                horario varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+				PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                FOREIGN KEY(idMedicamento) REFERENCES medicamentos (id),
+                FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+    
 //################### CREAR UNA TABLA DE "USUARIOS". ###################
 	//Preparar consulta SQL
 	$tabla='usuarios';
@@ -2474,6 +2511,6 @@
 
 	
 
-?>
+    ?>
 	</body>
 </html>
