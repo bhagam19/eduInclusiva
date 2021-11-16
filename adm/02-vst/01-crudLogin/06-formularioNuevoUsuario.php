@@ -13,6 +13,9 @@
 					<td><span>Apellidos: <br></span><input class="input" type="text" name="apellidos" id="apellidos" onkeyup="cambiarFondoInput(this.id)"></td>
 				</tr>
 				<tr>
+					<td><span>ID: <br></span><input class="input" type="text" name="usuarioCED" id="usuarioCED" onkeyup="cambiarFondoInput(this.id)"></td>
+				</tr>
+				<tr>
 					<td><span>Correo Electrónico: <br></span><input class="input" type="text" name="correo" id="correo" onkeyup="cambiarFondoInput(this.id)"></td>
 				</tr>
 				<tr>

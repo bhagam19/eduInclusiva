@@ -285,6 +285,7 @@ html {
 	border-bottom: 1px solid gray;
 	margin: 10px 0px;
 	padding: 10px 0px;
+	user-select: none;
 }
 .sesionImgInside {
 	margin: auto;
@@ -324,6 +325,7 @@ html {
 .appsFormularioNuevaContrasena{
 	top: 231px;
 	right: 192px;
+	user-select: none;
 }
 .appsFormularioNuevaContrasena #contrasenaCheckList{
 	position: absolute;
