@@ -2474,6 +2474,7 @@
 	$sql=
 		'
 			CREATE TABLE IF NOT EXISTS '.$tabla.'(
+            id int NOT NULL AUTO_INCREMENT,
 			utc int,
 			anio varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			mes varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
@@ -2483,10 +2484,11 @@
 			segundo varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			ip varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			navegador varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-			usuario varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+			idUsuario varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
 			contrasena varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-			pagVisitada varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci
-
+			pagVisitada varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+            PRIMARY KEY(id),
+            FOREIGN KEY(idUsuario) REFERENCES usuarios (usuario)
 		)';		
 	//Ejecutar	
 	ejecutarConsulta();
