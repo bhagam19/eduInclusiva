@@ -1,16 +1,8 @@
 <?php
 	include dirname(__FILE__).'../../../01-mdl/cnx.php';
-	$nombre="";
-	$nombres="";
-	$apellidos="";
-	$consulta=mysqli_query($cnx,"SELECT * FROM usuarios WHERE usuario=".$_SESSION['usuario']);
-	while($fila=mysqli_fetch_array($consulta)){
-		$nombres=$fila['nombres'];
-		$apellidos=$fila['apellidos'];
-		$nombre=$fila['nombres']." ".$fila['apellidos'];
-		$usuarioCED=$fila['usuarioCED'];
-	}
-echo '
+	include dirname(__FILE__).'../../../03-cnt/01-crudLogin/02-capturarDatosUsuario.php';
+?>
+
 <div id="appsFormulario" class="appsFormularioDatosUsuario">
 	<div id="">
 		<div class="sesionImgInside" title="Click para cambiar foto." onclick="">
@@ -20,15 +12,15 @@ echo '
 			<table class="" border=0>						
 				<tr>
 					<td><span class="etiqueta">Nombres: <br></span></td>
-					<td><span class="datos">'.$nombres.'</span></td>
+					<td><span class="datos"><?php echo $nombres ?></span></td>
 				</tr>
 				<tr>
 					<td><span class="etiqueta">Apellidos: <br></span></td>
-					<td><span class="datos">'.$apellidos.'</span></td>
+					<td><span class="datos"><?php echo $apellidos ?></span></td>
 				</tr>
 				<tr>
 					<td><span class="etiqueta">ID: <br></span></td>
-					<td><span class="datos">'.$usuarioCED.'</span></td>
+					<td><span class="datos"><?php echo $usuarioCED ?></span></td>
 				</tr>
 				<tr>				
 			</table> 
@@ -42,5 +34,3 @@ echo '
 	</div> 
 	<script type="text/javascript">document.getElementById("usuarioLogin").focus();</script>
 </div>
-';
-?>

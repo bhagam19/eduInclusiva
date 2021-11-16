@@ -17,19 +17,14 @@
 	</div>
 	<?php
 		if(!isset($_SESSION['usuario'])){
-			echo '
+			echo 
+				'
 					<div class="appsInicioSesionCinta" title="Clicko para iniciar sesión." onclick="mostrarLogin()">
 						Iniciar Sesión
 					</div>
-			';
+				';
 		}else{
-			include dirname(__FILE__).'../../../01-mdl/cnx.php';
-			$nombre="";
-			$consulta=mysqli_query($cnx,"SELECT * FROM usuarios WHERE usuario='".$_SESSION['usuario']."'");
-			while($fila=mysqli_fetch_array($consulta)){
-				$nombre=$fila['nombres']." ".$fila['apellidos'];
-				$usuarioCED=$fila['usuarioCED'];
-			}			
+			include dirname(__FILE__).'../../../01-mdl/cnx.php';					
 			echo '
 					<div id="appsSesionLogedIn">
 						<div class="appsSesionImg" >
