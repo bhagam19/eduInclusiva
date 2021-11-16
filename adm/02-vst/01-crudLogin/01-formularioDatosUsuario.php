@@ -28,8 +28,8 @@
 		<div class="datosPersonales" style="cursor:pointer" title="Click para mostrar y ocultar." onclick="mostrarCambiarContrasena()">
 			<span class="etiqueta">Cambiar Contraseña</span></td>
 		</div>	
-		<div class="btn" title="Click para cerrar sesión."  onclick="location.href=\'adm/03-cnt/01-crudLogin/02-cerrarSesion.php\'">
-			Cerrar Sesión
+		<div class="btn" title="Click para cerrar sesión." onclick="location.href='adm/03-cnt/01-crudLogin/03-cerrarSesion.php'">
+			Cerrar Sesión 
 		</div>
 	</div> 
 	<script type="text/javascript">document.getElementById("usuarioLogin").focus();</script>
