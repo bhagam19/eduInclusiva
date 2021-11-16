@@ -1,6 +1,6 @@
 <?php
 	include dirname(__FILE__).'../../../01-mdl/cnx.php';
-	include dirname(__FILE__).'../../../03-cnt/01-crudLogin/02-capturarDatosUsuario.php';
+	include dirname(__FILE__).'../../../03-cnt/01-crudLogin/03-capturarDatosUsuario.php';
 ?>
 
 <div id="appsFormulario" class="appsFormularioDatosUsuario">
@@ -28,7 +28,7 @@
 		<div class="datosPersonales" style="cursor:pointer" title="Click para mostrar y ocultar." onclick="mostrarCambiarContrasena()">
 			<span class="etiqueta">Cambiar Contraseña</span></td>
 		</div>	
-		<div class="btn" title="Click para cerrar sesión." onclick="location.href='adm/03-cnt/01-crudLogin/03-cerrarSesion.php'">
+		<div class="btn" title="Click para cerrar sesión." onclick="location.href='adm/03-cnt/01-crudLogin/02-cerrarSesion.php'">
 			Cerrar Sesión 
 		</div>
 	</div> 
