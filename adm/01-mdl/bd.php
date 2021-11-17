@@ -2374,6 +2374,19 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "ACTORES" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'actores';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				nombre varchar(80) NOT NULL,
+                PRIMARY KEY(id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'estudiantes';
@@ -2426,6 +2439,27 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "TERAPIAS RECIBIDAS" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'terapiasRecibidas';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+                idEstudiante int(2) NOT NULL,
+                idOpcion int(2) NOT NULL,
+                idTerapia int(2) NOT NULL,
+                idFrecuencia int(2) NOT NULL,
+				nombre varchar(80) NOT NULL,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                FOREIGN KEY(idOpcion) REFERENCES opciones (id),
+                FOREIGN KEY(idTerapia) REFERENCES terapias (id),
+                FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "VINCULADO A OTRAS INSTITUCIONES" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'vinculOtrasInst';
@@ -2469,12 +2503,12 @@
 		'
 			CREATE TABLE IF NOT EXISTS '.$tabla.' (
 				id int(2) NOT NULL,
-				idEstudiantes int(2) NOT NULL,
+				idEstudiante int(2) NOT NULL,
                 idProgramaComplementario int(2) NOT NULL,
-                idOpciones int(2) NOT NULL,
+                idOpcion int(2) NOT NULL,
                 razon varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                 PRIMARY KEY(id),
-                FOREIGN KEY(idEstudiantes) REFERENCES estudiantes (id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
                 FOREIGN KEY(idProgramaComplementario) REFERENCES programasComplementarios (id),
                 FOREIGN KEY(idOpcion) REFERENCES opciones (id)
 			)
@@ -2506,7 +2540,7 @@
 		'
 			CREATE TABLE IF NOT EXISTS '.$tabla.' (
 				id int(2) NOT NULL,
-                fechaCreación date NOT NULL,
+                fechaCreacion date NOT NULL,
                 idEstudiante int(2) NOT NULL,
 				descripcionGeneralEstud varchar(200) NOT NULL,
                 descripcionParticularEstud varchar(200) NOT NULL,
@@ -2524,7 +2558,7 @@
 			CREATE TABLE IF NOT EXISTS '.$tabla.' (
 				id int(2) NOT NULL,
                 idPiar int(2) NOT NULL,
-                idPeridoXgru
+                idPeridoXarea int(2) NOT NULL,
 				objetivo1 varchar(200) NOT NULL,
                 objetivo2 varchar(200),
                 objetivo3 varchar(200),
@@ -2537,7 +2571,27 @@
                 ajuste3 varchar(200),
                 ajuste4 varchar(200),
                 evaluacion1 varchar(200) NOT NULL,
-                PRIMARY KEY(id)
+                PRIMARY KEY(id),
+                FOREIGN KEY(idPiar) REFERENCES piar (id),
+                FOREIGN KEY(idPeridoXarea) REFERENCES periodosXarea (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "RECOMENDACIONES" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'recomendaciones';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+                idPiar int(2) NOT NULL,
+                idActores int(2) NOT NULL,
+				acciones varchar(5000) NOT NULL,
+                estrategias varchar(5000) NOT NULL,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idPiar) REFERENCES piar (id),
+                FOREIGN KEY(idActores) REFERENCES actores (id)
 			)
 		';
 	//Ejecutar
