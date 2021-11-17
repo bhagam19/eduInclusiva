@@ -2348,6 +2348,32 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "PROGRAMAS COMPLEMENTARIOS" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'programasComplementarios';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				nombre varchar(100) NOT NULL,
+                PRIMARY KEY(id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "MEDIOS DE TRANSPORTE" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'mediosTransporte';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				nombre varchar(80) NOT NULL,
+                PRIMARY KEY(id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'estudiantes';
@@ -2379,6 +2405,8 @@
                 idEntornoFamiliar int(11) NOT NULL,
                 idAspiraAlGrado int(2) NOT NULL,
                 ultimoGrado int(2) NOT NULL,
+                estadoUltimoGrado int(2) NOT NULL,
+                observaciones varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                 idInformePedagogico int(2) NOT NULL,
 				PRIMARY KEY(id),
                 FOREIGN KEY(idGrupo) REFERENCES gruposXgrado (id),
@@ -2392,9 +2420,8 @@
                 FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
                 FOREIGN KEY(idAspiraAlGrado) REFERENCES aspiraAlGrado (id),
                 FOREIGN KEY(ultimoGrado) REFERENCES grados (id),
+                FOREIGN KEY(estadoUltimoGrado) REFERENCES opciones (id),
                 FOREIGN KEY(idInformePedagogico) REFERENCES informePedagogico (id)
-
-
 			)
 		';
 	//Ejecutar
@@ -2435,7 +2462,86 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
-    
+//########## CREAR UNA TABLA DE "ASISTENCIA A PROGRAMAS COMPLEMENTARIOS" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'asistenciaProgramasComplementarios';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				idEstudiantes int(2) NOT NULL,
+                idProgramaComplementario int(2) NOT NULL,
+                idOpciones int(2) NOT NULL,
+                razon varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiantes) REFERENCES estudiantes (id),
+                FOREIGN KEY(idProgramaComplementario) REFERENCES programasComplementarios (id),
+                FOREIGN KEY(idOpcion) REFERENCES opciones (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "TRANSPORTE ESTUDIANTE" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'transporteEstudiantes';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+				idEstudiante int(2) NOT NULL,
+                idMedioTransporte int(2) NOT NULL,
+                tiempoViaje int(2) NOT NULL,
+                distanciaViaje int(2) NOT NULL,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                FOREIGN KEY(idMedioTransporte) REFERENCES mediosTransporte (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "PIAR" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'piar';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+                fechaCreación date NOT NULL,
+                idEstudiante int(2) NOT NULL,
+				descripcionGeneralEstud varchar(200) NOT NULL,
+                descripcionParticularEstud varchar(200) NOT NULL,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
+//########## CREAR UNA TABLA DE "AJUSTES RAZONABLES" ##########
+	// Preparamos la consulta SQL
+	$tabla = 'ajustesRazonables';
+	$sql=
+		'
+			CREATE TABLE IF NOT EXISTS '.$tabla.' (
+				id int(2) NOT NULL,
+                idPiar int(2) NOT NULL,
+                idPeridoXgru
+				objetivo1 varchar(200) NOT NULL,
+                objetivo2 varchar(200),
+                objetivo3 varchar(200),
+                barrera1 varchar(200) NOT NULL,
+                barrera2 varchar(200),
+                barrera3 varchar(200),
+                barrera4 varchar(200),
+                ajuste1 varchar(200) NOT NULL,
+                ajuste2 varchar(200),
+                ajuste3 varchar(200),
+                ajuste4 varchar(200),
+                evaluacion1 varchar(200) NOT NULL,
+                PRIMARY KEY(id)
+			)
+		';
+	//Ejecutar
+	ejecutarConsulta();
 //################### CREAR UNA TABLA DE "USUARIOS". ###################
 	//Preparar consulta SQL
 	$tabla='usuarios';
@@ -2484,6 +2590,7 @@
 			VALUES ("'.$usuario[0].'",'.$usuario[1].','.$usuario[2].',"'.$usuario[3].'","'.$usuario[4].'","'.$usuario[5].'","'.$usuario[6].'",'.$usuario[7].','.$usuario[8].')';
 			insertar();		
 	}	
+
 
 
 
