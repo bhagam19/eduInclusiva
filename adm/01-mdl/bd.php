@@ -2010,13 +2010,38 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
                     id int(2) NOT NULL AUTO_INCREMENT,
-                    name varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
         ejecutarConsulta();
-
+        //########## INGRESAR CONTENIDO A LA TABLA "CENTROS DE PROTECCIÓN" ##########
+        $centrosProteccion = array(
+            array(1,"ICBF"),
+            /*array(2,''),
+            array(3,''),
+            array(4,''),
+            array(5,''),
+            array(6,''),
+            array(7,''),
+            array(8,''),
+            array(9,''),
+            array(10,''),
+            array(11,''),
+            array(12,''),
+            array(13,''),
+            array(14,''),
+            array(15,''),
+            array(16,''),
+            array(17,''),
+            array(18,''),*/
+            );
+        foreach ($centrosProteccion as $centroProteccion){
+            $sql='INSERT INTO '.$tabla.' (id, nombre) 
+                VALUES ('.$centroProteccion[0].',"'.$centroProteccion[1].'")';
+        insertar();		
+        }
     //########## CREAR UNA TABLA DE "EPS" ##########
         // Preparamos la consulta SQL
         $tabla = 'eps';
@@ -2334,7 +2359,7 @@
                 array(4,"Padre"),
                 array(5,"Tía(o)"),
                 array(6,"Hermana(o)"),
-                array(7,"Tutor Legal"),
+                array(7,"Tutor(a) Legal"),
                 /*array(8,""),
                 array(9,""),
                 array(10,""),
@@ -2471,6 +2496,8 @@
                     nombre2 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     apellido1 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     apellido2 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idMunicipioNacimiento int(2) NOT NULL,
+                    idDepartamentoNacimiento int(2) NOT NULL,
                     idGrupo int(4) NOT NULL,
                     email varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     telefono int(10) NOT NULL,
@@ -2483,18 +2510,20 @@
                     victima boolean NOT NULL,
                     registroVictima boolean NOT NULL,
                     idGrupoEtnico int(2) NOT NULL,
-                    idCentroProteccion int(2) NOT NULL,
-                    idAfiliacion int(2) NOT NULL,
-                    idDiagnostico int(2) NOT NULL,
-                    idTratamiento int(2) NOT NULL,
+                    idCentroProteccion int(2),
+                    idAfiliacion int(2),
+                    idDiagnostico int(2),
+                    idTratamiento int(2),
                     idApoyo int(2) NOT NULL,
-                    idEntornoFamiliar int(11) NOT NULL,
+                    idEntornoFamiliar int(11),
                     idAspiraAlGrado int(2) NOT NULL,
                     ultimoGrado int(2) NOT NULL,
                     estadoUltimoGrado int(2) NOT NULL,
                     observaciones varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                    idInformePedagogico int(2) NOT NULL,
+                    idInformePedagogico int(2),
                     PRIMARY KEY(id),
+                    FOREIGN KEY(idMunicipioNacimiento) REFERENCES municipios (id),
+                    FOREIGN KEY(idDepartamentoNacimiento) REFERENCES departamentos (id),
                     FOREIGN KEY(idGrupo) REFERENCES gruposXgrado (id),
                     FOREIGN KEY(idTipoDoc) REFERENCES tiposDocumento (id),
                     FOREIGN KEY(idGrupoEtnico) REFERENCES gruposEtnicos (id),

@@ -1,4 +1,5 @@
 body {
+    font-size: 16px;
     background: darkgrey;    
 }
 
@@ -54,8 +55,8 @@ body {
     border-radius: 5px;
     border-top-left-radius: 0px;
     border: 2px solid bisque;
-    width: 2050px;
-    height: 1000px;
+    width: 92vw;
+    height: 80vh;
 }
 
 #contenidopestanas div{
@@ -91,4 +92,5 @@ table{
     width: 100%;
     margin: auto;
     text-align: left;
+    font-size: 1.2em;
 }

@@ -25,79 +25,81 @@
 
             <div id="contenidopestanas">
                 <div id="cpestana1">
+                    <br>
+                    <br>
+                    <br>
                     <?php
                         include('../../01-mdl/cnx.php');
                         $case="todo";
                         $tabla="estudiantes";
                         include('../../03-cnt/03-funciones/buscarEnBD.php');
-                        echo $consulta1;
                         while($row=mysqli_fetch_row($query1)){
                     ?>
                     <table border="1">
                         <tr>
                             <td>Nombres:</td>
-                            <td><?=$row[1]?></td>
+                            <td><?=$row[1]?>&nbsp;<?=$row[2]?></td>
                             <td>Apellidos:</td>
-                            <td></td>
+                            <td><?=$row[3]?>&nbsp;<?=$row[4]?></td>
                         </tr>
                         <tr>
                             <td colspan="2">Lugar de Nacimiento:</td>
-                            <td colspan="2"></td>
+                            <td colspan="2"><?=$row[5]?>, <?=$row[6]?></td>
                         </tr>
                         <tr>
                             <td>Fecha de Nacimiento:</td>
-                            <td></td>
+                            <td><?=$row[7]?></td>
                             <td>Edad:</td>
-                            <td></td>
+                            <td><?=$row[8]?></td>
                         </tr>
                         <tr>
                             <td>Tipo de Identificación:</td>
-                            <td></td>
+                            <td><?=$row[9]?></td>
                             <td>Número de Identificación:</td>
-                            <td></td>
+                            <td><?=$row[10]?></td>
                         </tr>
                         <tr>
                             <td>Departamento Donde Vive:</td>
-                            <td></td>
+                            <td><?=$row[11]?></td>
                             <td>Municipio Donde Vive:</td>
-                            <td></td>
+                            <td><?=$row[12]?></td>
                         </tr>
                         <tr>
                             <td>Dirección de Vivienda:</td>
-                            <td></td>
+                            <td><?=$row[13]?></td>
                             <td>Barrio / Vereda:</td>
-                            <td></td>
+                            <td><?=$row[14]?></td>
                         </tr>
                         <tr>
                             <td>Teléfono:</td>
-                            <td></td>
+                            <td><?=$row[15]?></td>
                             <td>Correo Electrónico:</td>
-                            <td></td>
+                            <td><?=$row[16]?></td>
                         </tr>
                         <tr>
-                            <td>¿Está en Centro de Protección?:</td>
+                            <td>¿Está en Centro de Protección?: <?=$row[17]?></td>
                             <td>¿Dónde?:</td>
-                            <td></td>
+                            <td><?=$row[18]?></td>
                             <td>Grado al que aspira a ingresar:</td>
-                            <td></td>
+                            <td><?=$row[19]?></td>
                         </tr>
                         <tr>
-                            <td>¿Se reconoce o pertenece a un grupo étnico?:</td>
+                            <td>¿Se reconoce o pertenece a un grupo étnico?: <?=$row[20]?></td>
                             <td>¿Cuál?:</td>
-                            <td></td>
+                            <td><?=$row[21]?></td>
                         </tr>
                         <tr>
                             <td>¿Se reconoce como víctima del conflicto armado?:</td>
-                            <td></td>
+                            <td><?=$row[22]?></td>
                             <td>¿Cuenta con el respectivo registro?:</td>
-                            <td></td>
+                            <td><?=$row[23]?></td>
                     </table>
                     <?php
                         }
                     ?>
                 </div>
                 <div id="cpestana2">
-                    El nombre hojas de estilo en cascada viene del inglés Cascading Style Sheets, del que toma sus siglas. CSS es un lenguaje usado para definir la presentación de un documento estructurado escrito en HTML o XML2 (y por extensión en XHTML). El W3C (World Wide Web Consortium) es el encargado de formular la especificación de las hojas de estilo que servirán de estándar para los agentes de usuario o navegadores.
+                
                 </div>
                 <div id="cpestana3">
                     JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos,3 basado en prototipos, imperativo, débilmente tipado y dinámico.
