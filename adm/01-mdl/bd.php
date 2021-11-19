@@ -137,7 +137,7 @@
 
     //########## INGRESAR CONTENIDO A LA TABLA "PAISES" ##########
 	
-	/*$paises = array(
+	$paises = array(
         array(4,"Austria"),
         array(4, "Belgica"),
         array(4, "Bulgaria"),
@@ -387,7 +387,7 @@
 			VALUES ('.$pais[0].',"'.$pais[1].'")';
             //echo $sql;
 			insertar();		
-	}	*/
+	}
 //########## CREAR UNA TABLA DE "DEPARTAMENTOS" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'departamentos';
@@ -406,7 +406,7 @@
 
     //########## INGRESAR CONTENIDO A LA TABLA "DEPARTAMENTOS" ##########
 	
-	/*$departamentos = array(
+	$departamentos = array(
         array(158, "Amazonas"),
         array(158, "Antioquia"),
         array(158, "Arauca"),
@@ -445,7 +445,7 @@
             VALUES ('.$departamento[0].',"'.$departamento[1].'")';
             //echo $sql;
             insertar();		
-    }*/
+    }
 //########## CREAR UNA TABLA DE "MUNICIPIOS" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'municipios';
@@ -464,7 +464,7 @@
 
     //########## INGRESAR CONTENIDO A LA TABLA "MUNICIPIOS" ##########
 	
-	/*$municipios = array(
+	$municipios = array(
         array(1,'El Encanto'),
         array(1,'La Chorrera'),
         array(1,'La Pedrera'),
@@ -1591,7 +1591,7 @@
             VALUES ('.$municipio[0].',"'.$municipio[1].'")';
             //echo $sql;
             insertar();		
-    }*/
+    }
 //########## CREAR UNA TABLA DE "INSTITUCIONES EDUCATIVAS" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'instEducativas';
@@ -1683,7 +1683,7 @@
 	ejecutarConsulta();
 
     //########## INGRESAR CONTENIDO A LA TABLA "GRADOS" ##########
-       /* $grados = array(
+       $grados = array(
             array(1,"Preescolar"),
             array(2,"Primero"),
             array(3,"Segundo"),
@@ -1702,8 +1702,7 @@
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$grado[0].',"'.$grado[1].'")';
                 insertar();		
-        }*/
-        
+        }        
 //########## CREAR UNA TABLA DE "GRADOS POR JORNADA" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'gradosXjornada';
@@ -1736,7 +1735,7 @@
 	ejecutarConsulta();
 
     //########## INGRESAR CONTENIDO A LA TABLA "GRUPOS" ##########
-       /* $grupos = array(
+       $grupos = array(
             array(1,"0.1"),
             array(2,"1.1"),
             array(3,"2.1"),
@@ -1755,7 +1754,7 @@
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$grupo[0].',"'.$grupo[1].'")';
                 insertar();		
-        }  */ 
+        } 
 //########## CREAR UNA TABLA DE "GRUPOS POR GRADO" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'gruposXgrado';
@@ -1772,8 +1771,7 @@
 			)
 		';
 	//Ejecutar
-	ejecutarConsulta();
-    
+	ejecutarConsulta(); 
 //########## CREAR UNA TABLA DE "ÁREAS" ##########
 	// Preparamos la consulta SQL
     $tabla = 'areas';
@@ -1805,7 +1803,6 @@
                 VALUES ('.$area[0].',"'.$area[1].'")';
                 insertar();		
         }
-
 //########## CREAR UNA TABLA DE "ÁREAS POR GRUPO" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'areasXgrupo';
@@ -1822,8 +1819,7 @@
 			)
 		';
 	//Ejecutar
-	ejecutarConsulta();        
-    
+	ejecutarConsulta();   
 //########## CREAR UNA TABLA DE "PERIODOS" ##########
 	// Preparamos la consulta SQL
     $tabla = 'periodos';
@@ -1851,7 +1847,6 @@
                 VALUES ('.$periodo[0].',"'.$periodo[1].'")';
                 insertar();		
         }
-
 //########## CREAR UNA TABLA DE "PERIODOS POR ÁREA" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'periodosXarea';
@@ -1868,8 +1863,7 @@
 			)
 		';
 	//Ejecutar
-	ejecutarConsulta();        
-
+	ejecutarConsulta();
 //########## CREAR UNA TABLA DE "TIPOS DE DOCUMENTO" ##########
 	// Preparamos la consulta SQL
     $tabla = 'tiposDocumento';
@@ -1901,7 +1895,6 @@
                 VALUES ('.$tipo[0].',"'.$tipo[1].'")';
                 insertar();		
         }
-
 //########## CREAR UNA TABLA DE "GRUPOS ÉTNICOS" ##########
 	// Preparamos la consulta SQL
     $tabla = 'gruposEtnicos';
@@ -1928,8 +1921,7 @@
             $sql='INSERT INTO '.$tabla.' (id, name) 
                 VALUES ('.$etnia[0].',"'.$etnia[1].'")';
                 insertar();		
-        }     
-   
+        }
 //########## CREAR UNA TABLA DE "CENTROS DE PROTECCIÓN" ##########
 	// Preparamos la consulta SQL
     $tabla = 'centrosDEproteccion';
@@ -2124,7 +2116,26 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+    //########## INGRESAR CONTENIDO A LA TABLA "TERAPIAS" ##########
+    $terapias = array(
+        array(1,"Terapia de Ejemplo"),
+        array(2,""),
+        array(3,""),
+        array(4,""),
+        array(5,""),
+        array(6,""),
+        array(7,""),
+        /*array(8,""),
+        array(9,""),
+        array(10,""),
+        array(11,""),*/
+        );
     
+    foreach ($terapias as $terapia){
+        $sql='INSERT INTO '.$tabla.' (id, name) 
+            VALUES ('.$terapia[0].',"'.$terapia[1].'")';
+            insertar();		
+    }     
 //########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
 	// Preparamos la consulta SQL
     $tabla = 'apoyosAbarreras';
@@ -2374,6 +2385,26 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+    //########## INGRESAR CONTENIDO A LA TABLA "MEDIOS DE TRANSPORTE" ##########
+    $transportes = array(
+        array(1,"Caminata"),
+        array(2,"Moto"),
+        array(3,"Vehículo Particular"),
+        array(4,"Vehículo Público"),
+        array(5,"Equino"),
+        array(6,"Canoa con Motor"),
+        array(7,"Canoa sin Motor"),
+        /*array(8,""),
+        array(9,""),
+        array(10,""),
+        array(11,""),*/
+        );
+    
+    foreach ($transportes as $transporte){
+        $sql='INSERT INTO '.$tabla.' (id, name) 
+            VALUES ('.$transporte[0].',"'.$transporte[1].'")';
+            insertar();		
+    }     
 //########## CREAR UNA TABLA DE "ACTORES" ##########
 	// Preparamos la consulta SQL
 	$tabla = 'actores';
@@ -2387,6 +2418,26 @@
 		';
 	//Ejecutar
 	ejecutarConsulta();
+    //########## INGRESAR CONTENIDO A LA TABLA "ACTORES" ##########
+    $actores = array(
+        array(1,"Familia o Cuidadores"),
+        array(2,"Docentes"),
+        array(3,"Directivos"),
+        array(4,"Administrativos"),
+        array(5,"Pares (sus compañeros)"),
+        /*array(6,""),
+        array(7,""),
+        array(8,""),
+        array(9,""),
+        array(10,""),
+        array(11,""),*/
+        );
+    
+    foreach ($actores as $actor){
+        $sql='INSERT INTO '.$tabla.' (id, name) 
+            VALUES ('.$actor[0].',"'.$actor[1].'")';
+            insertar();		
+    }     
 //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
 	// Preparamos la consulta SQL
     $tabla = 'estudiantes';
