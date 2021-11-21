@@ -51,7 +51,9 @@ body {
     text-decoration: none;
     color: bisque;
 }
-
+#pestanas td>span.heads{
+  color: rgb(3, 3, 3) !important;
+}
 #contenidopestanas{
     clear: both;  
     background: dimgray;

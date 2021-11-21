@@ -33,6 +33,7 @@
                             include('../../01-mdl/cnx.php');
                             include('../../03-cnt/03-funciones/buscarEnBD.php');
                             $retorno=mysqli_fetch_row($query1);
+                            mysqli_close($cnx);
                             return $retorno;  
                         }
                         $row=buscarEnBD("todo", "estudiantes", "");
@@ -40,7 +41,7 @@
                     ?>
                     <table border="1">
                         <tr>
-                            <td>Nombres:</td>
+                            <td><span class="heads">Nombres:</span></td>
                             <td><?=$row[1]?>&nbsp;<?=$row[2]?></td>
                             <td>Apellidos:</td>
                             <td><?=$row[3]?>&nbsp;<?=$row[4]?></td>
@@ -150,7 +151,13 @@
                 ?>
                 </div>
                 <div id="cpestana2">
+                    <br>
+                    <br>
+                    <br>
                     <table border="1">
+                        <?php
+                            $opcion=buscarEnBD("id", "opciones", $row[22])[1];
+                        ?>
                         <tr>
                             <td>¿Está afiliado al sistema de salud?: <?=$row[24]?></td>
                             <td>EPS: <?=$row[25]?>/td>
