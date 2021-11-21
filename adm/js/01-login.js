@@ -179,74 +179,42 @@ function validarContrasenaSegura(id){
 }
 
 $(document).ready(function() {
-    $(".upload").on('click', function() {
-		//alert("fotos");
-        var formData = new FormData();
-		var files = $('#foto')[0].files[0];
-		formData.append('file',files);
-		$.ajax({		
-			url: 'adm/03-cnt/01-crudLogin/03.1-subirImagen.php',
-			type: 'post',
-			data: formData,
-			contentType: false,
-			processData: false,
-			success: function(response){			
-				if(response !=0){
-					//alert(response);				
-					$(".foto").attr("src", response, "width","80px","height","80px","border-radius","30px");
-				}else{
-					alert('Formato de imagen incorrecto.');
+    $(".upload").on('change', function() {
+		var usuarioCED = document.getElementById("usuarioCED").value;
+		if(usuarioCED=""){
+			alert("Por favor, ingrese su número de identificación.");
+		}else{
+			var formData = new FormData();
+			var files = $('#foto')[0].files[0];
+			formData.append('file',files);
+			$.ajax({		
+				url: 'adm/03-cnt/01-crudLogin/03.1-subirImagen.php',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response){			
+					if(response !=0){	
+						var name =response.substr(10,response.length);	
+						$(".foto").attr("src", response, "width","80px","height","80px","border-radius","30px");
+							
+					}else{
+						alert('Formato de imagen incorrecto.');
+					}
 				}
-			}
-		});
-		return false;
+			});
+			return false;
+		}
     });
 });
-
-
-
-function cargarFeoto(){
-	
-	var formData = new FormData();
-	var files = $('#foto')[0].files[0];
-	formData.append('file',files);	
-	alert(formData),		
-	$.ajax({		
-		url: 'adm/03-cnt/01-crudLogin/03.1-subirImagen.php',
-		type: 'post',
-		data: formData,
-		contentType: false,
-		processData: false,
-		success: function(response){			
-			if(response !=0){
-				alert("response");				
-				$(".foto").attr("src", response);
-			}else{
-				alert('Formato de imagen incorrecto.');
-			}
-		}
-	});
-}
 function registrarUsuario(id){ //id=0 representa que no hay formulario que ocultar. (e.g. formularioNuevoUsuario.php)
 	//alert("Registro de usuario nuevo");
 	//valor=ucwords(valor.toLowerCase());
-	/*
-	var image_input =document.querySelector("#foto");	
-	var uploaded_image ="";
-	image_input.addEventListener("change", function(){
-		var reader =new FileReader();
-		reader.addEventListener("load",()=>{
-			uploaded_image=reader.result;
-			
-			document.querySelector("#mostrarFoto").style.backgroundImage = 'url(${uploaded_image})'
-		});
-		reader.readAsDataURL(this.files[0]);
-		alert(this.files[0]);
-	})
-	*/
+	
+	var usuarioCED= document.getElementById("usuarioCED").value;
+	var foto =$("#foto").val().substr(12,$("#foto").val().length);
 	var nombres= document.getElementById("nombres").value;
 	var apellidos= document.getElementById("apellidos").value;
-	var usuarioCED= document.getElementById("usuarioCED").value;
 	var correo= document.getElementById("correo").value;
 	var usuario= document.getElementById("usuario").value;
 	var contrasena= document.getElementById("contrasena").value;
@@ -294,9 +262,10 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 		if(contrasena===confirmarContrasena){
 
 			var xmlhttp = new XMLHttpRequest();
-	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?nombres="+nombres+"&apellidos="+apellidos+"&usuarioCED="+usuarioCED+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
+	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?usuarioCED="+usuarioCED+"&foto="+foto+"&nombres="+nombres+"&apellidos="+apellidos+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
 	        xmlhttp.send();
-            //alert(xmlhttp.responseText);
+			alert("Hola");
+            alert(xmlhttp.responseText);
 	        if(xmlhttp.responseText.trim()==="si"){
 				if(id===1){
 					var elemento=$("#handler").parent();		
