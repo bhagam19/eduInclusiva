@@ -29,16 +29,14 @@
                     <br>
                     <br>
                     <?php
-                        include('../../01-mdl/cnx.php');
                         function buscarEnBD($case, $tabla, $id) {
+                            include('../../01-mdl/cnx.php');
                             include('../../03-cnt/03-funciones/buscarEnBD.php');
-                            $columna=mysqli_fetch_row($query1);
-                            return $columna[2];   
+                            $retorno=mysqli_fetch_row($query1);
+                            return $retorno;  
                         }
-                        $case="todo";
-                        $tabla="estudiantes";
-                        include('../../03-cnt/03-funciones/buscarEnBD.php');
-                        while($row=mysqli_fetch_row($query1)){
+                        $row=buscarEnBD("todo", "estudiantes", "");
+                        /*while($row){*/
                     ?>
                     <table border="1">
                         <tr>
@@ -47,13 +45,13 @@
                             <td>Apellidos:</td>
                             <td><?=$row[3]?>&nbsp;<?=$row[4]?></td>
                         </tr>
+                        <?php
+                            $nombreMunicipio=buscarEnBD("id", "municipios", $row[5])[2];
+                            $nombreDepartamento=buscarEnBD("id", "departamentos", $row[6])[2];
+                        ?>
                         <tr>
-                            <td colspan="2">Lugar de Nacimiento:</td>
-                            <?php
-                                $nombreMunicipio=buscarEnBD("id", "municipios", $row[5]);
-                                $nombreDepartamento=buscarEnBD("id", "departamentos", $row[6]);
-                            ?>
-                            <td colspan="2"><?=$nombreMunicipio?>, <?=$nombreDepartamento?></td>
+                            <td>Lugar de Nacimiento:</td>
+                            <td colspan="3"><?=$nombreMunicipio?>, <?=$nombreDepartamento?></td>
                         </tr>
                         <tr>
                             <td>Fecha de Nacimiento:</td>
@@ -61,23 +59,33 @@
                             <td>Edad:</td>
                             <td><?=$row[8]?></td>
                         </tr>
+                        <?php
+                            $tipoIdentificacion=buscarEnBD("id", "tiposDocumento", $row[9])[1];
+                        ?>
                         <tr>
                             <td>Tipo de Identificación:</td>
-                            <td><?=$row[9]?></td>
+                            <td><?=$tipoIdentificacion?></td>
                             <td>Número de Identificación:</td>
                             <td><?=$row[10]?></td>
                         </tr>
+                        <?php
+                            $nombreMunicipio=buscarEnBD("id", "municipios", $row[12])[2];
+                            $nombreDepartamento=buscarEnBD("id", "departamentos", $row[11])[2];
+                        ?>
                         <tr>
                             <td>Departamento Donde Vive:</td>
-                            <td><?=$row[11]?></td>
+                            <td><?=$nombreDepartamento?></td>
                             <td>Municipio Donde Vive:</td>
-                            <td><?=$row[12]?></td>
+                            <td><?=$nombreMunicipio?></td>
                         </tr>
+                        <?php
+                            $nomenclatura1=buscarEnBD("id", "barrios", $row[14])[3];
+                            $nomenclatura2=buscarEnBD("id", "barrios", $row[14])[2];
+                            $nomenclatura3=buscarEnBD("id", "nomenclaturas", $nomenclatura2)[1];
+                        ?>
                         <tr>
-                            <td>Dirección de Vivienda:</td>
-                            <td><?=$row[13]?></td>
-                            <td>Barrio / Vereda:</td>
-                            <td><?=$row[14]?></td>
+                            <td>Dirección de la vivienda:</td>
+                            <td colspan="3"><?=$row[13]?>,&nbsp;<?=$nomenclatura3?>&nbsp;<?=$nomenclatura1?></td>
                         </tr>
                         <tr>
                             <td>Teléfono:</td>
@@ -85,49 +93,85 @@
                             <td>Correo Electrónico:</td>
                             <td><?=$row[16]?></td>
                         </tr>
+                        <?php
+                            $opcion=buscarEnBD("id", "opciones", $row[17])[1];
+                            $donde=buscarEnBD("id", "centrosDEproteccion", $row[18])[1];
+                        ?>
                         <tr>
-                            <td>¿Está en Centro de Protección?: <?=$row[17]?></td>
-                            <td>¿Dónde?:</td>
-                            <td><?=$row[18]?></td>
+                            <td>¿Está en Centro de Protección?:&nbsp;<?=$opcion?></td>
+                            <?php
+                                if($opcion=="Si"){
+                            ?>
+                                <td>¿Dónde?:</td>
+                                <td><?=$donde?></td>
+                            <?php
+                                }
+                            ?>
+                        </tr>
+                        <?php
+                            $grado=buscarEnBD("id", "grados", $row[19])[1];
+                        ?>
+                        <tr>
                             <td>Grado al que aspira a ingresar:</td>
-                            <td><?=$row[19]?></td>
+                            <td><?=$grado?></td>
                         </tr>
+                        <?php
+                            $opcion=buscarEnBD("id", "opciones", $row[20])[1];
+                            $cual=buscarEnBD("id", "gruposEtnicos", $row[21])[1];
+                        ?>
                         <tr>
-                            <td>¿Se reconoce o pertenece a un grupo étnico?: <?=$row[20]?></td>
-                            <td>¿Cuál?:</td>
-                            <td><?=$row[21]?></td>
+                            <td>¿Se reconoce o pertenece a un grupo étnico?:&nbsp;<?=$opcion?></td>
+                            <?php
+                                if($opcion=="Si"){
+                            ?>
+                                <td>¿Cuál?:</td>
+                                <td><?=$cual?></td>
+                            <?php
+                                }
+                            ?>
                         </tr>
+                        <?php
+                            $opcion=buscarEnBD("id", "opciones", $row[22])[1];
+                            $opcion2=buscarEnBD("id", "opciones", $row[23])[1];
+                        ?>
                         <tr>
-                            <td>¿Se reconoce como víctima del conflicto armado?:</td>
-                            <td><?=$row[22]?></td>
-                            <td>¿Cuenta con el respectivo registro?:</td>
-                            <td><?=$row[23]?></td>
+                            <td>¿Se reconoce como víctima del conflicto armado?:&nbsp;<?=$opcion?></td>
+                            <?php
+                                if($opcion=="Si"){
+                            ?>
+                                <td>¿Cuenta con el respectivo registro?:&nbsp;<?=$opcion2?></td>
+                            <?php
+                                }
+                            ?>
                         </tr>
                     </table>
+                <?php
+                    /*}*/
+                ?>
                 </div>
                 <div id="cpestana2">
                     <table border="1">
                         <tr>
-                            <td>¿Está afiliado al sistema de salud?: <?=$row[1]?></td>
-                            <td>EPS: <?=$row[1]?>/td>
+                            <td>¿Está afiliado al sistema de salud?: <?=$row[24]?></td>
+                            <td>EPS: <?=$row[25]?>/td>
                             <td>Régimen:</td>
-                            <td><?=$row[3]?></td>
+                            <td><?=$row[26]?></td>
                         </tr>
                         <tr>
                             <td colspan="2">Lugar donde lo atienden en caso de emergencia:</td>
-                            <td colspan="2"><?=$row[5]?></td>
+                            <td colspan="2"><?=$row[27]?></td>
                         </tr>
                         <tr>
                             <td>¿El niño está siendo atendido por el sector salud?:</td>
-                            <td><?=$row[7]?></td>
+                            <td><?=$row[28]?></td>
                             <td>Frecuencia de atención:</td>
-                            <td><?=$row[8]?></td>
+                            <td><?=$row[29]?></td>
                         </tr>
                         <tr>
                             <td>¿Tiene diagnóstico médico?:</td>
-                            <td><?=$row[9]?></td>
+                            <td><?=$row[30]?></td>
                             <td>¿Cuál?:</td>
-                            <td><?=$row[10]?></td>
+                            <td><?=$row[31]?></td>
                         </tr>
                         <tr>
                             <td>¿Está asistiendo a tereapias?:</td>
@@ -167,7 +211,7 @@
                     
                 </div>
                 <?php
-                    }
+                    /*}*/
                 ?>
             </div>
     </div>
