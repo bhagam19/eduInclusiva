@@ -2366,6 +2366,7 @@
                 array(2,"Enfermero(a)"),
                 array(3,"Recepcionista"),
                 array(4,"Abogado(a)"),
+                array(4,"Docente"),
                 );
             
             foreach ($ocupaciones as $ocupacion){
