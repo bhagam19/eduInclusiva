@@ -3,18 +3,24 @@
 		<div id="handler">
 			<a class="cerrar">X</a>
 			<p>REGISTRO DE NUEVO USUARIO</p>
-		</div>    
-		<form method="POST" name="formularioNuevoUsuario" action="index.php" onsubmit="return registrarUsuario(1);">
+		</div> 
+		<div id="mostrarFoto"> 
+			<img class="foto" src="../appsArt/usuario.svg">
+		</div>   
+		<form method="POST" name="formularioNuevoUsuario" action="index.php" onsubmit="return registrarUsuario(1)">
 			<table class="registro-usuario" border=0>
+				<tr>
+					<td><span>ID: <br></span><input class="input" type="text" name="usuarioCED" id="usuarioCED" onkeyup="cambiarFondoInput(this.id)"></td>
+				</tr>
+				<tr>
+					<td><span>Foto: <br></span><input class="submit upload" type="file" name="foto" id="foto" onkeyup="cambiarFondoInput(this.id)"></td>
+				</tr>								
 				<tr>
 					<td><span>Nombres: <br></span><input class="input" type="text" name="nombres" id="nombres" onkeyup="cambiarFondoInput(this.id)"></td>
 				</tr>
 				<tr>
 					<td><span>Apellidos: <br></span><input class="input" type="text" name="apellidos" id="apellidos" onkeyup="cambiarFondoInput(this.id)"></td>
-				</tr>
-				<tr>
-					<td><span>ID: <br></span><input class="input" type="text" name="usuarioCED" id="usuarioCED" onkeyup="cambiarFondoInput(this.id)"></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td><span>Correo Electrónico: <br></span><input class="input" type="text" name="correo" id="correo" onkeyup="cambiarFondoInput(this.id)"></td>
 				</tr>

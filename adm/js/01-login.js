@@ -177,17 +177,54 @@ function validarContrasenaSegura(id){
 		return false;
 	}
 }
+
+$(document).ready(function() {
+    $(".upload").on('change', function() {
+		var usuarioCED = document.getElementById("usuarioCED").value;
+		if(usuarioCED=""){
+			alert("Por favor, ingrese su número de identificación.");
+		}else{
+			var formData = new FormData();
+			var files = $('#foto')[0].files[0];
+			formData.append('file',files);
+			$.ajax({		
+				url: 'adm/03-cnt/01-crudLogin/03.1-subirImagen.php',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response){			
+					if(response !=0){	
+						var name =response.substr(10,response.length);	
+						$(".foto").attr("src", response, "width","80px","height","80px","border-radius","30px");
+							
+					}else{
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+			return false;
+		}
+    });
+});
 function registrarUsuario(id){ //id=0 representa que no hay formulario que ocultar. (e.g. formularioNuevoUsuario.php)
 	//alert("Registro de usuario nuevo");
 	//valor=ucwords(valor.toLowerCase());
+	
+	var usuarioCED= document.getElementById("usuarioCED").value;
+	var foto =$("#foto").val().substr(12,$("#foto").val().length);
 	var nombres= document.getElementById("nombres").value;
 	var apellidos= document.getElementById("apellidos").value;
-	var usuarioCED= document.getElementById("usuarioCED").value;
 	var correo= document.getElementById("correo").value;
 	var usuario= document.getElementById("usuario").value;
 	var contrasena= document.getElementById("contrasena").value;
 	var confirmarContrasena=document.getElementById("confirmarContrasena").value;
-	if(nombres===""){
+	if(usuarioCED===""){
+		alert("Por favor, ingrese número de identidad.");
+		document.getElementById("usuarioCED").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
+		document.getElementById("usuarioCED").focus();
+		return false;		
+	}else if(nombres===""){
 		alert("Por favor, ingrese el nombre.");
 		document.getElementById("nombres").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
 		document.getElementById("nombres").focus();
@@ -196,11 +233,6 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 		alert("Por favor, ingrese los apellidos.");
 		document.getElementById("apellidos").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
 		document.getElementById("apellidos").focus();
-		return false;
-	}else if(usuarioCED===""){
-		alert("Por favor, ingrese número de identidad.");
-		document.getElementById("usuarioCED").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
-		document.getElementById("usuarioCED").focus();
 		return false;
 	}else if(correo===""){
 		alert("Por favor, ingrese un correo.");
@@ -228,10 +260,12 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 			}	
 		}
 		if(contrasena===confirmarContrasena){
+
 			var xmlhttp = new XMLHttpRequest();
-	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?nombres="+nombres+"&apellidos="+apellidos+"&usuarioCED="+usuarioCED+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
+	        xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?usuarioCED="+usuarioCED+"&foto="+foto+"&nombres="+nombres+"&apellidos="+apellidos+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
 	        xmlhttp.send();
-            //alert(xmlhttp.responseText);
+			alert("Hola");
+            alert(xmlhttp.responseText);
 	        if(xmlhttp.responseText.trim()==="si"){
 				if(id===1){
 					var elemento=$("#handler").parent();		

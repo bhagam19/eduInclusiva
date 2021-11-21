@@ -24,13 +24,29 @@
 					</div>
 				';
 		}else{
-			include dirname(__FILE__).'../../../01-mdl/cnx.php';					
-			echo '
+			include dirname(__FILE__).'../../../01-mdl/cnx.php';	
+			include dirname(__FILE__).'../../../03-cnt/01-crudLogin/03-capturarDatosUsuario.php';	
+			if($foto==""){
+				echo 
+					'
 					<div id="appsSesionLogedIn">
 						<div class="appsSesionImg" >
-							<img src="../appsArt/usuario.svg"/ title="Click para ver información del usuario."  onclick="mostrarDatosUsuario()">
+							<img src="../appsArt/usuario.svg" title="Click para ver información del usuario."  onclick="mostrarDatosUsuario()">
 						</div>
 					</div>
+					';
+			}else{
+				echo 
+					'
+					<div id="appsSesionLogedIn">
+						<div class="appsSesionImg" >
+							<img src="../eduInclusiva/adm/img/'.$foto.'" title="Click para ver información del usuario."  onclick="mostrarDatosUsuario()">
+						</div>
+					</div>
+					';
+			}			
+			echo '
+					
 			';
 		}
 	?>

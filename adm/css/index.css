@@ -250,6 +250,17 @@ html {
 	box-shadow: 0px 0px 25px 0px var(--OnActivo);
 	background: var(--fondoOff09);	
 }
+
+.appsFormularioNuevoUsuario #mostrarFoto img{
+	position:absolute;
+	top:10px;
+	right:5px; 
+	width: 80px;
+	height: 80px;
+	border-radius: 30px;
+	border: 1px solid var(--OnPasivo); 
+	background:var(--fondo03);
+}
 /*==== LoggedIn====*/
 #appsSesionLogedIn {
 	position: relative;
@@ -271,10 +282,12 @@ html {
 	background: #AABAF6;
 	box-shadow: 0px 0px 5px 0px #EBEEF8;
 }
-.appsSesionImg {
+.appsSesionImg img{	
 	float: right;
 	width: 30px;
 	height: 30px;
+	border: 1px solid #0B0B61;
+	border-radius: 25px;
 }
 /*====Formularios LoggedIn=====*/
 .appsFormularioDatosUsuario {
@@ -287,11 +300,14 @@ html {
 	padding: 10px 0px;
 	user-select: none;
 }
-.sesionImgInside {
-	margin: auto;
+.sesionImgInside img{
+	margin: auto;	
+	align-items: center;
 	padding: 10px;
 	width: 50px;
 	height: 50px;
+	border: 1px solid #0B0B61;
+	border-radius: 25px;
 }
 .appsFormularioDatosUsuario .etiqueta {
 	font-weight: bold;
