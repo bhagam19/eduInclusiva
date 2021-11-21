@@ -36,7 +36,7 @@
                 echo "<div><p class='rojo'>===== INSERTANDO REGISTROS EN LA TABLA ".strtoupper($tabla)."======<br><br></p></div>";
                 echo "<div><p class='rojo'>No se insertaron los datos. ".mysqli_error($cnx)."</p><br><br></div>";		
             }
-        }/*
+        }
     //########## CREAR UNA TABLA DE "INSTALACION" ##########
         // Preparamos la consulta SQL
         $tabla = 'instalacion';
@@ -1586,7 +1586,7 @@
             array(1,"Barrio"),
             array(2,"Vereda"),
             /*array(3,""),
-            array(4,""),*//*
+            array(4,""),*/
             );       
         foreach ($nomenclaturas as $nomenclatura){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
@@ -2089,7 +2089,7 @@
             array(15,''),
             array(16,''),
             array(17,''),
-            array(18,''),*//*
+            array(18,''),*/
             );
         foreach ($centrosProteccion as $centroProteccion){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
@@ -2176,7 +2176,7 @@
             array(15,''),
             array(16,''),
             array(17,''),
-            array(18,''),*//*
+            array(18,''),*/
             );
         foreach ($afiliaciones as $afiliacion){
             $sql='INSERT INTO '.$tabla.' (eps, idOpcionesAfiliado, frecuencia, lugar) 
@@ -2489,7 +2489,7 @@
                 /*array(8,""),
                 array(9,""),
                 array(10,""),
-                array(11,""),*//*
+                array(11,""),*/
                 );
             
             foreach ($parentescos as $parentesco){
@@ -2598,7 +2598,7 @@
             $sql='INSERT INTO '.$tabla.' (idOpcion, razon, archivo) 
                 VALUES ('.$infoPedagogico[0].',"'.$infoPedagogico[1].'","'.$infoPedagogico[2].'")';
             insertar();		
-        }/*  
+        } 
     //########## CREAR UNA TABLA DE "PROGRAMAS COMPLEMENTARIOS" ##########
         // Preparamos la consulta SQL
         $tabla = 'programasComplementarios';
@@ -2662,8 +2662,8 @@
             insertar();		
         }
     //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
-        // Preparamos la consulta SQL*/                                                                                                      
-        $tabla = 'estudiantes';/*                                                                                                             
+        // Preparamos la consulta SQL                                                                                                      
+        $tabla = 'estudiantes';                                                                                                            
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
@@ -2727,7 +2727,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();*/
+        ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTUDIANTES" ##########
         $estudiantes = array(
             array("Pepito", "Pedrito", "Pérez", "Porras", 91, 2, "1978/12/08", 42, 3, 71481707, 2, 40, "Calle de la esquinita azul en el parque", 2, 6045555555, "pepitoperez@correo.com", 2,
@@ -2757,7 +2757,7 @@
                     ','.$estudiante[27].','.$estudiante[28].','.$estudiante[29].','.$estudiante[30].','.$estudiante[31].',"'.$estudiante[32].'",'.$estudiante[33].'
                 )';
             insertar();		
-        }/*   
+        }  
     //########## CREAR UNA TABLA DE "TERAPIAS RECIBIDAS" ##########
         // Preparamos la consulta SQL
         $tabla = 'terapiasRecibidas';
@@ -2952,7 +2952,7 @@
                     4	Usuario 	//User resp de bienes y Admin avdc. [add, mod, del], todos los bienes.(Coord., Secret., Aux. de Confianza)
                     5	Usuario 	//Usuario SuperAdministrador Frontend (Rector)	
                     6	Usuario 	//Usuario SuperAdministrador Frontend y Backend (Desarrollador) 
-            *//*
+            */
 
             array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
                 array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6)
@@ -3002,7 +3002,7 @@
                 INSERT INTO '.$tabla.' (utc, anio, mes, dia, hora, minuto, segundo, ip, navegador, idUsuario, contrasena,pagVisitada)
                 VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
             ';
-        insertar();*/
+        insertar();
   //Cerrar
         mysqli_close($cnx);
         
