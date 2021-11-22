@@ -2136,7 +2136,7 @@
             ';
         //Ejecutar
         ejecutarConsulta();
-
+    
         //########## INGRESAR CONTENIDO A LA TABLA "EPS" ##########
             $empresas = array(
                 array(1,"SISBEN",2),
@@ -2171,7 +2171,89 @@
                     VALUES ('.$empresa[0].',"'.$empresa[1].'",'.$empresa[2].')';
                 insertar();		
             }
-
+    //########## CREAR UNA TABLA DE "FRECUENCIAS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'frecuencias';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    descripcion varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        
+        //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
+        $tiempos = array(
+            array(1,'Cada hora'),
+            array(2,'Cada 2 horas'),
+            array(3,'Cada 4 horas'),
+            array(4,'Cada 6 horas'),
+            array(5,'Cada 8 horas'),
+            array(6,'Cada 10 horas'),
+            array(7,'Cada 12 horas'),
+            array(8,'Cada 24 horas'),
+            array(9,'Cada 2 días'),
+            array(10,'Cada 3 días'),
+            array(11,'Cada 4 días'),
+            array(12,'Cada 5 días'),
+            array(13,'Cada 6 días'),
+            array(14,'Cada semana'),
+            array(15,'Cada 2 semanas'),
+            array(16,'Cada 3 semanas'),
+            array(17,'Cada mes'),
+            array(18,'Cada 2 meses'),
+            array(19,'Cada 3 meses'),
+            array(20,'Cada 4 meses'),
+            array(21,'Cada 5 meses'),
+            array(22,'Cada 6 meses'),
+            array(23,'Cada 7 meses'),
+            array(24,'Cada 8 meses'),
+            array(25,'Cada 9 meses'),
+            array(26,'Cada 10 meses'),
+            array(27,'Cada 11 meses'),
+            array(28,'Cada año'),
+            array(29,'Cada 2 años'),
+            array(30,'Cada 3 años'),
+            array(31,'Cada 4 años'),
+            array(32,'Cada 5 años'),
+            );
+        
+        foreach ($tiempos as $tiempo){
+            $sql='INSERT INTO '.$tabla.' (id, descripcion) 
+                VALUES ('.$tiempo[0].',"'.$tiempo[1].'")';
+            insertar();		
+        }
+    //########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'apoyosAbarreras';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int(11) NOT NULL AUTO_INCREMENT,
+                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        //########## INGRESAR CONTENIDO A LA TABLA "APOYOS A BARRERAS" ##########
+        $apoyos = array(
+            array(1,'Silla de ruedas'),
+            array(2,'Muletas'),
+            array(3,'Bastones'),
+            array(4,'Tablero de comunicación'),
+            array(5,'Audífonos'),
+            array(6,'Regleta Braille'),
+            );
+        
+        foreach ($apoyos as $apoyo){
+            $sql='INSERT INTO '.$tabla.' (id, nombre) 
+                VALUES ('.$apoyo[0].',"'.$apoyo[1].'")';
+            insertar();		
+        }
     //########## CREAR UNA TABLA DE "AFILIACIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'afiliaciones';
@@ -2179,7 +2261,7 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
                     id int NOT NULL AUTO_INCREMENT,
-                    eps int(2) NOT NULL,
+                    idEps int(2) NOT NULL,
                     lugar varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     idOpcionAtencionSS int(2) NOT NULL,
                     idFrecuencia int(2) NOT NULL,
@@ -2187,17 +2269,17 @@
                     descripcionDiagnostico varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idOpcionTerapia int(2) NOT NULL,
                     descripcionTerapia1 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                    idFrecuenciaTerapia1 int(2) NOT NULL,
+                    idFrecuenciaTerapia1 int(2),
                     descripcionTerapia2 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                    idFrecuenciaTerapia2 int(2) NOT NULL,
+                    idFrecuenciaTerapia2 int(2),
                     descripcionTerapia3 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idFrecuenciaTerapia3 int(2),
                     idOpcionTratamiento int(2),
                     tratamiento varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idOpcionApoyo int(2),
-                    idApoyo int(2) NOT NULL,
+                    idApoyo int(2),
                     PRIMARY KEY(id),
-                    FOREIGN KEY(eps) REFERENCES eps (id),
+                    FOREIGN KEY(idEps) REFERENCES eps (id),
                     FOREIGN KEY(idOpcionAtencionSS) REFERENCES opciones (id),
                     FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id),
                     FOREIGN KEY(idOpcionDiagnostico) REFERENCES opciones (id),
@@ -2207,14 +2289,14 @@
                     FOREIGN KEY(idFrecuenciaTerapia3) REFERENCES frecuencias (id),
                     FOREIGN KEY(idOpcionTratamiento) REFERENCES opciones (id),
                     FOREIGN KEY(idOpcionApoyo) REFERENCES opciones (id),
-                    FOREIGN KEY(idApoyo) REFERENCES apoyos (id)
+                    FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id)
                 )
             ';
         //Ejecutar
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "AFILIACIONES" ##########
         $afiliaciones = array(
-            array(1,1,3,"IPS Entrerríos"),
+            array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,NULL,NULL,NULL,NULL,1,'para controlor epilepsia',2,NULL),
             /*array(2,''),
             array(3,''),
             array(4,''),
@@ -2234,8 +2316,12 @@
             array(18,''),*/
             );
         foreach ($afiliaciones as $afiliacion){
-            $sql='INSERT INTO '.$tabla.' (eps, idOpcionesAfiliado, frecuencia, lugar) 
-                VALUES ('.$afiliacion[0].','.$afiliacion[1].','.$afiliacion[2].',"'.$afiliacion[3].'")';
+            $sql='INSERT INTO '.$tabla.' (idEps, lugar, idOpcionAtencionSS, idFrecuencia, idOpcionDiagnostico,
+             descripcionDiagnostico, idOpcionTerapia, descripcionTerapia1, idFrecuenciaTerapia1,
+              descripcionTerapia2, idFrecuenciaTerapia2, descripcionTerapia3, idFrecuenciaTerapia3,
+              idOpcionTratamiento, tratamiento, idOpcionApoyo, idApoyo) 
+                VALUES ('.$afiliacion[0].',"'.$afiliacion[1].'",'.$afiliacion[2].','.$afiliacion[3].','.$afiliacion[4].',"'.$afiliacion[5].'",'.$afiliacion[6].',"'.$afiliacion[7].'",'.$afiliacion[8].',"'.$afiliacion[9].'",
+                '.$afiliacion[10].',"'.$afiliacion[11].'",'.$afiliacion[12].','.$afiliacion[13].',"'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].')';
         insertar();		
         }
     //########## CREAR UNA TABLA DE "DIAGNÓSTICOS" ##########
@@ -2298,65 +2384,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
-        
-    //########## CREAR UNA TABLA DE "FRECUENCIAS" ##########
-        // Preparamos la consulta SQL
-        $tabla = 'frecuencias';
-        $sql=
-            '
-                CREATE TABLE IF NOT EXISTS '.$tabla.'(
-                    id int NOT NULL AUTO_INCREMENT,
-                    descripcion varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    PRIMARY KEY(id)
-                )
-            ';
-        //Ejecutar
-        ejecutarConsulta();
-        
-        //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
-        $tiempos = array(
-            array(1,'Cada hora'),
-            array(2,'Cada 2 horas'),
-            array(3,'Cada 4 horas'),
-            array(4,'Cada 6 horas'),
-            array(5,'Cada 8 horas'),
-            array(6,'Cada 10 horas'),
-            array(7,'Cada 12 horas'),
-            array(8,'Cada 24 horas'),
-            array(9,'Cada 2 días'),
-            array(10,'Cada 3 días'),
-            array(11,'Cada 4 días'),
-            array(12,'Cada 5 días'),
-            array(13,'Cada 6 días'),
-            array(14,'Cada semana'),
-            array(15,'Cada 2 semanas'),
-            array(16,'Cada 3 semanas'),
-            array(17,'Cada mes'),
-            array(18,'Cada 2 meses'),
-            array(19,'Cada 3 meses'),
-            array(20,'Cada 4 meses'),
-            array(21,'Cada 5 meses'),
-            array(22,'Cada 6 meses'),
-            array(23,'Cada 7 meses'),
-            array(24,'Cada 8 meses'),
-            array(25,'Cada 9 meses'),
-            array(26,'Cada 10 meses'),
-            array(27,'Cada 11 meses'),
-            array(28,'Cada año'),
-            array(29,'Cada 2 años'),
-            array(30,'Cada 3 años'),
-            array(31,'Cada 4 años'),
-            array(32,'Cada 5 años'),
-            );
-        
-        foreach ($tiempos as $tiempo){
-            $sql='INSERT INTO '.$tabla.' (id, descripcion) 
-                VALUES ('.$tiempo[0].',"'.$tiempo[1].'")';
-            insertar();		
-        }
-
-        
+        ejecutarConsulta();    
 
     //########## CREAR UNA TABLA DE "TERAPIAS" ##########
         // Preparamos la consulta SQL
@@ -2376,35 +2404,6 @@
             ';
         //Ejecutar
         ejecutarConsulta();
-        
-    //########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
-        // Preparamos la consulta SQL
-        $tabla = 'apoyosAbarreras';
-        $sql=
-            '
-                CREATE TABLE IF NOT EXISTS '.$tabla.'(
-                    id int(11) NOT NULL AUTO_INCREMENT,
-                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    PRIMARY KEY(id)
-                )
-            ';
-        //Ejecutar
-        ejecutarConsulta();
-        //########## INGRESAR CONTENIDO A LA TABLA "APOYOS A BARRERAS" ##########
-        $apoyos = array(
-            array(1,'Silla de ruedas'),
-            array(2,'Muletas'),
-            array(3,'Bastones'),
-            array(4,'Tablero de comunicación'),
-            array(5,'Audífonos'),
-            array(6,'Regleta Braille'),
-            );
-        
-        foreach ($apoyos as $apoyo){
-            $sql='INSERT INTO '.$tabla.' (id, nombre) 
-                VALUES ('.$apoyo[0].',"'.$apoyo[1].'")';
-            insertar();		
-        }
 
     //########## CREAR UNA TABLA DE "OCUPACIONES" ##########
         // Preparamos la consulta SQL
