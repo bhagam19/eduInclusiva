@@ -2096,9 +2096,9 @@
                 VALUES ('.$centroProteccion[0].',"'.$centroProteccion[1].'")';
         insertar();		
         }
-    //########## CREAR UNA TABLA DE "EPS" ##########
+    //########## CREAR UNA TABLA DE "REGIMENES" ##########
         // Preparamos la consulta SQL
-        $tabla = 'eps';
+        $tabla = 'regimenes';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
@@ -2110,32 +2110,65 @@
         //Ejecutar
         ejecutarConsulta();
 
+        //########## INGRESAR CONTENIDO A LA TABLA "REGIMENES" ##########
+            $regimenes = array(
+                array(1,"subsidiado"),
+                array(2,'contributivo'),
+                );
+            
+            foreach ($regimenes as $regimen){
+                $sql='INSERT INTO '.$tabla.' (id, nombre) 
+                    VALUES ('.$regimen[0].',"'.$regimen[1].'")';
+                insertar();		
+            }
+    //########## CREAR UNA TABLA DE "EPS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'eps';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    idRegimen int(2) NOT NULL,
+                    PRIMARY KEY(id),
+                    FOREIGN KEY (idRegimen) REFERENCES regimenes(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+
         //########## INGRESAR CONTENIDO A LA TABLA "EPS" ##########
             $empresas = array(
-                array(1,"SISBEN"),
-                array(2,'ALIANSALUD E.P.S.'),
-                array(3,'SALUD TOTAL S.A.'),
-                array(4,'CAFESALUD E.P.S.'),
-                array(5,'E.P.S. SANITAS'),
-                array(6,'COMPENSAR E.P.S.'),
-                array(7,'EPS Y MEDICINA PREPAGADA SURAMERICANA S.A.'),
-                array(8,'COMFENALCO VALLE'),
-                array(9,'COOMEVA E.P.S. S.A.'),
-                array(10,'FAMISANAR E.P.S. LTDA - CAFAM - COLSUBSIDIO'),
-                array(11,'SERVICIO OCCIDENTAL DE SALUD - S.O.S. S.A.'),
-                array(12,'CRUZ BLANCA E.P.S.'),
-                array(13,'SALUDVIDA S.A. E.P.S.'),
-                array(14,'NUEVA EPS S.A. '),
-                array(15,'COOPERATIVA DE SALUD Y DESARROLLO INTEGRAL ZONA SUR ORIENTAL DE CARTAGENA - COOSALUD'),
-                array(16,'MEDIMÁS EPS S.A.S. CONTRIBUTIVO'),
-                array(17,'A.R.S. CONVIDA'),
-                array(18,'CAJA DE PREVISION SOCIAL Y SEGURIDAD DEL CASANARE - CAPRESOCA E.P.S. S.A.'),
-
+                array(1,"SISBEN",2),
+                array(2,'ALIANSALUD E.P.S.',2),
+                array(3,'SALUD TOTAL S.A.',2),
+                array(4,'CAFESALUD E.P.S.',2),
+                array(5,'E.P.S. SANITAS',2),
+                array(6,'COMPENSAR E.P.S.',2),
+                array(7,'EPS Y MEDICINA PREPAGADA SURAMERICANA S.A.',2),
+                array(8,'COMFENALCO VALLE',2),
+                array(9,'COOMEVA E.P.S. S.A.',2),
+                array(10,'FAMISANAR E.P.S. LTDA - CAFAM - COLSUBSIDIO',2),
+                array(11,'SERVICIO OCCIDENTAL DE SALUD - S.O.S. S.A.',2),
+                array(12,'CRUZ BLANCA E.P.S.',2),
+                array(13,'SALUDVIDA S.A. E.P.S.',2),
+                array(14,'NUEVA EPS S.A.',2),
+                array(15,'COOPERATIVA DE SALUD Y DESARROLLO INTEGRAL ZONA SUR ORIENTAL DE CARTAGENA - COOSALUD',2),
+                array(16,'MEDIMÁS EPS S.A.S. CONTRIBUTIVO',2),
+                array(17,'A.R.S. CONVIDA',2),
+                array(18,'CAJA DE PREVISION SOCIAL Y SEGURIDAD DEL CASANARE - CAPRESOCA E.P.S. S.A.',2),
+                array(19,'CAFESALUD E.P.S. S.A.', 1),
+                array(20,'SALUDVIDA S.A. E.P.S.',1),
+                array(21,'CAPITAL SALUD S.A. E.P.S.',1),
+                array(22,'SAVIA SALUD E.P.S.',1),
+                array(23,'NUEVA E.P.S. S.A.',1),
+                array(24,'MEDIMÁS EPS S.A.S. SUBSIDIADO',1),
+                array(25,'SALUDVIDA S.A. E.P.S.',1),
                 );
             
             foreach ($empresas as $empresa){
-                $sql='INSERT INTO '.$tabla.' (id, nombre) 
-                    VALUES ('.$empresa[0].',"'.$empresa[1].'")';
+                $sql='INSERT INTO '.$tabla.' (id, nombre, idRegimen) 
+                    VALUES ('.$empresa[0].',"'.$empresa[1].'",'.$empresa[2].')';
                 insertar();		
             }
 
@@ -2147,12 +2180,34 @@
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
                     id int NOT NULL AUTO_INCREMENT,
                     eps int(2) NOT NULL,
-                    idOpcionesAfiliado int(2) NOT NULL,
-                    frecuencia int(2) NOT NULL,
                     lugar varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    idOpcionAtencionSS int(2) NOT NULL,
+                    idFrecuencia int(2) NOT NULL,
+                    idOpcionDiagnostico int(2) NOT NULL,
+                    descripcionDiagnostico varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idOpcionTerapia int(2) NOT NULL,
+                    descripcionTerapia1 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idFrecuenciaTerapia1 int(2) NOT NULL,
+                    descripcionTerapia2 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idFrecuenciaTerapia2 int(2) NOT NULL,
+                    descripcionTerapia3 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idFrecuenciaTerapia3 int(2),
+                    idOpcionTratamiento int(2),
+                    tratamiento varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idOpcionApoyo int(2),
+                    idApoyo int(2) NOT NULL,
                     PRIMARY KEY(id),
                     FOREIGN KEY(eps) REFERENCES eps (id),
-                    FOREIGN KEY(idOpcionesAfiliado) REFERENCES opciones (id)
+                    FOREIGN KEY(idOpcionAtencionSS) REFERENCES opciones (id),
+                    FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id),
+                    FOREIGN KEY(idOpcionDiagnostico) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcionTerapia) REFERENCES opciones (id),
+                    FOREIGN KEY(idFrecuenciaTerapia1) REFERENCES frecuencias (id),
+                    FOREIGN KEY(idFrecuenciaTerapia2) REFERENCES frecuencias (id),
+                    FOREIGN KEY(idFrecuenciaTerapia3) REFERENCES frecuencias (id),
+                    FOREIGN KEY(idOpcionTratamiento) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcionApoyo) REFERENCES opciones (id),
+                    FOREIGN KEY(idApoyo) REFERENCES apoyos (id)
                 )
             ';
         //Ejecutar
@@ -2337,7 +2392,12 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "APOYOS A BARRERAS" ##########
         $apoyos = array(
-            array(1,'Acá debe ir un apoyo a las barreras'),
+            array(1,'Silla de ruedas'),
+            array(2,'Muletas'),
+            array(3,'Bastones'),
+            array(4,'Tablero de comunicación'),
+            array(5,'Audífonos'),
+            array(6,'Regleta Braille'),
             );
         
         foreach ($apoyos as $apoyo){
@@ -2536,16 +2596,17 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
                     id int(11) NOT NULL AUTO_INCREMENT,
-                    apoyoCrianza varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    numHermanos int(2) NOT NULL,
-                    bajoProteccion int(2) NOT NULL,
                     idMadres int(2) NOT NULL,
                     idPadres int(2) NOT NULL,
                     idCuidadores int(2) NOT NULL,
+                    numHermanos int(2) NOT NULL,
+                    apoyoCrianza varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    idOpcionProteccion int(2) NOT NULL,
                     PRIMARY KEY(id),
                     FOREIGN KEY(idMadres) REFERENCES madres (id),
                     FOREIGN KEY(idPadres) REFERENCES padres (id),
-                    FOREIGN KEY(idCuidadores) REFERENCES cuidadores (id)
+                    FOREIGN KEY(idCuidadores) REFERENCES cuidadores (id),
+                    FOREIGN KEY(idOpcionProteccion) REFERENCES opciones (id)
                 )
             ';
         //Ejecutar
@@ -2662,6 +2723,32 @@
                 VALUES ('.$estado[0].',"'.$estado[1].'")';
             insertar();		
         }
+    //########## CREAR UNA TABLA DE "ENTIDADES SUBSIDIARIAS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'entidadesSubsidio';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL,
+                    name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        //########## INGRESAR CONTENIDO A LA TABLA "ESTADOS" ##########
+        $entidades = array(
+            array(1,"Prosperidad Social"),
+            array(2,"ICBF"),
+            array(3,"Fundaciones"),
+            array(4,"ONG"),
+            array(5,"Otras entidades que subsidian"),
+        );
+        foreach ($entidades as $entidad) {
+            $sql='INSERT INTO '.$tabla.' (id, name) 
+                VALUES ('.$entidad[0].',"'.$entidad[1].'")';
+            insertar();		
+        }
     //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
         // Preparamos la consulta SQL                                                                                                      
         $tabla = 'estudiantes';                                                                                                            
@@ -2692,13 +2779,13 @@
                     idGrupoEtnico int(2) NOT NULL,
                     idOpcVictimaConflicto int(2) NOT NULL,
                     idOpcRegistroVictima int(2) NOT NULL,
+                    idOpcionesAfiliado int(2) NOT NULL,
+                    idAfiliacion int(2),
                     lugarHermanos int(2) NOT NULL,
                     viveCon varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    idAfiliacion int(2),
-                    idDiagnostico int(2),
-                    idTratamiento int(2),
-                    idApoyo int(2) NOT NULL,
                     idEntornoFamiliar int(11),
+                    idOpcionSubsidio int(2) NOT NULL,
+                    idEntidadSubsidio int(2) NOT NULL,
                     ultimoGrado int(2) NOT NULL,
                     idEstadoUltimoGrado int(2) NOT NULL,
                     observaciones varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
@@ -2717,11 +2804,11 @@
                     FOREIGN KEY(idGrupoEtnico) REFERENCES gruposEtnicos (id),
                     FOREIGN KEY(idOpcVictimaConflicto) REFERENCES opciones (id),
                     FOREIGN KEY(idOpcRegistroVictima) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcionesAfiliado) REFERENCES opciones (id),
                     FOREIGN KEY(idAfiliacion) REFERENCES afiliaciones (id),
-                    FOREIGN KEY(idDiagnostico) REFERENCES diagnosticos (id),
-                    FOREIGN KEY(idTratamiento) REFERENCES tratamientos (id),
-                    FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id),
                     FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
+                    FOREIGN KEY(idOpcionSubsidio) REFERENCES opciones (id),
+                    FOREIGN KEY(idEntidadSubsidio) REFERENCES entidadesSubsidio (id),
                     FOREIGN KEY(ultimoGrado) REFERENCES grados (id),
                     FOREIGN KEY(idEstadoUltimoGrado) REFERENCES estados (id),
                     FOREIGN KEY(idInformePedagogico) REFERENCES informePedagogico (id)
