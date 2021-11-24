@@ -2274,9 +2274,9 @@
                     idFrecuenciaTerapia2 int(2),
                     descripcionTerapia3 varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idFrecuenciaTerapia3 int(2),
-                    idOpcionTratamiento int(2),
+                    idOpcionTratamiento int(2) NOT NULL,
                     tratamiento varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                    idOpcionApoyo int(2),
+                    idOpcionApoyo int(2) NOT NULL,
                     idApoyo int(2),
                     PRIMARY KEY(id),
                     FOREIGN KEY(idEps) REFERENCES eps (id),
@@ -2296,7 +2296,7 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "AFILIACIONES" ##########
         $afiliaciones = array(
-            array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,NULL,NULL,NULL,NULL,1,'para controlor epilepsia',2,NULL),
+            array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,'NULL','NULL','NULL','NULL',1,'para controlor epilepsia',2,'NULL'),
             /*array(2,''),
             array(3,''),
             array(4,''),
@@ -2320,8 +2320,10 @@
              descripcionDiagnostico, idOpcionTerapia, descripcionTerapia1, idFrecuenciaTerapia1,
               descripcionTerapia2, idFrecuenciaTerapia2, descripcionTerapia3, idFrecuenciaTerapia3,
               idOpcionTratamiento, tratamiento, idOpcionApoyo, idApoyo) 
-                VALUES ('.$afiliacion[0].',"'.$afiliacion[1].'",'.$afiliacion[2].','.$afiliacion[3].','.$afiliacion[4].',"'.$afiliacion[5].'",'.$afiliacion[6].',"'.$afiliacion[7].'",'.$afiliacion[8].',"'.$afiliacion[9].'",
-                '.$afiliacion[10].',"'.$afiliacion[11].'",'.$afiliacion[12].','.$afiliacion[13].',"'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].')';
+                VALUES ('.$afiliacion[0].',"'.$afiliacion[1].'",'.$afiliacion[2].','.$afiliacion[3].','.$afiliacion[4].',"'.$afiliacion[5].'",'.$afiliacion[6].',
+                "'.$afiliacion[7].'",'.$afiliacion[8].',"'.$afiliacion[9].'",'.$afiliacion[10].',"'.$afiliacion[11].'",'.$afiliacion[12].','.$afiliacion[13].',
+                "'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].')';
+            echo $sql;
         insertar();		
         }
     //########## CREAR UNA TABLA DE "DIAGNÓSTICOS" ##########
@@ -2425,7 +2427,7 @@
                 array(2,"Enfermero(a)"),
                 array(3,"Recepcionista"),
                 array(4,"Abogado(a)"),
-                array(4,"Docente"),
+                array(5,"Docente"),
                 );
             
             foreach ($ocupaciones as $ocupacion){
@@ -2612,12 +2614,13 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "ENTORNO FAMILIAR" ##########
         $entornos = array(
-            array('Acá debe ir un apoyo a crianza', 5, 1, 1, 1,1),
+            array(1, 1, 1, 1,'Acá debe ir un apoyo a crianza',1),
             );
         
         foreach ($entornos as $entorno){
-            $sql='INSERT INTO '.$tabla.' (apoyoCrianza, numHermanos, bajoProteccion, idMadres, idPadres, idCuidadores) 
-                VALUES ("'.$entorno[0].'",'.$entorno[1].','.$entorno[2].','.$entorno[3].','.$entorno[4].','.$entorno[5].')';
+            $sql='INSERT INTO '.$tabla.' (idMadres, idPadres, idCuidadores, numHermanos, apoyoCrianza, idOpcionProteccion) 
+                VALUES ('.$entorno[0].','.$entorno[1].','.$entorno[2].','.$entorno[3].',"'.$entorno[4].'",'.$entorno[5].')';
+                echo $sql;
             insertar();		
         }
     //########## CREAR UNA TABLA DE "ASPIRA AL GRADO" ##########
@@ -2778,14 +2781,14 @@
                     idGrupoEtnico int(2) NOT NULL,
                     idOpcVictimaConflicto int(2) NOT NULL,
                     idOpcRegistroVictima int(2) NOT NULL,
-                    idOpcionesAfiliado int(2) NOT NULL,
+                    idOpcAfiliado int(2) NOT NULL,
                     idAfiliacion int(2),
                     lugarHermanos int(2) NOT NULL,
                     viveCon varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     idEntornoFamiliar int(11),
-                    idOpcionSubsidio int(2) NOT NULL,
+                    idOpcSubsidio int(2) NOT NULL,
                     idEntidadSubsidio int(2) NOT NULL,
-                    ultimoGrado int(2) NOT NULL,
+                    idUltimoGrado int(2) NOT NULL,
                     idEstadoUltimoGrado int(2) NOT NULL,
                     observaciones varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idInformePedagogico int(2),
@@ -2803,12 +2806,12 @@
                     FOREIGN KEY(idGrupoEtnico) REFERENCES gruposEtnicos (id),
                     FOREIGN KEY(idOpcVictimaConflicto) REFERENCES opciones (id),
                     FOREIGN KEY(idOpcRegistroVictima) REFERENCES opciones (id),
-                    FOREIGN KEY(idOpcionesAfiliado) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcAfiliado) REFERENCES opciones (id),
                     FOREIGN KEY(idAfiliacion) REFERENCES afiliaciones (id),
                     FOREIGN KEY(idEntornoFamiliar) REFERENCES entornoFamiliar (id),
-                    FOREIGN KEY(idOpcionSubsidio) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcSubsidio) REFERENCES opciones (id),
                     FOREIGN KEY(idEntidadSubsidio) REFERENCES entidadesSubsidio (id),
-                    FOREIGN KEY(ultimoGrado) REFERENCES grados (id),
+                    FOREIGN KEY(idUltimoGrado) REFERENCES grados (id),
                     FOREIGN KEY(idEstadoUltimoGrado) REFERENCES estados (id),
                     FOREIGN KEY(idInformePedagogico) REFERENCES informePedagogico (id)
                 )
@@ -2817,8 +2820,10 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTUDIANTES" ##########
         $estudiantes = array(
-            array("Pepito", "Pedrito", "Pérez", "Porras", 91, 2, "1978/12/08", 42, 3, 71481707, 2, 40, "Calle de la esquinita azul en el parque", 2, 6045555555, "pepitoperez@correo.com", 2,
-             1, 10, 1, 2, 2, 2, 2, "Abuela, mamá y hemanos", 1, 1, 1, 1, 1, 10, 2, "Tiene muchas observaciones", 1),
+            array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,
+            2,40,"Calle de la esquinita azul en el parque",2,6045555555,"pepitoperez@correo.com",2,1,10,
+            1,2,2,2,2,1,4,"Abuela, mamá y hemanos",1,
+            1,1,10,2,"Tiene muchas observaciones",1),
         /*    array(2,"Abuela(o)"),
             array(3,"Madre"),
             array(4,"Padre"),
@@ -2833,16 +2838,18 @@
         
         foreach ($estudiantes as $estudiante){
             $sql='INSERT INTO '.$tabla.' (
-                    nombre1, nombre2, apellido1, apellido2, idMunicipioNacimiento, idDepartamentoNacimiento, fechaNacimiento, edad, idTipoDoc, documento, idDepartamentoResidencia, idMunicipioResidencia,
-                    direccion, idBarrio, telefono, correo, idOpcProteccion, idCentroProteccion, idAspiraAlGrado, idOpcEtnico, idGrupoEtnico, idOpcVictimaConflicto, idOpcRegistroVictima, lugarHermanos, viveCon,
-                    idAfiliacion, idDiagnostico, idTratamiento, idApoyo, idEntornoFamiliar, ultimoGrado, idEstadoUltimoGrado, observaciones, idInformePedagogico
+                    nombre1, nombre2, apellido1, apellido2, idMunicipioNacimiento, idDepartamentoNacimiento, fechaNacimiento, edad, idTipoDoc, documento,
+                    idDepartamentoResidencia, idMunicipioResidencia, direccion, idBarrio, telefono, correo, idOpcProteccion, idCentroProteccion, idAspiraAlGrado,
+                    idOpcEtnico, idGrupoEtnico, idOpcVictimaConflicto, idOpcRegistroVictima, idOpcAfiliado, idAfiliacion, lugarHermanos, viveCon, idEntornoFamiliar,
+                    idOpcSubsidio,idEntidadSubsidio,idUltimoGrado, idEstadoUltimoGrado, observaciones, idInformePedagogico
                 ) 
                 VALUES (
-                    "'.$estudiante[0].'","'.$estudiante[1].'","'.$estudiante[2].'","'.$estudiante[3].'",'.$estudiante[4].','.$estudiante[5].',"'.$estudiante[6].'",'.$estudiante[7].','.$estudiante[8].
-                    ','.$estudiante[9].','.$estudiante[10].','.$estudiante[11].',"'.$estudiante[12].'",'.$estudiante[13].','.$estudiante[14].',"'.$estudiante[15].'",'.$estudiante[16].','.$estudiante[17].
-                    ','.$estudiante[18].','.$estudiante[19].','.$estudiante[20].','.$estudiante[21].','.$estudiante[22].','.$estudiante[23].',"'.$estudiante[24].'",'.$estudiante[25].','.$estudiante[26].
-                    ','.$estudiante[27].','.$estudiante[28].','.$estudiante[29].','.$estudiante[30].','.$estudiante[31].',"'.$estudiante[32].'",'.$estudiante[33].'
+                    "'.$estudiante[0].'","'.$estudiante[1].'","'.$estudiante[2].'","'.$estudiante[3].'",'.$estudiante[4].','.$estudiante[5].',"'.$estudiante[6].'",'.$estudiante[7].','.$estudiante[8].','.$estudiante[9].',
+                    '.$estudiante[10].','.$estudiante[11].',"'.$estudiante[12].'",'.$estudiante[13].','.$estudiante[14].',"'.$estudiante[15].'",'.$estudiante[16].','.$estudiante[17].','.$estudiante[18].',
+                    '.$estudiante[19].','.$estudiante[20].','.$estudiante[21].','.$estudiante[22].','.$estudiante[23].','.$estudiante[24].','.$estudiante[25].',"'.$estudiante[26].'",'.$estudiante[27].',
+                    '.$estudiante[28].','.$estudiante[29].','.$estudiante[30].','.$estudiante[31].',"'.$estudiante[32].'",'.$estudiante[33].'
                 )';
+                echo $sql;
             insertar();		
         }  
     //########## CREAR UNA TABLA DE "TERAPIAS RECIBIDAS" ##########
