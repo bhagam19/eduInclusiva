@@ -34,11 +34,9 @@
                             include('../../03-cnt/03-funciones/buscarEnBD.php');
                             mysqli_close($cnx);
                             return $query1;
-                            //$retorno=mysqli_fetch_row($query1);
-                            //return $retorno;
-                            //return mysqli_fetch_row($query1);
                         }
-                        $query=buscarEnBD("id", "estudiantes", "1");
+                        $id=1;
+                        $query=buscarEnBD("id", "estudiantes", $id);
                         while($row=mysqli_fetch_row($query)){
                     ?>
                             <table border="1">
@@ -265,28 +263,72 @@
                                     <td><?=$cual?></td>
                                 </tr>
                                 <?php
-                                        $opcion=mysqli_fetch_row(buscarEnBD("id", "afiliaciones", $row[25]))[14];
-                                        $opcion=mysqli_fetch_row(buscarEnBD("id", "opciones", $opcion))[1];
-                                        $cual=mysqli_fetch_row(buscarEnBD("id", "afiliaciones", $row[25]))[15];
+                                    function buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id){
+                                        include('../../01-mdl/cnx.php');
+                                        include('../../03-cnt/03-funciones/buscarEnBD.php');
+                                        mysqli_close($cnx);
+                                        return $query1;
+                                    }
+                                    $case="innerJoinx4";
+                                    $t1="estudiantes";
+                                    $t2="afiliaciones";
+                                    $t3="prescripciones";
+                                    $t4="medicamentos";
+                                    $p1="idAfiliacion";
+                                    $p2="id";
+                                    $p31="idAfiliacion";
+                                    $p32="idMedicamento";
+                                    $p41="id";
+                                    $p42="nombre";
+                                    $opcion=mysqli_fetch_row(buscarEnBD("id", "afiliaciones", $row[25]))[16];
+                                    $opcion=mysqli_fetch_row(buscarEnBD("id", "opciones", $opcion))[1];
+                                    $cual=mysqli_fetch_row(buscarEnBD("id", "afiliaciones", $row[25]))[1];
+                                    $medicamento=buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id);
+                                    $t4="frecuencias";
+                                    $p32="idFrecuencia";
+                                    $p42="descripcion";
+                                    $frecuencia=buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id);
+                                    $i=0;
+                                    while($row=mysqli_fetch_row($medicamento)){
+                                        $medicamentos[$i] = $row[0];
+                                        $i++;
+                                    }
+                                    $i=0;
+                                    while($row=mysqli_fetch_row($frecuencia)){
+                                        $frecuencias[$i] = $row[0];
+                                        $i++;
+                                    }
+                                ?>
+                                <tr>
+                                    <?php
+                                        if($opcion=="Si"){
                                     ?>
-                                <tr>
-                                    <td rowspan="4">¿Consume medicamentos?:</td>
-                                    <td rowspan="4"><?=$row[15]?></td>
-                                    <td><?=$row[18]?></td>
-                                    <td>Frecuencia:</td>
-                                </tr>
-                                <tr>
-                                    <td><?=$row[18]?></td>
-                                    <td>Frecuencia:</td>
-                                </tr>
-                                <tr>
-                                    <td><?=$row[18]?></td>
-                                    <td>Frecuencia:</td>
-                                </tr>
-                                <tr>
-                                    <td><?=$row[18]?></td>
-                                    <td>Frecuencia:</td>
-                                </tr>
+                                                <td rowspan="4">¿Consume medicamentos?:</td>
+                                                <td rowspan="4"><?=$opcion?></td>
+                                                <td><?=$medicamentos[0]?></td>
+                                                <td><?=$frecuencias[0]?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?=$medicamentos[1]?></td>
+                                                <td><?=$frecuencias[1]?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?=$medicamentos[2]?></td>
+                                                <td><?=$frecuencias[2]?></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?=$medicamentos[3]?></td>
+                                                <td><?=$frecuencias[3]?></td>
+                                            </tr>
+                                    <?php
+                                        }else{
+                                    ?>
+                                                <td>¿Consume medicamentos?:</td>
+                                                <td colspan="3"><?=$opcion?></td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    ?>
                                 <tr>
                                     <td>Horarios:</td>
                                     <td><?=$row[16]?></td>
