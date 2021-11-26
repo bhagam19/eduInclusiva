@@ -2226,6 +2226,35 @@
                 VALUES ('.$tiempo[0].',"'.$tiempo[1].'")';
             insertar();		
         }
+    //########## CREAR UNA TABLA DE "MEDICAMENTOS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'medicamentos';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        
+        //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
+        $medicamentos = array(
+            array(1,'Ritalina'),
+            array(2,'Paracetamol'),
+            array(3,'Diclofenaco'),
+            array(4,'Ibuprofeno'),
+            array(5,'Aspirina'),
+            array(6,'Dolex'),
+            );
+        
+        foreach ($medicamentos as $medicamento){
+            $sql='INSERT INTO '.$tabla.' (id, nombre) 
+                VALUES ('.$medicamento[0].',"'.$medicamento[1].'")';
+            insertar();		
+        }
     //########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
         // Preparamos la consulta SQL
         $tabla = 'apoyosAbarreras';
@@ -2276,6 +2305,7 @@
                     idFrecuenciaTerapia3 int(2),
                     idOpcionTratamiento int(2) NOT NULL,
                     tratamiento varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    idOpcMedicamento int(2) NOT NULL,
                     idOpcionApoyo int(2) NOT NULL,
                     idApoyo int(2),
                     PRIMARY KEY(id),
@@ -2288,6 +2318,7 @@
                     FOREIGN KEY(idFrecuenciaTerapia2) REFERENCES frecuencias (id),
                     FOREIGN KEY(idFrecuenciaTerapia3) REFERENCES frecuencias (id),
                     FOREIGN KEY(idOpcionTratamiento) REFERENCES opciones (id),
+                    FOREIGN KEY(idOpcMedicamento) REFERENCES opciones (id),
                     FOREIGN KEY(idOpcionApoyo) REFERENCES opciones (id),
                     FOREIGN KEY(idApoyo) REFERENCES apoyosAbarreras (id)
                 )
@@ -2296,7 +2327,7 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "AFILIACIONES" ##########
         $afiliaciones = array(
-            array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,'NULL','NULL','NULL','NULL',1,'para controlor epilepsia',2,'NULL'),
+            array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,'NULL','NULL','NULL','NULL',1,'para controlor epilepsia',1,2,'NULL'),
             /*array(2,''),
             array(3,''),
             array(4,''),
@@ -2319,13 +2350,163 @@
             $sql='INSERT INTO '.$tabla.' (idEps, lugar, idOpcionAtencionSS, idFrecuencia, idOpcionDiagnostico,
              descripcionDiagnostico, idOpcionTerapia, descripcionTerapia1, idFrecuenciaTerapia1,
               descripcionTerapia2, idFrecuenciaTerapia2, descripcionTerapia3, idFrecuenciaTerapia3,
-              idOpcionTratamiento, tratamiento, idOpcionApoyo, idApoyo) 
+              idOpcionTratamiento, tratamiento, idOpcMedicamento, idOpcionApoyo, idApoyo) 
                 VALUES ('.$afiliacion[0].',"'.$afiliacion[1].'",'.$afiliacion[2].','.$afiliacion[3].','.$afiliacion[4].',"'.$afiliacion[5].'",'.$afiliacion[6].',
                 "'.$afiliacion[7].'",'.$afiliacion[8].',"'.$afiliacion[9].'",'.$afiliacion[10].',"'.$afiliacion[11].'",'.$afiliacion[12].','.$afiliacion[13].',
-                "'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].')';
-            echo $sql;
+                "'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].','.$afiliacion[17].')';
         insertar();		
         }
+    //########## CREAR UNA TABLA DE "PRESCRIPCIONES" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'prescripciones';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    idAfiliacion int(2) NOT NULL,
+                    idMedicamento int(2) NOT NULL,
+                    idFrecuencia int(2) NOT NULL,
+                    PRIMARY KEY(id),
+                    FOREIGN KEY(idAfiliacion) REFERENCES afiliaciones (id),
+                    FOREIGN KEY(idMedicamento) REFERENCES medicamentos (id),
+                    FOREIGN KEY(idFrecuencia) REFERENCES frecuencias (id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        //########## INGRESAR CONTENIDO A LA TABLA "PRESCRIPCIONES" ##########
+        $prescripciones = array(
+            array(1,1,1),
+            array(1,2,5),
+            array(1,3,9),
+            array(1,5,4),
+            /*array(2,6,3),
+            array(6,''),
+            array(7,''),
+            array(8,''),
+            array(9,''),
+            array(10,''),
+            array(11,''),
+            array(12,''),
+            array(13,''),
+            array(14,''),
+            array(15,''),
+            array(16,''),
+            array(17,''),
+            array(18,''),*/
+            );
+        foreach ($prescripciones as $prescripcion){
+            $sql='INSERT INTO '.$tabla.' (idAfiliacion, idMedicamento, idFrecuencia) 
+                VALUES ('.$prescripcion[0].','.$prescripcion[1].','.$prescripcion[2].')';
+            insertar();
+        }
+    //########## CREAR UNA TABLA DE "HORAS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'horas';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    hora varchar(8) NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();
+        //########## INGRESAR CONTENIDO A LA TABLA "HORAS" ##########
+        $horas = array(
+            array('12:00 am'),
+            array('12:30 am'),
+            array('1:00 am'),
+            array('1:30 am'),
+            array('2:00 am'),
+            array('2:30 am'),
+            array('3:00 am'),
+            array('3:30 am'),
+            array('4:00 am'),
+            array('4:30 am'),
+            array('5:00 am'),
+            array('5:30 am'),
+            array('6:00 am'),
+            array('6:30 am'),
+            array('7:00 am'),
+            array('7:30 am'),
+            array('8:00 am'),
+            array('8:30 am'),
+            array('9:00 am'),
+            array('9:30 am'),
+            array('10:00 am'),
+            array('10:30 am'),
+            array('11:00 am'),
+            array('11:30 am'),
+            array('12:00 pm'),
+            array('12:30 pm'),
+            array('1:00 pm'),
+            array('1:30 pm'),
+            array('2:00 pm'),
+            array('2:30 pm'),
+            array('3:00 pm'),
+            array('3:30 pm'),
+            array('4:00 pm'),
+            array('4:30 pm'),
+            array('5:00 pm'),
+            array('5:30 pm'),
+            array('6:00 pm'),
+            array('6:30 pm'),
+            array('7:00 pm'),
+            array('7:30 pm'),
+            array('8:00 pm'),
+            array('8:30 pm'),
+            array('9:00 pm'),
+            array('9:30 pm'),
+            array('10:00 pm'),
+            array('10:30 pm'),
+            array('11:00 pm'),
+            array('11:30 pm'),
+            );
+        foreach ($horas as $hora){
+            $sql='INSERT INTO '.$tabla.' (hora) 
+                VALUES ("'.$hora[0].'")';
+            insertar();
+        }
+        //########## CREAR UNA TABLA DE "HORARIOS DE MEDICAMENTOS" ##########
+        // Preparamos la consulta SQL                                              
+        $tabla = 'horariosMedicamentos';                                                    
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    idPrescripcion int(2) NOT NULL,
+                    idHora int(2) NOT NULL,
+                    PRIMARY KEY(id),
+                    FOREIGN KEY(idPrescripcion) REFERENCES prescripciones (id),
+                    FOREIGN KEY(idHora) REFERENCES horas (id)
+                )
+            ';
+        //Ejecutar
+        ejecutarConsulta();                                                                                             
+        //########## INGRESAR CONTENIDO A LA TABLA "HORARIOS DE MEDICAMENTOS" ##########
+        $horariosMed = array(
+            array(1,17),
+            array(1,41),
+            array(2,17),
+            array(2,33),
+            array(2,1),
+            array(3,13),
+            array(3,29),
+            array(3,45),
+            array(4,11),
+            array(4,23),
+            array(4,35),
+            array(4,47),
+            );
+        
+        foreach ($horariosMed as $horarioMed){
+            $sql='INSERT INTO '.$tabla.' (idPrescripcion, idHora) 
+                VALUES ('.$horarioMed[0].','.$horarioMed[1].')';
+            insertar();		
+        }
+           
     //########## CREAR UNA TABLA DE "DIAGNÓSTICOS" ##########
         // Preparamos la consulta SQL                                              
         $tabla = 'diagnosticos';                                                    
@@ -2373,20 +2554,6 @@
                 VALUES ('.$tratamiento[0].',"'.$tratamiento[1].'")';
             insertar();		
         }
-                                                                                                                                                
-    //########## CREAR UNA TABLA DE "MEDICAMENTOS" ##########
-        // Preparamos la consulta SQL
-        $tabla = 'medicamentos';
-        $sql=
-            '
-                CREATE TABLE IF NOT EXISTS '.$tabla.'(
-                    id int NOT NULL AUTO_INCREMENT,
-                    nombre varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    PRIMARY KEY(id)
-                )
-            ';
-        //Ejecutar
-        ejecutarConsulta();    
 
     //########## CREAR UNA TABLA DE "TERAPIAS" ##########
         // Preparamos la consulta SQL
@@ -2620,7 +2787,6 @@
         foreach ($entornos as $entorno){
             $sql='INSERT INTO '.$tabla.' (idMadres, idPadres, idCuidadores, numHermanos, apoyoCrianza, idOpcionProteccion) 
                 VALUES ('.$entorno[0].','.$entorno[1].','.$entorno[2].','.$entorno[3].',"'.$entorno[4].'",'.$entorno[5].')';
-                echo $sql;
             insertar();		
         }
     //########## CREAR UNA TABLA DE "ASPIRA AL GRADO" ##########
@@ -2849,7 +3015,6 @@
                     '.$estudiante[19].','.$estudiante[20].','.$estudiante[21].','.$estudiante[22].','.$estudiante[23].','.$estudiante[24].','.$estudiante[25].',"'.$estudiante[26].'",'.$estudiante[27].',
                     '.$estudiante[28].','.$estudiante[29].','.$estudiante[30].','.$estudiante[31].',"'.$estudiante[32].'",'.$estudiante[33].'
                 )';
-                echo $sql;
             insertar();		
         }  
     //########## CREAR UNA TABLA DE "TERAPIAS RECIBIDAS" ##########
