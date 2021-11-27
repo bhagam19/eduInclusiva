@@ -372,12 +372,13 @@ html {
 .menuNavegacion {
 	position: absolute;
 	display: inline-block;
-	top: 75px;
+	top: 55px;
 	width: 34px;
 	padding: 5px;	
 	line-height: 18px;
 	overflow: hidden;
 	z-index: 3;
+	user-select: none;
 }
 .menuNavegacion ul {
 	position: relative;
@@ -424,6 +425,9 @@ html {
 	position: relative;
 	top: 0px;
 	left: -10px;
+}
+.menuNavegacion .menu ul li{
+	padding:3px;
 }
 .menuNavegacion .menu .activado > a {
 	background: green;
