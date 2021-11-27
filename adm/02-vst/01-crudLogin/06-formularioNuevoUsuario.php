@@ -7,7 +7,7 @@
 		<div id="mostrarFoto"> 
 			<img class="foto" src="../appsArt/usuario.svg">
 		</div>   
-		<form method="POST" name="formularioNuevoUsuario" action="index.php" onsubmit="return registrarUsuario(1)">
+		<form name="formularioNuevoUsuario">
 			<table class="registro-usuario" border=0>
 				<tr>
 					<td><span>ID: <br></span><input class="input" type="text" name="usuarioCED" id="usuarioCED" onkeyup="cambiarFondoInput(this.id)"></td>
@@ -34,7 +34,7 @@
 					<td><span>Confirmar Contraseña: <br></span><input class="input" type="password" name="confirmarContrasena" id="confirmarContrasena" onkeyup="cambiarFondoInput(this.id)"></td>
 				</tr>									
 				<tr>
-					<td><input style="left:30px" type="submit" class="submit" value="Enviar"></td>
+					<td><input style="left:30px" type="button" class="submit" value="Enviar" onclick="registrarUsuario(1)"></td>
 				</tr>			
 			</table>
 		</form>
