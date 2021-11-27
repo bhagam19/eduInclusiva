@@ -56,11 +56,11 @@
 		}elseif($codigo==5){//Usuario SuperAdministrador Frontend (Rector)	
 		}elseif($codigo==6){//Usuario SuperAdministrador Frontend y Backend (Desarrollador) 
 			include('01-encabezadoGral.php');
-			include dirname(__FILE__).'../../01-crudLogin/01-formularioDatosUsuario.php';
-			/*include('appsLogin/04-formularioNuevaContrasena.php');
-			include('03-appsMenuNavegacion.php');*/
+			include dirname(__FILE__).'../../01-crudLogin/01-formularioDatosUsuario.php';			
+			include dirname(__FILE__).'../../01-crudLogin/02-formularioNuevaContrasena.php';
+			include dirname(__FILE__).'/03-menuNavegacion.php';
 			echo '
-				<div id="appsContenedor">';
+				<div id="appsContenedor" onmouseover="ocultarMenu()">';
 					$datosApp=array(
 					array("planeaApp/00-index.php","../appsArt/planeador.png","Planeador"),
 					array("eduInclusiva/00-index.php","../appsArt/DUA.png","EduInclusiva")
@@ -77,6 +77,7 @@
 				<div id="h2">
 					<H2>¡Click y disfruta nuestras apps!</H2>
 				</div>
+				
 			';
 		}
 	}

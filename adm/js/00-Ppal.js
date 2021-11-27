@@ -3,31 +3,23 @@ function mostrarFormularios(clase){
 	$(clase).css({"visibility":"visible"});
 	$(clase).animate({'top':'238px'},500);
 }
-function mostrarMenu(){
-	$('.menuNavegacion').css({"border-right":"1px solid gray"});
+function mostrarMenu(){		
+	$('.menuNavegacion').css({"border-right":"1px solid #80c0fc"});
 	if(screen.width<800){
 		//alert(screen.width);
 		$('.menuNavegacion').animate({width:'420px'},"fast",function(){
 			$('.li').animate({width:'410px'},"fast",function(){
-				$('#listProy').html('<img style="width:40px;height:40px" src="../art/atras.svg">' + 'Ir a Lista de Proyectos');
-				$('#verBD').html('<img style="width:40px;height:40px" src="../art/bd.svg">' + 'Ver Base de Datos');
-				$('#invBienes').html('<img style="width:40px;height:40px" src="../art/inventario.png">' + 'Inventario de Bienes');
-				$('#admon').html('<img style="width:40px;height:40px" src="../art/administracion.svg">' + 'Adminstración');
-				$('#reiniciarBD').html('<img style="width:40px;height:40px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
-				$('#genActa').html('<img style="width:40px;height:40px" src="../art/acta.svg">' + 'Generar Acta');
-				$('#expExcel').html('<img style="width:40px;height:40px" src="../art/exportar.svg">' + 'Exportar a Excel');
+				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
+				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
+				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
 			});
 		});
-	}else{
+	}else{		
 		$('.menuNavegacion').animate({width:'180px'},"fast",function(){
 			$('.li').animate({width:'160px'},"fast",function(){
-				$('#listProy').html('<img style="width:15px;height:15px" src="../art/atras.svg">' + 'Ir a Lista de Proyectos');
-				$('#verBD').html('<img style="width:15px;height:15px" src="../art/bd.svg">' + 'Ver Base de Datos');
-				$('#invBienes').html('<img style="width:15px;height:15px" src="../art/inventario.png">' + 'Inventario de Bienes');
-				$('#admon').html('<img style="width:15px;height:15px" src="../art/administracion.svg">' + 'Adminstración');
-				$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
-				$('#genActa').html('<img style="width:15px;height:15px" src="../art/acta.svg">' + 'Generar Acta');
-				$('#expExcel').html('<img style="width:15px;height:15px" src="../art/exportar.svg">' + 'Exportar a Excel');
+				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
+				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
+				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');				
 			});
 		});
 	}
@@ -37,26 +29,18 @@ function ocultarMenu(){
 		$('.menuNavegacion').animate({width:'50px'},"fast"); 
 		$('.menuNavegacion').css({"border-right":"none"});
 		$('.li').animate({width:'45px'},"fast");
-		$('#listProy').html('<img style="width:40px;height:40px" src="../art/atras.svg">');
-		$('#verBD').html('<img style="width:40px;height:40px" src="../art/bd.svg">');
-		$('#invBienes').html('<img style="width:40px;height:40px" src="../art/inventario.png">');
-		$('#admon').html('<img style="width:40px;height:40px" src="../art/administracion.svg">');
+		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
 		$('.submenuAdmon').css({"display":"none"});
-		$('#reiniciarBD').html('<img style="width:40px;height:40px" src="../art/reiniciar.svg">');
-		$('#genActa').html('<img style="width:40px;height:40px" src="../art/acta.svg">');
-		$('#expExcel').html('<img style="width:40px;height:40px" src="../art/exportar.svg">');
-	}else{
-		$('.menuNavegacion').animate({width:'24px'},"fast"); 
-		$('.menuNavegacion').css({"border-right":"none"});
-		$('.li').animate({width:'20px'},"fast");
-		$('#listProy').html('<img style="width:15px;height:15px" src="../art/atras.svg">');
-		$('#verBD').html('<img style="width:15px;height:15px" src="../art/bd.svg">');
-		$('#invBienes').html('<img style="width:15px;height:15px" src="../art/inventario.png">');
-		$('#admon').html('<img style="width:15px;height:15px" src="../art/administracion.svg">');
+		$('#reiniciarBD').html('<img style="width:40px;height:40px" src="../art/reiniciar.svg">');		
+	}else{	
+		$('.menuNavegacion').css({"border-right":"none"});	
 		$('.submenuAdmon').css({"display":"none"});
-		$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">');
-		$('#genActa').html('<img style="width:15px;height:15px" src="../art/acta.svg">');
-		$('#expExcel').html('<img style="width:15px;height:15px" src="../art/exportar.svg">');
+		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');		
+		$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">');	
+		$('.menuNavegacion').animate({width:'35px'},"fast");
+		$('.li').animate({width:'30px'},"fast");
 	}
 }
 function mostrarSubMenu(){
@@ -84,12 +68,12 @@ function mostrarSubMenu(){
 		}	
 	}
 }
+/*
 $(document).ready(function(){
 	$(window).resize(function(){
 		if ($(document).width() > 450){
 			$('.menuNavegacion .menu').css({'display' : 'block'});
 		}
-
 		if ($(document).width() < 450){
 			$('.menuNavegacion .menu').css({'display' : 'none'});
 			$('.menu li ul').slideUp();
@@ -97,6 +81,7 @@ $(document).ready(function(){
 		}
 	});	
 });
+*/
 $(document).ready(function(){ //ocultar formularios
 	$('.cerrar').click(function(){
 		var elemento=$(this).parent().parent();		
