@@ -328,10 +328,45 @@
                                             </tr>
                                     <?php
                                         }
+                                        function buscarInnerJoinX6($case, $t1, $t2, $t3, $t4, $t5, $t6, $p1, $p2, $p31, $p32, $p33, $p41, $p42, $p51, $p52, $p61, $p62, $id){
+                                            include('../../01-mdl/cnx.php');
+                                            include('../../03-cnt/03-funciones/buscarEnBD.php');
+                                            mysqli_close($cnx);
+                                            return $query1;
+                                        }
+                                        $case="innerJoinx6";
+                                        $t4="medicamentos";
+                                        $t5="horariosMedicamentos";
+                                        $t6="horas";
+                                        $p32="idMedicamento";
+                                        $p33="id";
+                                        $p42="nombre";
+                                        $p51="idPrescripcion";
+                                        $p52="idHora";
+                                        $p61="id";
+                                        $p62="hora";
+                                        $horarios=buscarInnerJoinX6($case, $t1, $t2, $t3, $t4, $t5, $t6, $p1, $p2, $p31, $p32, $p33, $p41, $p42, $p51, $p52, $p61, $p62, $id);
+                                        $i=0;
+                                        while($row=mysqli_fetch_row($horarios)){
+                                            $medicamentos[$i] = $row[0];
+                                            $horario[$i] = $row[1];
+                                            echo $medicamentos[$i]." ".$horario[$i]."<br>";
+                                            $i++;
+                                        }
+                                        include('../../03-cnt/03-funciones/extraerTextos.php');
+                                        for ($i=0; $i < count($medicaments); $i++) {
+                                            echo $medicaments[$i];
+                                            for ($j=0; $j < count($horaris); $j++) {
+                                                echo $horaris[$m][$j];
+                                                }
+                                        }
+
                                     ?>
                                 <tr>
                                     <td>Horarios:</td>
-                                    <td><?=$row[16]?></td>
+                                    <td><?=$medicamentos[0]?></td>
+                                    <td><?=$horario[0]?></td>
+                                    
 
                                 </tr>
                                 <tr>
