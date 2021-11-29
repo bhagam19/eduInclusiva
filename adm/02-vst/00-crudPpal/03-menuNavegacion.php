@@ -30,17 +30,15 @@
 			echo'
 				<div id="menuNavegacion" class="menuNavegacion" onmouseenter="mostrarMenu()" onmouseleave="ocultarMenu()"> 
 					<ul class="menu" >						
-						<li class="li"><a id="verBD" href="?pg=$pzz'.crypt($pzz,"$2y$10$".$salt).'"><img src="../appsArt/bdOnPasiva.png"></a></li>
+						<li class="li"><a id="home" href="?pg=$pzz'.crypt($pzz,"$2y$10$".$salt).'"><img src="../appsArt/homeOnPasiva.png"></a></li>
+						<li class="li"><a id="verBD" href="?pg=$p00'.crypt($pzz,"$2y$10$".$salt).'"><img src="../appsArt/bdOnPasiva.png"></a></li>
 						<li class="li"><a id="admon" onclick="mostrarSubMenu()"><img src="../appsArt/adminOnPasiva.png"></a></li>                        							
 							<ul class="submenuAdmon">
-								<li class="li"><a href="?pg=$p02'.crypt($p02,"$2y$10$".$salt).'">Almacenamiento</a></li>
-								<li class="li"><a href="?pg=$p03'.crypt($p03,"$2y$10$".$salt).'">Clases de Bienes</a></li>
-								<li class="li"><a href="?pg=$p04'.crypt($p04,"$2y$10$".$salt).'">Categorías de Bienes</a></li>
-								<li class="li"><a href="?pg=$p05'.crypt($p05,"$2y$10$".$salt).'">Dependencias</a></li>
-								<li class="li"><a href="?pg=$p06'.crypt($p06,"$2y$10$".$salt).'">Estado del Bien</a></li>
-								<li class="li"><a href="?pg=$p07'.crypt($p07,"$2y$10$".$salt).'">Estado de Mantenimiento</a></li>
-								<li class="li"><a href="?pg=$p07'.crypt($p07,"$2y$10$".$salt).'">Usuarios</a></li>
+								<li class="li"><a href="?pg=$p01'.crypt($p01,"$2y$10$".$salt).'">Usuarios</a></li>
+								<li class="li"><a href="?pg=$p02'.crypt($p01,"$2y$10$".$salt).'">Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p03'.crypt($p01,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
 							</ul>
+						
 					</ul>				
 				</div>
 			';

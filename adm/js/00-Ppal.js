@@ -9,6 +9,7 @@ function mostrarMenu(){
 		//alert(screen.width);
 		$('.menuNavegacion').animate({width:'420px'},"fast",function(){
 			$('.li').animate({width:'410px'},"fast",function(){
+				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
 				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
 				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
@@ -17,6 +18,7 @@ function mostrarMenu(){
 	}else{		
 		$('.menuNavegacion').animate({width:'180px'},"fast",function(){
 			$('.li').animate({width:'160px'},"fast",function(){
+				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
 				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
 				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');				
@@ -29,6 +31,7 @@ function ocultarMenu(){
 		$('.menuNavegacion').animate({width:'50px'},"fast"); 
 		$('.menuNavegacion').css({"border-right":"none"});
 		$('.li').animate({width:'45px'},"fast");
+		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
 		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
 		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
 		$('.submenuAdmon').css({"display":"none"});
@@ -36,6 +39,7 @@ function ocultarMenu(){
 	}else{	
 		$('.menuNavegacion').css({"border-right":"none"});	
 		$('.submenuAdmon').css({"display":"none"});
+		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
 		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
 		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');		
 		$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">');	
@@ -96,8 +100,6 @@ $(document).ready(function() {//mover formularios
 $(document).ready(function() {//mover formulario Mis Reservaciones
 	$("#formulario").draggable({stack:"#formulario"}, {handle:"#handler"});
 });//mover formulario Mis Reservaciones
-
-
 function mostrarFormCargueExcel(){
   if( $('#formCargueExcel').css('visibility') !== 'hidden') {
 	    $('#formCargueExcel').css('visibility', 'hidden');	    
@@ -119,4 +121,9 @@ function reinstalarBD(){
 		alert("No se reinstaló la Base de Datos.");
 	}
 
+}
+function ucwords(f){
+    return f.replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1){
+       return $1.toUpperCase(); 
+    });
 }

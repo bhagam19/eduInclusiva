@@ -3214,7 +3214,7 @@
             */
 
             array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
-                array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6)
+            array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6)
             );
         
         foreach ($usuarios as $usuario){

@@ -1,15 +1,16 @@
 <?php
     $salt = substr(base64_encode(openssl_random_pseudo_bytes('30')), 0, 22);
 	$salt = strtr($salt, array('+' => '.'));
-	$pzz='';
-	$p01='inventarioApp/index.php';
-	$p02='CTEApp/index.php';
-	$p03='prestamoTabletas/index.php';
+	$pzz='adm/02-vst/00-crudPpal/04-bienvenida.php';
+	$p00='';
+	$p01='adm/02-vst/02-crudUsuarios/00-crudUsuarios.php';
+	$p02='adm/02-vst/02-crudInfoGralEstud/00-verInfoGralEstud.php';
+	$p03='adm/02-vst/02-crudInfoGralEstud/10-crudEstudiantes.php';
 	$p04='biblioTaparto/index.php';
 	$p05='pollaMundialista/index.php';
 	$p06='creaExamen/index.php';
 	$p07='ironManProject/index.html';
-	$pagina = isset($_GET['pg']) ? $_GET['pg'] : '../bdBienes/01-verBienes.php';
+	$pagina = isset($_GET['pg']) ? $_GET['pg'] : 'adm/02-vst/00-crudPpal/04-bienvenida.php';
 	$numPag=substr($pagina, 0, 4);	
 	switch ($numPag) {		
 		case '$pzz':

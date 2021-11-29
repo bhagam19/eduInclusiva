@@ -3,9 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/pestannas/pestannas.css" />
-    <script type="text/javascript" src="../../js/pestannas/cambiarPestanna.js"></script>
-    <script type="text/javascript" src="../../js/pestannas/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
+    <script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
+    <script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
     <title></title>
 </head>
 
@@ -30,8 +30,8 @@
                     <br>
                     <?php
                         function buscarEnBD($case, $tabla, $id) {
-                            include('../../01-mdl/cnx.php');
-                            include('../../03-cnt/03-funciones/buscarEnBD.php');
+                            include('adm/01-mdl/cnx.php');
+                            include('adm/03-cnt/03-funciones/buscarEnBD.php');
                             mysqli_close($cnx);
                             return $query1;
                         }
@@ -264,8 +264,8 @@
                                 </tr>
                                 <?php
                                     function buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id){
-                                        include('../../01-mdl/cnx.php');
-                                        include('../../03-cnt/03-funciones/buscarEnBD.php');
+                                        include('adm/01-mdl/cnx.php');
+                                        include('adm/03-cnt/03-funciones/buscarEnBD.php');
                                         mysqli_close($cnx);
                                         return $query1;
                                     }
