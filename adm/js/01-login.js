@@ -26,7 +26,6 @@ function validarLogin(usuario,contrasena){
 }
 //Scripts para el registro de nuevo usuario.
 function cambiarFondoInput(id){//Esta función reestablece el color del fondo de un input después de haberse puesto rojo como validación de dato fatante o equivocado.	
-	//alert(id);
 	document.getElementById(id).style.boxShadow="0 1px 10px #abe2f8 inset, 0 0 8px #0076fc";
 	if(id=="nombres"||id=="apellidos"){
 		var valor=document.getElementById(id).value;
@@ -211,16 +210,14 @@ $(document).ready(function() {
 });
 function registrarUsuario(id){ //id=0 representa que no hay formulario que ocultar. (e.g. formularioNuevoUsuario.php)
 	//alert("Registro de usuario nuevo");
-	//valor=ucwords(valor.toLowerCase());
-	
 	var usuarioCED= document.getElementById("usuarioCED").value;
-	var foto =$("#foto").val().substr(12,$("#foto").val().length);
-	var nombres= document.getElementById("nombres").value;
-	var apellidos= document.getElementById("apellidos").value;
+	var foto =$("#foto").val().substr(12,$("#foto").val().length);			
+	var nombres= document.getElementById("nombres").value;	
+	var apellidos= document.getElementById("apellidos").value;	
 	var correo= document.getElementById("correo").value;
 	var usuario= document.getElementById("usuario").value;
 	var contrasena= document.getElementById("contrasena").value;
-	var confirmarContrasena=document.getElementById("confirmarContrasena").value;
+	var confirmarContrasena=document.getElementById("confirmarContrasena").value;	
 	if(usuarioCED===""){
 		alert("Por favor, ingrese número de identidad.");
 		document.getElementById("usuarioCED").style.boxShadow="0 1px 10px #fd0101 inset, 0 0 8px #d80202";
@@ -264,7 +261,7 @@ function registrarUsuario(id){ //id=0 representa que no hay formulario que ocult
 		if(validarContrasenaSegura("contrasena")){
 			if(contrasena===confirmarContrasena){
 				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/crearUsuario.php?usuarioCED="+usuarioCED+"&foto="+foto+"&nombres="+nombres+"&apellidos="+apellidos+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
+				xmlhttp.open("GET", "adm/03-cnt/02-crudUsuarios/01-crearUsuario.php?usuarioCED="+usuarioCED+"&foto="+foto+"&nombres="+nombres+"&apellidos="+apellidos+"&correo="+correo+"&usuario="+usuario+"&contrasena="+contrasena, false);
 				xmlhttp.send();
 				if(xmlhttp.responseText.trim()==="si"){
 					if(id===1){

@@ -59,26 +59,13 @@
 			include dirname(__FILE__).'../../01-crudLogin/01-formularioDatosUsuario.php';			
 			include dirname(__FILE__).'../../01-crudLogin/02-formularioNuevaContrasena.php';
 			include dirname(__FILE__).'/03-menuNavegacion.php';
-			echo '
-				<div id="appsContenedor" onmouseover="ocultarMenu()">';
-					$datosApp=array(
-					array("planeaApp/00-index.php","../appsArt/planeador.png","Planeador"),
-					array("eduInclusiva/00-index.php","../appsArt/DUA.png","EduInclusiva")
-			);
-			foreach ($datosApp as $App) {
-				echo '
-					<div id="boton">
-						<a href='.$App[0].'><img src='.$App[1].'><p>'.$App[2].'</p></a>
-					</div>
-				';
-			}
+			echo'
+				<div id="contenedor">
+			';
+			include($pagina);
 			echo'
 				</div>
-				<div id="h2">
-					<H2>¡Click y disfruta nuestras apps!</H2>
-				</div>
-				
-			';
+			';			
 		}
 	}
 ?>

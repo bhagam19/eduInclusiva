@@ -4,10 +4,7 @@
 	include('../../01-mdl/cnx.php');		
 	//Obtener variables.
 	$usuarioCED=$_REQUEST['usuarioCED'];
-	$foto=$_REQUEST['foto'];
-	$ext= pathinfo($foto, PATHINFO_EXTENSION);
-	rename("../../img/".$foto,"../../img/".$usuarioCED.".".$ext);
-	$foto=$usuarioCED.".".$ext;
+	$foto=$_REQUEST['foto'];	
 	$nombres=$_REQUEST['nombres'];
 	$apellidos=$_REQUEST['apellidos'];
 	$correo=$_REQUEST['correo'];
@@ -32,12 +29,15 @@
 		}
 	}	
 	if($cntUsuario==0 && $cntCorreo==0){
+		$ext= pathinfo($foto, PATHINFO_EXTENSION);
+		rename("../../img/".$foto,"../../img/".$usuarioCED.".".$ext);
+		$foto=$usuarioCED.".".$ext;
 		//Encriptamos la contraseña
 		$salt = substr(base64_encode(openssl_random_pseudo_bytes('30')), 0, 22);
 		$salt = strtr($salt, array('+' => '.')); 
 		$contrasenaEncriptada = crypt($contrasena, '$2y$10$' . $salt);	
 		mysqli_query($cnx,"INSERT INTO ".$tabla." (foto,usuarioCED,usuario,contrasena,apellidos,nombres,correo,defUsuario,permiso) 
-			VALUES ('$foto',$usuarioCED,'$usuario','$contrasenaEncriptada','$apellidos','$nombres','$correo',1,1)");
+			VALUES ('$foto',$usuarioCED,'$usuario','$contrasenaEncriptada','$apellidos','$nombres','$correo',1,1)");		
 		echo "si";
 	}elseif($cntUsuario!=0){	
 		echo "NoUsuario";

@@ -3,9 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/pestannas/pestannas.css" />
-    <script type="text/javascript" src="../../js/pestannas/cambiarPestanna.js"></script>
-    <script type="text/javascript" src="../../js/pestannas/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
+    <script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
+    <script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
     <title></title>
 </head>
 
@@ -386,12 +386,7 @@
         }
     }
 ?>
-                        
-
-
-
-
-
+ 
 
                         <tr>
                             <td rowspan=<?=count($medicaments)?>>¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
