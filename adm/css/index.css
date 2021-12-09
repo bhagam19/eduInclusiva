@@ -52,7 +52,8 @@ html {
 	border:1px solid var(--Off);	
 	background: var(--fondo03);
 	border-radius: 15px 0px 15px 0px;
-	z-index: 3;
+	z-index: 3;	
+	user-select: none;
 }
 #appsEncabezadoGral:hover{
 	border:1px solid var(--OnActivo);
@@ -171,7 +172,8 @@ html {
 	border: 1px solid var(--OnActivo);
 	box-shadow: 0px 0px 5px 0px var(--luzOn);	
 	background: var(--fondoOff07);	
-	z-index: 4;
+	z-index: 4;		
+	user-select: none;
 }
 #appsFormulario:hover{
 	color: var(--OnActivo);
@@ -255,11 +257,12 @@ html {
 	position:absolute;
 	top:10px;
 	right:5px; 
-	width: 80px;
-	height: 80px;
-	border-radius: 30px;
+	width: 60px;
+	height: 60px;
+	padding:3px;
+	border-radius: 50px;
 	border: 1px solid var(--OnPasivo); 
-	background:var(--fondo03);
+	background:white;
 }
 /*==== LoggedIn====*/
 #appsSesionLogedIn {
@@ -291,7 +294,8 @@ html {
 }
 /*====Formularios LoggedIn=====*/
 .appsFormularioDatosUsuario {
-	top: 50px;
+	position:relative;
+	top: 52px;
 	right: 0;
 }
 .datosPersonales {
@@ -300,14 +304,19 @@ html {
 	padding: 10px 0px;
 	user-select: none;
 }
+
+.sesionImgInside{
+	position:relative;
+	margin: 0 auto;
+	width:fit-content;
+}
 .sesionImgInside img{
-	margin: auto;	
-	align-items: center;
-	padding: 10px;
+	padding: 2px;
 	width: 50px;
 	height: 50px;
 	border: 1px solid #0B0B61;
-	border-radius: 25px;
+	border-radius: 50px;
+	background: white;
 }
 .appsFormularioDatosUsuario .etiqueta {
 	font-weight: bold;
@@ -339,9 +348,9 @@ html {
 	background: var(--fondo01);		
 }
 .appsFormularioNuevaContrasena{
+	position:relative;
 	top: 231px;
 	right: 192px;
-	user-select: none;
 }
 .appsFormularioNuevaContrasena #contrasenaCheckList{
 	position: absolute;
@@ -563,7 +572,6 @@ html {
 	font-weight: bold;
 	font-size: 5vw;
 	border: 1px solid #0B0B61;
-	background: white;
 	box-shadow: 0px 0px 5px 0px gray;
 	border-radius: 5px;
 	z-index: 4;
@@ -598,83 +606,93 @@ html {
 	background: #EBEEF8;
 	box-shadow: 0px 0px 2px 0px #EBEEF8;
 }
-	/*==== LogedIn====*/
-	#appsSesionLogedIn {
-		position: relative;
-		top: -255px;
-		right: 30px;
-		width: 85px;
-		height:85px;
-		border: 1px solid #0B0B61;
-		border-radius: 50px;
-	}
-	.appsSesionNom {
-		position: relative;
-		right: -100px;
-		padding: 2px 10px;
-		font-size: 2.3vw;
-		font-weight: bold;
-	}
-	.appsSesionImg img{
-		position: absolute;
-		top:3px;
-		right:3px;
-		width: 80px;
-		height: 80px;
-		border: 1px solid #0B0B61;
-		border-radius: 50px;
-	}
-	.sesionNom .nom {
-		position: relative;
-		top: 0px;
-		right: -20px;
-		text-align: right;
-	}
-	#sesionLogedIn .btn {
-		position: relative;
-		top: 0px;
-		right: 0px;
-		padding: 3px 4px;
-		font-size: 3.5vw;
-		font-weight: bold;
-		color: #0B0B61;
-		border: 1px solid #0B0B61;
-		border-radius: 5px;
-		background: #EBEEF8;
-	}
-	.formularioLogin {
-		position: absolute;
-		top: 190px;
-		right: -45px;
-		width: auto;
-		border: 1px solid #0B0B61;
-		font-size: 4.5vw;
-		font-weight: bold;
-		box-shadow: 0px 0px 5px 0px gray;
-		border-radius: 5px;
-		z-index: 3;
-		background: white;
-	}
-	.formularioLogin input {
-		font-weight: normal;
-		font-size: 4.5vw;
-		border: 1px solid #0B0B61;
-		border-radius: 5px;
-	}
-	.formularioLogin input:focus {
-		border-color: #0B0B61;
-		box-shadow: 0 1px 1px rgba(14, 35, 144, 0.075)inset, 0 0 8px rgba(51, 228, 130,0.6);
-		outline: 0 none;
-	}
-	.formularioLogin .btnLogin {
-		left: 30px;
-		color: #0B0B61;
-		font-weight: bold;
-		font-size: 4.5vw;
-		border: 1px solid #0B0B61;
-		border-radius: 5px;
-		background: white;
-	}
+.formularioLogin {
+	position: absolute;
+	top: 190px;
+	right: -45px;
+	width: auto;
+	border: 1px solid #0B0B61;
+	font-size: 4.5vw;
+	font-weight: bold;
+	box-shadow: 0px 0px 5px 0px gray;
+	border-radius: 5px;
+	z-index: 3;
+}
+.formularioLogin input {
+	font-weight: normal;
+	font-size: 4.5vw;
+	border: 1px solid #0B0B61;
+	border-radius: 5px;
+}
+.formularioLogin input:focus {
+	border-color: #0B0B61;
+	box-shadow: 0 1px 1px rgba(14, 35, 144, 0.075)inset, 0 0 8px rgba(51, 228, 130,0.6);
+	outline: 0 none;
+}
+.formularioLogin .btnLogin {
+	left: 30px;
+	color: #0B0B61;
+	font-weight: bold;
+	font-size: 4.5vw;
+	border: 1px solid #0B0B61;
+	border-radius: 5px;
+	background: white;
+}
+/*==== LogedIn====*/
+#appsSesionLogedIn {
+	position: relative;
+	top: -255px;
+	right: 30px;
+	width: 85px;
+	height:85px;
+	border: 1px solid #0B0B61;
+	border-radius: 50px;
+}
+.appsSesionNom {
+	position: relative;
+	right: -100px;
+	padding: 2px 10px;
+	font-size: 2.3vw;
+	font-weight: bold;
+}
+.appsSesionImg img{
+	position: absolute;
+	top:3px;
+	right:3px;
+	width: 80px;
+	height: 80px;
+	border: 1px solid #0B0B61;
+	border-radius: 50px;
+}
+.sesionNom .nom {
+	position: relative;
+	top: 0px;
+	right: -20px;
+	text-align: right;
+}
+#sesionLogedIn .btn {
+	position: relative;
+	top: 0px;
+	right: 0px;
+	padding: 3px 4px;
+	font-size: 3.5vw;
+	font-weight: bold;
+	color: #0B0B61;
+	border: 1px solid #0B0B61;
+	border-radius: 5px;
+	background: #EBEEF8;
+}
+.appsFormularioDatosUsuario{
+	position:relative;
+	top:-22px;
+}
+.appsFormularioNuevaContrasena{
+	position:relative;
+	top:310px;
+	right:0px;
+}
+
+	
 	#parche {
 		position: fixed;
 		top: 130px;
