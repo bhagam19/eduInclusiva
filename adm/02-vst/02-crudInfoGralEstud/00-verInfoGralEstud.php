@@ -30,8 +30,8 @@
                     <br>
 <?php
     function buscarEnBD($case, $tabla, $id) {
-        include('../../01-mdl/cnx.php');
-        include('../../03-cnt/03-funciones/buscarEnBD.php');
+        include dirname(_FILE_).'../../../01-mdl/cnx.php';
+        include dirname(_FILE_).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $id=1;
