@@ -416,12 +416,34 @@
                             
 <?php
     }
+    $case="innerJoinx3";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idAfiliacion";
+    $t2="afiliaciones";
+    $p21="id";
+    $p22="idOpcionApoyo";
+    $t3="opciones";
+    $p31="id";
+    $p32="opcion";
+    include('../../01-mdl/cnx.php');
+    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    $row=mysqli_fetch_row($query1);
 ?>
                         </tr>
                         <tr>
-                            <td>¿Cuenta con productos de apoyo para favorecer su movilidad, comunicación e independencia? : <?=$row[17]?></td>
+                            <td>¿Cuenta con productos de apoyo para favorecer su movilidad, comunicación e independencia? : <?=$row[0]?></td>
+<?php
+    $p22="idApoyo";
+    $t3="apoyosAbarreras";
+    $p31="id";
+    $p32="nombre";
+    include('../../01-mdl/cnx.php');
+    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    $row=mysqli_fetch_row($query1);
+?>
                             <td>¿Cuáles?:</td>
-                            <td><?=$row[18]?></td>
+                            <td><?=$row[0]?></td>
                         </tr>
                     </table>
         </div>
