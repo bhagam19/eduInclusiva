@@ -2478,32 +2478,34 @@
                     id int NOT NULL AUTO_INCREMENT,
                     idPrescripcion int(2) NOT NULL,
                     idHora int(2) NOT NULL,
+                    idOpcEnClase int(2) NOT NULL,
                     PRIMARY KEY(id),
                     FOREIGN KEY(idPrescripcion) REFERENCES prescripciones (id),
-                    FOREIGN KEY(idHora) REFERENCES horas (id)
+                    FOREIGN KEY(idHora) REFERENCES horas (id),
+                    FOREIGN KEY(idOpcEnClase) REFERENCES opciones (id)
                 )
             ';
         //Ejecutar
         ejecutarConsulta();                                                                                             
         //########## INGRESAR CONTENIDO A LA TABLA "HORARIOS DE MEDICAMENTOS" ##########
         $horariosMed = array(
-            array(1,17),
-            array(1,41),
-            array(2,17),
-            array(2,33),
-            array(2,1),
-            array(3,13),
-            array(3,29),
-            array(3,45),
-            array(4,11),
-            array(4,23),
-            array(4,35),
-            array(4,47),
+            array(1,17,1),
+            array(1,41,2),
+            array(2,17,1),
+            array(2,33,2),
+            array(2,1,2),
+            array(3,13,1),
+            array(3,29,2),
+            array(3,45,2),
+            array(4,11,2),
+            array(4,23,1),
+            array(4,35,2),
+            array(4,47,2),
             );
         
         foreach ($horariosMed as $horarioMed){
-            $sql='INSERT INTO '.$tabla.' (idPrescripcion, idHora) 
-                VALUES ('.$horarioMed[0].','.$horarioMed[1].')';
+            $sql='INSERT INTO '.$tabla.' (idPrescripcion, idHora, idOpcEnClase) 
+                VALUES ('.$horarioMed[0].','.$horarioMed[1].','.$horarioMed[2].')';
             insertar();		
         }
            
@@ -3214,7 +3216,8 @@
             */
 
             array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
-                array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6)
+            array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6),
+            array("71481707.jpg",71481707,71481707,"12345","dorianrodrigo@gmail.com","Dorian Rodrigo","Ruiz Hernández",1,6),
             );
         
         foreach ($usuarios as $usuario){

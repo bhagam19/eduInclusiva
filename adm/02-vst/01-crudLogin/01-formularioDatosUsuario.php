@@ -6,15 +6,18 @@
 
 <div id="appsFormulario" class="appsFormularioDatosUsuario">
 	<div id="">
-		<div class="sesionImgInside" title="Click para cambiar foto." onclick="">
+		<div class="sesionImgInside" title="Click para cambiar foto." onclick="mostrarUpload()">
 			<?php 
 				if($foto==""){
 					echo '<img src="../appsArt/usuario.svg"/>';
 				}else{
 					echo '<img src="../eduInclusiva/adm/img/'.$foto.'"/>';
 				}			
-			?>			
-		</div>		
+			?>
+		</div>	
+		<div>
+			<input class="upload" id="uploadInvisible" style="visibility:hidden" type="file" name="foto" id="foto">
+		</div>	
 		<div class="datosPersonales">
 			<table class="" border=0>						
 				<tr>
@@ -27,7 +30,7 @@
 				</tr>
 				<tr>
 					<td><span class="etiqueta">ID: <br></span></td>
-					<td><span class="datos"><?php echo $usuarioCED ?></span></td>
+					<td><span class="datos" id="usuarioCED"><?php echo $usuarioCED ?></span></td>
 				</tr>
 				<tr>				
 			</table> 
