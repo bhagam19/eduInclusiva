@@ -30,8 +30,8 @@
                     <br>
 <?php
     function buscarEnBD($case, $tabla, $id) {
-        include dirname(_FILE_).'../../../01-mdl/cnx.php';
-        include dirname(_FILE_).'../../../03-cnt/03-funciones/buscarEnBD.php';
+        include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $id=1;
@@ -262,8 +262,8 @@
                         </tr>
 <?php
     function buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id){
-        include('../../01-mdl/cnx.php');
-        include('../../03-cnt/03-funciones/buscarEnBD.php');
+        include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $case="innerJoinx4";
@@ -326,8 +326,8 @@
 <?php
     }
     function buscarInnerJoinX6($case, $t1, $t2, $t3, $t4, $t5, $t6, $p1, $p2, $p31, $p32, $p33, $p41, $p42, $p51, $p52, $p61, $p62, $id){
-        include('../../01-mdl/cnx.php');
-        include('../../03-cnt/03-funciones/buscarEnBD.php');
+        include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $case="innerJoinx6";
@@ -351,7 +351,8 @@
 ?>
                         <tr>
 <?php
-    include('../../03-cnt/03-funciones/extraerTextos.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/extraerTextos.php';
 ?>                      
                             <td rowspan=<?=count($medicaments)?>>Horarios:</td>
 <?php
@@ -378,8 +379,9 @@
     $p31="idPrescripcion";
     $p32="idOpcEnClase";
     $enClase="No";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    
     while($row=mysqli_fetch_row($query1)){
         if($row[0]==1){
             $enClase="Si";
@@ -421,8 +423,8 @@
     $t3="opciones";
     $p31="id";
     $p32="opcion";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
     $row=mysqli_fetch_row($query1);
 ?>
                         </tr>
@@ -433,8 +435,8 @@
     $t3="apoyosAbarreras";
     $p31="id";
     $p32="nombre";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
     $row=mysqli_fetch_row($query1);
 ?>
                             <td>¿Cuáles?:</td>
