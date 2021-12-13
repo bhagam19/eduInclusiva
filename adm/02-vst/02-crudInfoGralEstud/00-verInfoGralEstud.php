@@ -262,8 +262,8 @@
                         </tr>
 <?php
     function buscarInnerJoinX4($case, $t1, $t2, $t3, $t4, $p1, $p2, $p31, $p32, $p41, $p42, $id){
-        include('../../01-mdl/cnx.php');
-        include('../../03-cnt/03-funciones/buscarEnBD.php');
+        include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $case="innerJoinx4";
@@ -326,19 +326,19 @@
 <?php
     }
     function buscarInnerJoinX6($case, $t1, $t2, $t3, $t4, $t5, $t6, $p1, $p2, $p31, $p32, $p33, $p41, $p42, $p51, $p52, $p61, $p62, $id){
-        include('../../01-mdl/cnx.php');
-        include('../../03-cnt/03-funciones/buscarEnBD.php');
+        include dirname(__FILE__).'../../../01-mdl/cnx.php';
+        include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
     $case="innerJoinx6";
-    $t4="medicamentos";
-    $t5="horariosMedicamentos";
-    $t6="horas";
     $p32="idMedicamento";
     $p33="id";
+    $t4="medicamentos";
     $p42="nombre";
+    $t5="horariosMedicamentos";
     $p51="idPrescripcion";
     $p52="idHora";
+    $t6="horas";
     $p61="id";
     $p62="hora";
     $horarios=buscarInnerJoinX6($case, $t1, $t2, $t3, $t4, $t5, $t6, $p1, $p2, $p31, $p32, $p33, $p41, $p42, $p51, $p52, $p61, $p62, $id);
@@ -351,7 +351,7 @@
 ?>
                         <tr>
 <?php
-    include('../../03-cnt/03-funciones/extraerTextos.php');
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/extraerTextos.php';
 ?>                      
                             <td rowspan=<?=count($medicaments)?>>Horarios:</td>
 <?php
@@ -368,52 +368,54 @@
                         </tr>
 <?php
     }
-    $case="innerJoinx3";
+    $case="innerJoinx4con3";
     $t1="afiliaciones";
-    $t2="prescripciones";
-    $t3="horariosMedicamentos";
     $p1="id";
-    $p21="idAfiliacion";
+    $t2="prescripciones";
+    $p21="idMedicamento";
     $p22="id";
-    $p31="idPrescripcion";
-    $p32="idOpcEnClase";
+    $p23="idAfiliacion";
+    $t3="medicamentos";
+    $p31="id";
+    $p32="nombre";
+    $t4="horariosMedicamentos";
+    $p41="idPrescripcion";
+    $p42="idOpcEnClase";
+    $p43="idHora";
     $enClase="No";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    $cont=0;
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
     while($row=mysqli_fetch_row($query1)){
-        if($row[0]==1){
+        $cont++;
+        if($cont==1 && $cont1>=1){
             $enClase="Si";
-        }
-    }
 ?>
-                        
-
-
-
-
-
-
                         <tr>
-                            <td rowspan=<?=count($medicaments)?>>¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
+                            ##<td rowspan=<?=$cont1?>>¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
+                            <td rowspan="3">¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
 <?php
-    for ($i=1; $i <= count($medicaments); $i++) {
+        }
+        if ($row[1]==1) {
 ?>
-                            <td><?=$medicaments[$i]?></td>
+                            <td><?=$row[0]?></td>
                             <td colspan="2">
 <?php
-        for ($j=1; $j <= count($horaris[$i]); $j++) {
-            echo $horaris[$i][$j]."<br>";
-        }
+            $case="id";
+            $tabla="horas";
+            $hora=mysqli_fetch_row(buscarEnBD($case, $tabla, $row[2]));
+        
 ?>
-                            </td>
+                            <?=$hora[1]?></td>
+                        </tr>         
+<?php
+        }
+    }
+    if ($cont1==0) {
+?>
+                        <tr>
+                            <td rowspan="4">¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
                         </tr>
-
-
-
-
-
-
-                            
 <?php
     }
     $case="innerJoinx3";
@@ -426,11 +428,10 @@
     $t3="opciones";
     $p31="id";
     $p32="opcion";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
     $row=mysqli_fetch_row($query1);
 ?>
-                        </tr>
                         <tr>
                             <td>¿Cuenta con productos de apoyo para favorecer su movilidad, comunicación e independencia? : <?=$row[0]?></td>
 <?php
@@ -438,8 +439,9 @@
     $t3="apoyosAbarreras";
     $p31="id";
     $p32="nombre";
-    include('../../01-mdl/cnx.php');
-    include('../../03-cnt/03-funciones/buscarEnBD.php');
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    echo $consulta1;
     $row=mysqli_fetch_row($query1);
 ?>
                             <td>¿Cuáles?:</td>
