@@ -1,0 +1,6 @@
+.tmp.drivedownload/*
+.vscode/*
+appsConexion/*
+conexion/*
+*.json
+dtcnx.php
