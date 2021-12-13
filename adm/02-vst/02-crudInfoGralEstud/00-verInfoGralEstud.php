@@ -440,7 +440,6 @@
     $p32="nombre";
     include dirname(__FILE__).'../../../01-mdl/cnx.php';
     include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-    echo $consulta1;
     $row=mysqli_fetch_row($query1);
 ?>
                             <td>¿Cuáles?:</td>
