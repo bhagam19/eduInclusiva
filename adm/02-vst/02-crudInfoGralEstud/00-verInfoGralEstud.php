@@ -392,8 +392,7 @@
             $enClase="Si";
 ?>
                         <tr>
-                            ##<td rowspan=<?=$cont1?>>¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
-                            <td rowspan="3">¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
+                            <td rowspan=<?=$cont1?>>¿Debe consumir algún medicamento en horario de clase?: <?=$enClase?></td>
 <?php
         }
         if ($row[1]==1) {
