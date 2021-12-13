@@ -2187,7 +2187,7 @@
         
         //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
         $tiempos = array(
-            array(1,'Cada hora'),
+            array(1,'Cada 1 hora'),
             array(2,'Cada 2 horas'),
             array(3,'Cada 4 horas'),
             array(4,'Cada 6 horas'),
