@@ -3,4 +3,5 @@
 appsConexion/*
 conexion/*
 *.json
+settings.json
 dtcnx.php
