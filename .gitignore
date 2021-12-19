@@ -5,3 +5,4 @@ conexion/*
 *.json
 settings.json
 dtcnx.php
+.gitignore
