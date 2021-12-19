@@ -24,6 +24,9 @@
         <body onload="javascript:cambiarPestanna(pestanas,pestana1);">
 
             <div id="contenidopestanas">
+<!--########################################################################################################################################################################################################
+###############################################################################   PESTAÑA 1   ##############################################################################################################
+#########################################################################################################################################################################################################-->
                 <div id="cpestana1">
                     <br>
                     <br>
@@ -146,6 +149,9 @@
                         </tr>
                     </table>
         </div>
+<!--########################################################################################################################################################################################################
+###############################################################################   PESTAÑA 2   ##############################################################################################################
+#########################################################################################################################################################################################################-->
         <div id="cpestana2">
                     <br>
                     <br>
@@ -447,10 +453,367 @@
                         </tr>
                     </table>
         </div>
+<!--########################################################################################################################################################################################################
+###############################################################################   PESTAÑA 3   ##############################################################################################################
+#########################################################################################################################################################################################################-->
         <div id="cpestana3">
             
+        <br>
+                    <br>
+                    <br>
+                    <table border="1">
+<?php
+    $case="innerJoinx3";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idEntornoFamiliar";
+    $t2="entornoFamiliar";
+    $p21="id";
+    $p22="idMadres";
+    $t3="madres";
+    $p31="id";
+    $p32="nomMadre";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+
+?>
+                        <tr>
+                            <td>Nombre de la Madre: </td>
+                            <td><?=$row[0]?></td>
+<?php
+    $p22="idPadres";
+    $t3="padres";
+    $p31="id";
+    $p32="nomPadre";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                        
+                        <td>Nombre del Padre:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+<?php
+    $case="innerJoinx4";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idEntornoFamiliar";
+    $t2="entornoFamiliar";
+    $p21="id";
+    $p22="idMadres";
+    $t3="madres";
+    $p31="id";
+    $p32="idOcupacion";
+    $t4="ocupaciones";
+    $p41="id";
+    $p42="name";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>Ocupación de la Madre:</td>
+                            <td><?=$row[0]?></td>
+<?php
+    $p22="idPadres";
+    $t3="padres";
+    $p31="id";
+    $p32="idOcupacion";
+    $t4="ocupaciones";
+    $p41="id";
+    $p42="name";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                            <td>Ocupación del Padre:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+<?php
+    $p22="idMadres";
+    $t3="madres";
+    $p31="id";
+    $p32="idNivelEdu";
+    $t4="nivelesEducativos";
+    $p41="id";
+    $p42="name";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>Nivel Educativo de la madre:</td>
+                            <td><?=$row[0]?></td>
+<?php
+    $p22="idPadres";
+    $t3="padres";
+    $p31="id";
+    $p32="idNivelEdu";
+    $t4="nivelesEducativos";
+    $p41="id";
+    $p42="name";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                            <td>Nivel Educativo del padre:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+<?php
+    $case="innerJoinx3";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idEntornoFamiliar";
+    $t2="entornoFamiliar";
+    $p21="id";
+    $p22="idCuidadores";
+    $t3="cuidadores";
+    $p31="id";
+    $p32="nomCuidador";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);  
+?>
+                        <tr>
+                            <td>Nombre del Cuidador:</td>
+                            <td><?=$row[0]?></td>
+<?php
+    $case="innerJoinx4";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idEntornoFamiliar";
+    $t2="entornoFamiliar";
+    $p21="id";
+    $p22="idCuidadores";
+    $t3="cuidadores";
+    $p31="id";
+    $p32="idParentesco";
+    $t4="parentescos";
+    $p41="id";
+    $p42="name";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                            <td>Parentesco con el estudiante:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+<?php
+$p22="idCuidadores";
+$t3="cuidadores";
+$p31="id";
+$p32="idNivelEdu";
+$t4="nivelesEducativos";
+$p41="id";
+$p42="name";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>Nivel Educativo del cuidador:</td>
+                            <td><?=$row[0]?></td>
+<?php
+?>
+                            <td>Teléfono del cuidador:</td>
+                            <td><?=$frecuencia1?></td>
+                        </tr>
+<?php
+?>
+                        <tr>
+                            <td>Correo electrónico del cuidador:</td>
+                            <td colspan="3"><?=$frecuencia2?></td>
+                        </tr>
+<?php
+?>
+                        <tr>
+                            <td>Número de hermanos:</td>
+                            <td><?=$frecuencia3?></td>
+                            <td>Lugar que ocupa:</td>
+                            <td><?=$frecuencia3?></td>
+                        </tr>
+<?php
+?>   
+                        <tr>
+                            <td>Personas con quien vive:</td>
+                            <td><?=$opcion?></td>
+                            <td>¿Quienes apoyan la crianza del estudiante?:</td>
+                            <td><?=$cual?></td>
+                        </tr>
+<?php
+?>
+                        <tr>
+                            <td>¿Está bajo protección? :</td>
+                            <td><?=$row[0]?></td>
+<?php
+    $p22="idApoyo";
+    $t3="apoyosAbarreras";
+    $p31="id";
+    $p32="nombre";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+?>
+                            <td>¿La familia recibe algún subsidio de alguna entidad o institución?:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+<?php
+    if($opcion=="Si"){
+?>
+                            <td colspan="2">¿De qué entidad recibe subsidio?:</td>
+                            <td colspan="2"><?=$cual?></td>
+<?php
+    }
+?>
+                        </tr>
+                    </table>
         </div>
+<!--########################################################################################################################################################################################################
+###############################################################################   PESTAÑA 4   ##############################################################################################################
+#########################################################################################################################################################################################################-->
         <div id="cpestana4">
+                    <br>
+                    <h3>Información de la Trayectoria Educativa</h3>
+                    <br>
+                    <table border="1">
+<?php
+    $case="innerJoinx3";
+    $t1="estudiantes";
+    $p11="id";
+    $p12="idEntornoFamiliar";
+    $t2="entornoFamiliar";
+    $p21="id";
+    $p22="idMadres";
+    $t3="madres";
+    $p31="id";
+    $p32="nomMadre";
+    include dirname(__FILE__).'../../../01-mdl/cnx.php';
+    include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+    $row=mysqli_fetch_row($query1);
+
+?>
+                        <tr>
+                            <td>¿Ha estado vinculado en otra institución educativa, fundación o modalidad de educación inicial?: </td>
+                            <td><?=$row[0]?></td>
+<?php
+if($opcion=="Si"){
+?>
+                        <td>¿Cuáles?:</td>
+                        <td><?=$cual?></td>
+<?php
+}else{
+?>
+                        <td>¿Por qué?:</td>
+                        <td><?=$cual?></td>
+<?php
+}
+?>
+                    </tr>
+<?php
+$p22="idPadres";
+$t3="padres";
+$p31="id";
+$p32="nomPadre";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>Último grado cursado:</td>
+                            <td><?=$row[0]?></td>
+<?php
+$case="innerJoinx4";
+$t1="estudiantes";
+$p11="id";
+$p12="idEntornoFamiliar";
+$t2="entornoFamiliar";
+$p21="id";
+$p22="idMadres";
+$t3="madres";
+$p31="id";
+$p32="idOcupacion";
+$t4="ocupaciones";
+$p41="id";
+$p42="name";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                            <td>¿Aprobó?;</td>
+                            <td><?=$row[0]?></td>
+                            </tr>
+<?php
+$p22="idPadres";
+$t3="padres";
+$p31="id";
+$p32="idOcupacion";
+$t4="ocupaciones";
+$p41="id";
+$p42="name";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>Observaciones:</td>
+                            <td colspan="3"><?=$row[0]?></td>
+                        </tr>
+<?php
+$p22="idMadres";
+$t3="madres";
+$p31="id";
+$p32="idNivelEdu";
+$t4="nivelesEducativos";
+$p41="id";
+$p42="name";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                        <tr>
+                            <td>¿Se recibe informe pedagógico cualitativo que describa el proceso de desarrollo y aprendizaje del estudiante y/o PIAR?:</td>
+                            <td><?=$row[0]?></td>
+<?php
+$p22="idPadres";
+$t3="padres";
+$p31="id";
+$p32="idNivelEdu";
+$t4="nivelesEducativos";
+$p41="id";
+$p42="name";
+include dirname(__FILE__).'../../../01-mdl/cnx.php';
+include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+$row=mysqli_fetch_row($query1);
+?>
+                            <td>¿De qué institución o modalidad proviene el informe?:</td>
+                            <td><?=$row[0]?></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h3>Información de la institución educativa en la que se matricula:</h3>
+                    <br>
+                    <table border="1">
+<?php
+?>
+                        <tr>
+                            <td>Nombre de la Institución educativa a la que se matricula:</td>
+                            <td><?=$opcion?></td>
+                            <td>Sede:</td>
+                            <td><?=$descripcion?></td>
+                        </tr>
+<?php
+?>
+                        <tr>
+                            <td>Medio que usará el estudiante para transportarse a la institución educativa:</td>
+                            <td><?=$opcion?></td>
+<?php
+?>
+                            <td>Distancia entre la institución educativa o sede y el hogar del estudiante (Tiempo):</td>
+                            <td><?=$frecuencia1?></td>
+                        </tr>
+
+                    </table>
             
         </div>
     </div>
