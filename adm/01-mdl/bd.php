@@ -2739,6 +2739,7 @@
                     id int NOT NULL AUTO_INCREMENT,
                     nomCuidador varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     docCuidador int(10) NOT NULL UNIQUE,
+                    telefono int(11) NOT NULL,
                     idOcupacion int(2) NOT NULL,
                     idNivelEdu int(2) NOT NULL,
                     idParentesco int(2) NOT NULL,                
@@ -2752,11 +2753,11 @@
         ejecutarConsulta();
         //########## INGRESAR CONTENIDO A LA TABLA "CUIDADORES" ##########
         $cuidadores = array(
-            array("Acá debe ir un nombre", 43555555, 1, 5, 1),
+            array("Acá debe ir un nombre", 43555555, 3102456789, 1, 5, 1),
             );
         foreach ($cuidadores as $cuidador){
-            $sql='INSERT INTO '.$tabla.' (nomCuidador, docCuidador, idOcupacion, idNivelEdu, idParentesco) 
-                VALUES ("'.$cuidador[0].'",'.$cuidador[1].','.$cuidador[2].','.$cuidador[3].','.$cuidador[4].')';
+            $sql='INSERT INTO '.$tabla.' (nomCuidador, docCuidador, telefono, idOcupacion, idNivelEdu, idParentesco) 
+                VALUES ("'.$cuidador[0].'",'.$cuidador[1].','.$cuidador[2].','.$cuidador[3].','.$cuidador[4].','.$cuidador[5].')';
             insertar();		
         } 
     //########## CREAR UNA TABLA DE "ENTORNO FAMILIAR" ##########
