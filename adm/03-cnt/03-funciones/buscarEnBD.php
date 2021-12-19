@@ -23,6 +23,18 @@
                         INNER JOIN ".$t3." 
                         ON ".$t3.".".$p31." = ".$t2.".".$p22." 
                         WHERE ".$t1.".".$p1." =$id";
+        break;       
+        case 'innerJoinx4con3':
+            $consulta1="
+                        SELECT ".$t3.".".$p32.", ".$t4.".".$p42.", ".$t4.".".$p43."
+                        FROM ".$t1." 
+                        INNER JOIN ".$t2." 
+                        ON ".$t2.".".$p23." = ".$t1.".".$p1." 
+                        INNER JOIN ".$t3." 
+                        ON ".$t3.".".$p31." = ".$t2.".".$p21." 
+                        INNER JOIN ".$t4."
+                        ON ".$t4.".".$p41." = ".$t2.".".$p22." 
+                        WHERE ".$t1.".".$p1." =$id AND ".$t4.".".$p42." = 1";
         break;
         case 'innerJoinx4':
             $consulta1="
