@@ -1,8 +1,0 @@
-.tmp.drivedownload/*
-.vscode/*
-appsConexion/*
-conexion/*
-*.json
-settings.json
-dtcnx.php
-.gitignore
