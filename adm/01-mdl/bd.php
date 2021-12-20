@@ -4,37 +4,35 @@
 	</head>
 	<body>
 <?php
-    //Establecer conexion
-        include('./cnx.php');
-        echo "<div> <a href='../../index.php'>Volver</a><br><br></div>";
-        echo "<div> <H1>===== RESUMEN DE INSTALACIÓN ===== </H1><br><br></div>";
-    //################### Creamos las funciones ejecutarConsulta() e insertar(). ###################		
-        function ejecutarConsulta(){
+    include('./cnx.php'); //Establecemos la conexion.
+    echo "<div> <a href='../../index.php'>Volver</a><br><br></div>";
+    echo "<div> <H1>===== RESUMEN DE INSTALACIÓN ===== </H1><br><br></div>";
+    //########## Creamos las funciones crearTabla() e insertarRegistros(). ###################		
+        function crearTabla(){
             global $sql;
             global $cnx;
             global $tabla;
-            //if (mysqli_query($conexion,$sql)){
-            if ($query=$cnx->query($sql)){
-                echo "<div>========================= CREACIÓN DE LA TABLA '".strtoupper($tabla)."' =========================
+            if ($cnx->query($sql)){
+                echo "<div>========================= CREACIÓN DE LA TABLA <span>".strtoupper($tabla)."</span> =========================
                     <br>====================================================================================<br></div>";
-                echo "<div> Se creó la tabla <span>'".strtoupper($tabla)."'</span> con exito.<br><br></div>";		
+                echo "<div> Se creó la tabla <span>".strtoupper($tabla)."</span> con exito.<br><br></div>";		
             }else{
-                echo "<div><p class='rojo'>========================= CREACIÓN DE LA TABLA '".strtoupper($tabla)."' =========================</p>
+                echo "<div><p class='rojo'>========================= CREACIÓN DE LA TABLA <span>".strtoupper($tabla)."</span> =========================</p>
                     <br>====================================================================================<br></div>";
-                echo "<div><p class='rojo'>No se pudo crear la tabla'".strtoupper($tabla)."'. Razón: [".mysqli_error($cnx)."]</p><br><br></div>";		
+                echo "<div><p class='rojo'>No se pudo crear la tabla <span>".strtoupper($tabla)."</span>. Razón: [".mysqli_error($cnx)."]</p><br><br></div>";		
             }
         }	
-        function insertar(){
+        function insertarRegistros(){
             set_time_limit(600);
             global $sql;
             global $cnx;
             global $tabla;		
-            if ($query=$cnx->query($sql)){
-                echo "<div>===== INSERTANDO REGISTROS EN LA TABLA ".strtoupper($tabla)."======<br><br></div>";
+            if ($cnx->query($sql)){
+                echo "<div>===== INSERTANDO REGISTROS EN LA TABLA <span>".strtoupper($tabla)."</span>======<br><br></div>";
                 echo "<div>Se insertaron los datos exitosamente.<br><br></div>";			
             }else{
-                echo "<div><p class='rojo'>===== INSERTANDO REGISTROS EN LA TABLA ".strtoupper($tabla)."======<br><br></p></div>";
-                echo "<div><p class='rojo'>No se insertaron los datos. ".mysqli_error($cnx)."</p><br><br></div>";		
+                echo "<div><p class='rojo'>===== INSERTANDO REGISTROS EN LA TABLA <span>".strtoupper($tabla)."</span>======<br><br></p></div>";
+                echo "<div><p class='rojo'>No se insertaron los datos. <span>".mysqli_error($cnx)."</span></p><br><br></div>";		
             }
         }
     //########## CREAR UNA TABLA DE "INSTALACION" ##########
@@ -48,25 +46,114 @@
                     confirmacion int(1) NOT NULL
                 )
             ';
-        //Ejecutar
-        ejecutarConsulta();
+        //Ejecutamos la consulta.
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "INSTALACION" ##########	
         $sql='INSERT INTO '.$tabla.' (codInstalacion, confirmacion) 
                 VALUES (1,1)';
-        insertar();
+        insertarRegistros();
+    //################### CREAR UNA TABLA DE "USUARIOS". ###################
+        //Preparar consulta SQL
+        $tabla='usuarios';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(			
+                    usuarioID int NOT NULL AUTO_INCREMENT,
+                    foto varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    usuarioCED int(11) NOT NULL,
+                    usuario varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    contrasena varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    correo varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    nombres varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    apellidos varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+                    defUsuario int NOT NULL ,
+                    permiso int(1) NOT NULL,
+                    PRIMARY KEY(usuarioID)
+                )
+            ';
+        
+        //Ejecutar	
+        crearTabla();
+        
+        //################### CONTENIDO DE PRUEBA PARA LA TABLA "USUARIOS". ###################
+        $usuarios = array( 
+
+            //(responsableCED, usuario, contrasena, nombres, apellidos, defUsuario, permiso)
+            /*
+                Niveles de usuarios
+                    
+                    0	Visitante 	//Usuario visitante (No tiene bienes a cargos, no administra)
+                    1	Usuario 	//User resp [sug. add, sug. mod, sug. del], bienes propios unic. No admin. (Doc, Aux no conf.)
+                    2	Usuario 	//User no resp de bienes. Admin bás. [sug. add, sug. mod, sug. del], todos los bienes. (SSO)
+                    3	Usuario 	//User resp de bienes y Admin bás. [sug. add, sug. mod, sug. del], todos los bienes. (Docente apoyo inventario)
+                    4	Usuario 	//User resp de bienes y Admin avdc. [add, mod, del], todos los bienes.(Coord., Secret., Aux. de Confianza)
+                    5	Usuario 	//Usuario SuperAdministrador Frontend (Rector)	
+                    6	Usuario 	//Usuario SuperAdministrador Frontend y Backend (Desarrollador) 
+            */
+
+            array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
+            array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6),
+            array("71481707.jpg",71481707,71481707,"12345","dorianrodrigo@gmail.com","Dorian Rodrigo","Ruiz Hernández",1,6),
+            );
+        
+        foreach ($usuarios as $usuario){
+            $sql='INSERT INTO '.$tabla.' (foto,usuarioCED, usuario, contrasena, correo, nombres, apellidos, defUsuario, permiso) 
+                VALUES ("'.$usuario[0].'",'.$usuario[1].','.$usuario[2].',"'.$usuario[3].'","'.$usuario[4].'","'.$usuario[5].'","'.$usuario[6].'",'.$usuario[7].','.$usuario[8].')';
+            insertarRegistros();		
+        }	
+
+
+
+
+    //################### CREAR UNA TABLA DE LOGS. ###################
+        
+        //Preparar
+        $tabla='logs';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                id int NOT NULL AUTO_INCREMENT,
+                utc int,
+                anio varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                mes varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                dia varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                hora varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                minuto varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                segundo varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                ip varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                navegador varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                idUsuario int(2) NOT NULL,
+                contrasena varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                pagVisitada varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                PRIMARY KEY(id),
+                FOREIGN KEY(idUsuario) REFERENCES usuarios (usuarioID)
+            )';		
+        //Ejecutar	
+        crearTabla();
+            
+        //################### CONTENIDO DE PRUEBA PARA LA TABLA DE LOGS. ###################
+        
+        //Preparar
+        $tabla='logs';
+        $sql=
+            '
+                INSERT INTO '.$tabla.' (utc, anio, mes, dia, hora, minuto, segundo, ip, navegador, idUsuario, contrasena,pagVisitada)
+                VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
+            ';
+        insertarRegistros();
     //########## CREAR UNA TABLA DE "OPCIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'opciones';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     opcion varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "OPCIONES" ##########
         $opciones = array(
             array(1,"Si"),
@@ -75,7 +162,7 @@
         foreach ($opciones as $opcion) {
             $sql='INSERT INTO '.$tabla.' (id, opcion) 
                 VALUES ('.$opcion[0].',"'.$opcion[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "CONTINENTES" ##########
         // Preparamos la consulta SQL
@@ -83,13 +170,13 @@
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.'(
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     nomContinente varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
                     PRIMARY KEY(id)	
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "CONTINENTES" ##########
         $continentes = array(
             array(1,"África"),
@@ -101,7 +188,7 @@
         foreach ($continentes as $continente){
             $sql='INSERT INTO '.$tabla.' (id, nomContinente) 
                 VALUES ('.$continente[0].',"'.$continente[1].'")';
-            insertar();		
+            insertarRegistros();		
         }	
     //########## CREAR UNA TABLA DE "PAISES" ##########
         // Preparamos la consulta SQL
@@ -117,7 +204,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "PAISES" ##########	
         $paises = array(
             array(4,"Austria"),
@@ -367,7 +454,7 @@
             $sql='INSERT INTO '.$tabla.' (idContinente, nombre) 
                 VALUES ('.$pais[0].',"'.$pais[1].'")';
                 //echo $sql;
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "DEPARTAMENTOS" ##########
         // Preparamos la consulta SQL
@@ -383,7 +470,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "DEPARTAMENTOS" ##########	
         $departamentos = array(
             array(158, "Amazonas"),
@@ -423,7 +510,7 @@
             $sql='INSERT INTO '.$tabla.' (idPais, nombre) 
                 VALUES ('.$departamento[0].',"'.$departamento[1].'")';
                 //echo $sql;
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "MUNICIPIOS" ##########
         // Preparamos la consulta SQL
@@ -439,7 +526,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "MUNICIPIOS" ##########	
         $municipios = array(
             array(1,'El Encanto'),
@@ -1566,7 +1653,7 @@
             $sql='INSERT INTO '.$tabla.' (idDepartamento, nombre) 
                 VALUES ('.$municipio[0].',"'.$municipio[1].'")';
                 //echo $sql;
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "NOMENCLATURA" ##########
         // Preparamos la consulta SQL
@@ -1580,7 +1667,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "NOMENCLATURA" ##########
         $nomenclaturas = array(
             array(1,"Barrio"),
@@ -1591,7 +1678,7 @@
         foreach ($nomenclaturas as $nomenclatura){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$nomenclatura[0].',"'.$nomenclatura[1].'")';
-            insertar();
+            insertarRegistros();
         } 
     //########## CREAR UNA TABLA DE "BARRIOS" ##########
         // Preparamos la consulta SQL
@@ -1609,7 +1696,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "BARRIOS" ##########
         $barrios = array(
             array(40,2,"La Cercana"),
@@ -1620,7 +1707,7 @@
         foreach ($barrios as $barrio){
             $sql='INSERT INTO '.$tabla.' (idMunicipio, idNomenclatura, nombre) 
                 VALUES ('.$barrio[0].','.$barrio[1].',"'.$barrio[2].'")';
-            insertar();
+            insertarRegistros();
         }
     //########## CREAR UNA TABLA DE "INSTITUCIONES EDUCATIVAS" ##########
         // Preparamos la consulta SQL
@@ -1637,15 +1724,16 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "INSTITUCIONES EDUCATIVAS" ##########
         $ies = array(
-            array(40,"IE. Entrerríos",105001003123),
+            array(40,"IE Entrerríos",105264000013),
+            array(12,"IE Tapartó",205034000248),
             );       
         foreach ($ies as $ie){
             $sql='INSERT INTO '.$tabla.' (idMunicipio, nombre, dane) 
                 VALUES ('.$ie[0].',"'.$ie[1].'",'.$ie[2].')';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "SEDES" ##########
         // Preparamos la consulta SQL
@@ -1662,7 +1750,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "SEDES" ##########
         $sedes = array(
             array(1,"Casco Urbano"),
@@ -1672,7 +1760,7 @@
         foreach ($sedes as $sede){
             $sql='INSERT INTO '.$tabla.' (idInstEducativa, nombre) 
                 VALUES ('.$sede[0].',"'.$sede[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "JORNADAS" ##########
         // Preparamos la consulta SQL
@@ -1686,7 +1774,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "JORNADAS" ##########
             $jornadas = array(
                 array(1,"Mañana"),
@@ -1697,7 +1785,7 @@
             foreach ($jornadas as $jornada){
                 $sql='INSERT INTO '.$tabla.' (id, nombre) 
                     VALUES ('.$jornada[0].',"'.$jornada[1].'")';
-                insertar();		
+                insertarRegistros();		
             }        
     //########## CREAR UNA TABLA DE "JORNADAS POR SEDE" ##########
         // Preparamos la consulta SQL
@@ -1715,7 +1803,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "JORNADAS POR SEDE" ##########
         $jornadasXsede = array(
             array(1,4,"Única"),
@@ -1725,7 +1813,7 @@
         foreach ($jornadasXsede as $jornadaxsede){
             $sql='INSERT INTO '.$tabla.' (idSede, idJornada, nombre) 
                 VALUES ('.$jornadaxsede[0].','.$jornadaxsede[1].',"'.$jornadaxsede[2].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "GRADOS" ##########
         // Preparamos la consulta SQL
@@ -1739,7 +1827,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "GRADOS" ##########
         $grados = array(
             array(1,"Preescolar"),
@@ -1758,7 +1846,7 @@
         foreach ($grados as $grado){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$grado[0].',"'.$grado[1].'")';
-            insertar();		
+            insertarRegistros();		
         }        
     //########## CREAR UNA TABLA DE "GRADOS POR JORNADA" ##########
         // Preparamos la consulta SQL
@@ -1776,7 +1864,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "GRADOS POR JORNADA" ##########
         $gradosXjornada = array(
             array(1,1,"Preescolar"),
@@ -1795,7 +1883,7 @@
         foreach ($gradosXjornada as $gradoXjornada){
             $sql='INSERT INTO '.$tabla.' (idJornadaSede,idGrado, nombre) 
                 VALUES ('.$gradoXjornada[0].','.$gradoXjornada[1].',"'.$gradoXjornada[2].'")';
-            insertar();		
+            insertarRegistros();		
         }        
     //########## CREAR UNA TABLA DE "GRUPOS" ##########
         // Preparamos la consulta SQL
@@ -1809,7 +1897,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "GRUPOS" ##########
         $grupos = array(
                 array(1,"0.1"),
@@ -1829,7 +1917,7 @@
             foreach ($grupos as $grupo){
                 $sql='INSERT INTO '.$tabla.' (id, nombre) 
                     VALUES ('.$grupo[0].',"'.$grupo[1].'")';
-                insertar();		
+                insertarRegistros();		
             }
     //########## CREAR UNA TABLA DE "GRUPOS POR GRADO" ##########
         // Preparamos la consulta SQL
@@ -1847,7 +1935,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "GRUPOS POR GRADO" ##########
         $gruposXgrado = array(
             array(1,1,"Preescolar 1"),
@@ -1866,7 +1954,7 @@
         foreach ($gruposXgrado as $grupoXgrado){
             $sql='INSERT INTO '.$tabla.' (idGradoJornada,idGrupo, nombre) 
                 VALUES ('.$grupoXgrado[0].','.$grupoXgrado[1].',"'.$grupoXgrado[2].'")';
-            insertar();		
+            insertarRegistros();		
         }        
     //########## CREAR UNA TABLA DE "ÁREAS" ##########
         // Preparamos la consulta SQL
@@ -1880,7 +1968,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ÁREAS" ##########
             $areas = array(
                 array(1,"Matemáticas"),
@@ -1896,7 +1984,7 @@
             foreach ($areas as $area){
                 $sql='INSERT INTO '.$tabla.' (id, nombre) 
                     VALUES ('.$area[0].',"'.$area[1].'")';
-                insertar();		
+                insertarRegistros();		
             }
     //########## CREAR UNA TABLA DE "ÁREAS POR GRUPO" ##########
         // Preparamos la consulta SQL
@@ -1914,7 +2002,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ÁREAS POR GRUPO" ##########
         $areasXgrupo = array();
         $j=0;
@@ -1932,7 +2020,7 @@
         foreach ($areasXgrupo as $areaXgrupo){
             $sql='INSERT INTO '.$tabla.' (idGrupoGrado, idArea, nombre) 
                 VALUES ('.$areaXgrupo[0].','.$areaXgrupo[1].',"'.$areaXgrupo[2].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "PERIODOS" ##########
         // Preparamos la consulta SQL
@@ -1946,7 +2034,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "PERIODOS" ##########
             $periodos = array(
@@ -1960,7 +2048,7 @@
             foreach ($periodos as $periodo){
                 $sql='INSERT INTO '.$tabla.' (id, nombre) 
                     VALUES ('.$periodo[0].',"'.$periodo[1].'")';
-                insertar();		
+                insertarRegistros();		
             }
 
     //########## CREAR UNA TABLA DE "PERIODOS POR ÁREA" ##########
@@ -1979,7 +2067,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();        
+        crearTabla();        
         //########## INGRESAR CONTENIDO A LA TABLA "PERIODO POR ÁREA" ##########
         echo $j;
         $periodosXarea = array();
@@ -1995,7 +2083,7 @@
         foreach ($periodosXarea as $periodoXarea){
             $sql='INSERT INTO '.$tabla.' (idAreasGrupo, idPeriodos, nombre) 
                 VALUES ('.$periodoXarea[0].','.$periodoXarea[1].',"'.$periodoXarea[2].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "TIPOS DE DOCUMENTO" ##########
         // Preparamos la consulta SQL
@@ -2009,7 +2097,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "TIPOS DE DOCUMENTO" ##########
             $tipos = array(
@@ -2026,7 +2114,7 @@
             foreach ($tipos as $tipo){
                 $sql='INSERT INTO '.$tabla.' (id, tipo) 
                     VALUES ('.$tipo[0].',"'.$tipo[1].'")';
-                insertar();		
+                insertarRegistros();		
             }
 
     //########## CREAR UNA TABLA DE "GRUPOS ÉTNICOS" ##########
@@ -2041,7 +2129,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "GRUPOS ÉTNICOS" ##########
             $etnias = array(
@@ -2054,7 +2142,7 @@
             foreach ($etnias as $etnia){
                 $sql='INSERT INTO '.$tabla.' (id, name) 
                     VALUES ('.$etnia[0].',"'.$etnia[1].'")';
-                insertar();		
+                insertarRegistros();		
             }     
     
     //########## CREAR UNA TABLA DE "CENTROS DE PROTECCIÓN" ##########
@@ -2069,7 +2157,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "CENTROS DE PROTECCIÓN" ##########
         $centrosProteccion = array(
             array(1,"ICBF"),
@@ -2094,7 +2182,7 @@
         foreach ($centrosProteccion as $centroProteccion){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$centroProteccion[0].',"'.$centroProteccion[1].'")';
-        insertar();		
+        insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "REGIMENES" ##########
         // Preparamos la consulta SQL
@@ -2108,7 +2196,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "REGIMENES" ##########
             $regimenes = array(
@@ -2119,7 +2207,7 @@
             foreach ($regimenes as $regimen){
                 $sql='INSERT INTO '.$tabla.' (id, nombre) 
                     VALUES ('.$regimen[0].',"'.$regimen[1].'")';
-                insertar();		
+                insertarRegistros();		
             }
     //########## CREAR UNA TABLA DE "EPS" ##########
         // Preparamos la consulta SQL
@@ -2135,7 +2223,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     
         //########## INGRESAR CONTENIDO A LA TABLA "EPS" ##########
             $empresas = array(
@@ -2169,7 +2257,7 @@
             foreach ($empresas as $empresa){
                 $sql='INSERT INTO '.$tabla.' (id, nombre, idRegimen) 
                     VALUES ('.$empresa[0].',"'.$empresa[1].'",'.$empresa[2].')';
-                insertar();		
+                insertarRegistros();		
             }
     //########## CREAR UNA TABLA DE "FRECUENCIAS" ##########
         // Preparamos la consulta SQL
@@ -2183,7 +2271,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         
         //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
         $tiempos = array(
@@ -2224,7 +2312,7 @@
         foreach ($tiempos as $tiempo){
             $sql='INSERT INTO '.$tabla.' (id, descripcion) 
                 VALUES ('.$tiempo[0].',"'.$tiempo[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "MEDICAMENTOS" ##########
         // Preparamos la consulta SQL
@@ -2238,7 +2326,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         
         //########## INGRESAR CONTENIDO A LA TABLA "FRECUENCIAS" ##########
         $medicamentos = array(
@@ -2253,7 +2341,7 @@
         foreach ($medicamentos as $medicamento){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$medicamento[0].',"'.$medicamento[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "APOYOS A BARRERAS" ##########
         // Preparamos la consulta SQL
@@ -2267,7 +2355,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "APOYOS A BARRERAS" ##########
         $apoyos = array(
             array(1,'Silla de ruedas'),
@@ -2281,7 +2369,7 @@
         foreach ($apoyos as $apoyo){
             $sql='INSERT INTO '.$tabla.' (id, nombre) 
                 VALUES ('.$apoyo[0].',"'.$apoyo[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "AFILIACIONES" ##########
         // Preparamos la consulta SQL
@@ -2324,7 +2412,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "AFILIACIONES" ##########
         $afiliaciones = array(
             array(1,'IPS Entrerríos',1,5,1,'Acá debe ir un diagnóstico médico',1,'Si hay una terapia',3,'NULL','NULL','NULL','NULL',1,'para controlor epilepsia',1,2,'NULL'),
@@ -2354,7 +2442,7 @@
                 VALUES ('.$afiliacion[0].',"'.$afiliacion[1].'",'.$afiliacion[2].','.$afiliacion[3].','.$afiliacion[4].',"'.$afiliacion[5].'",'.$afiliacion[6].',
                 "'.$afiliacion[7].'",'.$afiliacion[8].',"'.$afiliacion[9].'",'.$afiliacion[10].',"'.$afiliacion[11].'",'.$afiliacion[12].','.$afiliacion[13].',
                 "'.$afiliacion[14].'",'.$afiliacion[15].','.$afiliacion[16].','.$afiliacion[17].')';
-        insertar();		
+        insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "PRESCRIPCIONES" ##########
         // Preparamos la consulta SQL
@@ -2373,7 +2461,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "PRESCRIPCIONES" ##########
         $prescripciones = array(
             array(1,1,1),
@@ -2398,7 +2486,7 @@
         foreach ($prescripciones as $prescripcion){
             $sql='INSERT INTO '.$tabla.' (idAfiliacion, idMedicamento, idFrecuencia) 
                 VALUES ('.$prescripcion[0].','.$prescripcion[1].','.$prescripcion[2].')';
-            insertar();
+            insertarRegistros();
         }
     //########## CREAR UNA TABLA DE "HORAS" ##########
         // Preparamos la consulta SQL
@@ -2412,7 +2500,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "HORAS" ##########
         $horas = array(
             array('12:00 am'),
@@ -2467,7 +2555,7 @@
         foreach ($horas as $hora){
             $sql='INSERT INTO '.$tabla.' (hora) 
                 VALUES ("'.$hora[0].'")';
-            insertar();
+            insertarRegistros();
         }
         //########## CREAR UNA TABLA DE "HORARIOS DE MEDICAMENTOS" ##########
         // Preparamos la consulta SQL                                              
@@ -2486,7 +2574,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();                                                                                             
+        crearTabla();                                                                                             
         //########## INGRESAR CONTENIDO A LA TABLA "HORARIOS DE MEDICAMENTOS" ##########
         $horariosMed = array(
             array(1,17,1),
@@ -2506,7 +2594,7 @@
         foreach ($horariosMed as $horarioMed){
             $sql='INSERT INTO '.$tabla.' (idPrescripcion, idHora, idOpcEnClase) 
                 VALUES ('.$horarioMed[0].','.$horarioMed[1].','.$horarioMed[2].')';
-            insertar();		
+            insertarRegistros();		
         }
            
     //########## CREAR UNA TABLA DE "DIAGNÓSTICOS" ##########
@@ -2521,7 +2609,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();                                                                                             
+        crearTabla();                                                                                             
         //########## INGRESAR CONTENIDO A LA TABLA "DIAGNÓSTICOS" ##########
         $diagnosticos = array(
             array(1,'Esto debería ser un diagnóstico'),
@@ -2530,7 +2618,7 @@
         foreach ($diagnosticos as $diagnostico){
             $sql='INSERT INTO '.$tabla.' (id, descripcion) 
                 VALUES ('.$diagnostico[0].',"'.$diagnostico[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
                                                                                     
     //########## CREAR UNA TABLA DE "TRATAMIENTOS" ##########
@@ -2545,7 +2633,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "TRATAMIENTOS" ##########                                                                    
         $tratamientos = array(
             array(1,'Esto debería ser un tratamiento'),
@@ -2554,7 +2642,7 @@
         foreach ($tratamientos as $tratamiento){
             $sql='INSERT INTO '.$tabla.' (id, descripcion) 
                 VALUES ('.$tratamiento[0].',"'.$tratamiento[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
 
     //########## CREAR UNA TABLA DE "TERAPIAS" ##########
@@ -2574,7 +2662,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
     //########## CREAR UNA TABLA DE "OCUPACIONES" ##########
         // Preparamos la consulta SQL
@@ -2588,7 +2676,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "OCUPACIONES" ##########
             $ocupaciones = array(
@@ -2602,7 +2690,7 @@
             foreach ($ocupaciones as $ocupacion){
                 $sql='INSERT INTO '.$tabla.' (id, name) 
                     VALUES ('.$ocupacion[0].',"'.$ocupacion[1].'")';
-                insertar();		
+                insertarRegistros();		
             }     
     //########## CREAR UNA TABLA DE "NIVELES EDUCATIVOS" ##########
         // Preparamos la consulta SQL
@@ -2616,7 +2704,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
 
         //########## INGRESAR CONTENIDO A LA TABLA "NIVELES EDUCATIVOS" ##########
             $nivelesEdu = array(
@@ -2636,7 +2724,7 @@
             foreach ($nivelesEdu as $nivelEdu){
                 $sql='INSERT INTO '.$tabla.' (id, name) 
                     VALUES ('.$nivelEdu[0].',"'.$nivelEdu[1].'")';
-                insertar();		
+                insertarRegistros();		
             }     
         
     //########## CREAR UNA TABLA DE "MADRES" ##########
@@ -2656,7 +2744,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "MADRES" ##########
         $madres = array(
             array("Acá debe ir un nombre", 43555555, 1, 5),
@@ -2665,7 +2753,7 @@
         foreach ($madres as $madre){
             $sql='INSERT INTO '.$tabla.' (nomMadre, docMadre, idOcupacion, idNivelEdu) 
                 VALUES ("'.$madre[0].'",'.$madre[1].','.$madre[2].','.$madre[3].')';
-            insertar();		
+            insertarRegistros();		
         }     
     //########## CREAR UNA TABLA DE "PADRES" ##########
         // Preparamos la consulta SQL
@@ -2684,7 +2772,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "PADRES" ##########
         $padres = array(
             array("Acá debe ir un nombre", 43555555, 1, 5),
@@ -2693,7 +2781,7 @@
         foreach ($padres as $padre){
             $sql='INSERT INTO '.$tabla.' (nomPadre, docPadre, idOcupacion, idNivelEdu) 
                 VALUES ("'.$padre[0].'",'.$padre[1].','.$padre[2].','.$padre[3].')';
-            insertar();		
+            insertarRegistros();		
         } 
     //########## CREAR UNA TABLA DE "PARENTESCOS" ##########
         // Preparamos la consulta SQL
@@ -2707,7 +2795,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "PARENTESCOS" ##########
             $parentescos = array(
                 array(1,"Bisabuela(o)"),
@@ -2726,7 +2814,7 @@
             foreach ($parentescos as $parentesco){
                 $sql='INSERT INTO '.$tabla.' (id, name) 
                     VALUES ('.$parentesco[0].',"'.$parentesco[1].'")';
-                insertar();		
+                insertarRegistros();		
             }     
         
 
@@ -2749,7 +2837,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "CUIDADORES" ##########
         $cuidadores = array(
             array("Acá debe ir un nombre", 43555555, 1, 5, 1),
@@ -2757,7 +2845,7 @@
         foreach ($cuidadores as $cuidador){
             $sql='INSERT INTO '.$tabla.' (nomCuidador, docCuidador, idOcupacion, idNivelEdu, idParentesco) 
                 VALUES ("'.$cuidador[0].'",'.$cuidador[1].','.$cuidador[2].','.$cuidador[3].','.$cuidador[4].')';
-            insertar();		
+            insertarRegistros();		
         } 
     //########## CREAR UNA TABLA DE "ENTORNO FAMILIAR" ##########
         // Preparamos la consulta SQL
@@ -2780,7 +2868,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ENTORNO FAMILIAR" ##########
         $entornos = array(
             array(1, 1, 1, 1,'Acá debe ir un apoyo a crianza',1),
@@ -2789,7 +2877,7 @@
         foreach ($entornos as $entorno){
             $sql='INSERT INTO '.$tabla.' (idMadres, idPadres, idCuidadores, numHermanos, apoyoCrianza, idOpcionProteccion) 
                 VALUES ('.$entorno[0].','.$entorno[1].','.$entorno[2].','.$entorno[3].',"'.$entorno[4].'",'.$entorno[5].')';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "ASPIRA AL GRADO" ##########
         // Preparamos la consulta SQL
@@ -2797,14 +2885,14 @@
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     idGrado int(2) NOT NULL,
                     PRIMARY KEY(id),
                     FOREIGN KEY(idGrado) REFERENCES grados (id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "INFORME PEDAGÓGICO" ##########
         // Preparamos la consulta SQL
         $tabla = 'informePedagogico';
@@ -2820,7 +2908,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "INFORME PEDAGÓGICO" ##########
         $infoPedagogicos = array(
             array(1,"Acá debe ir una razón", "Acá debe ir un path a el archivo con el informe del estudiante"),
@@ -2829,7 +2917,7 @@
         foreach ($infoPedagogicos as $infoPedagogico){
             $sql='INSERT INTO '.$tabla.' (idOpcion, razon, archivo) 
                 VALUES ('.$infoPedagogico[0].',"'.$infoPedagogico[1].'","'.$infoPedagogico[2].'")';
-            insertar();		
+            insertarRegistros();		
         } 
     //########## CREAR UNA TABLA DE "PROGRAMAS COMPLEMENTARIOS" ##########
         // Preparamos la consulta SQL
@@ -2837,52 +2925,52 @@
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     nombre varchar(100) NOT NULL,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "MEDIOS DE TRANSPORTE" ##########
         // Preparamos la consulta SQL
         $tabla = 'mediosTransporte';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     nombre varchar(80) NOT NULL,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "ACTORES" ##########
         // Preparamos la consulta SQL
         $tabla = 'actores';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     nombre varchar(80) NOT NULL,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "ESTADOS" ##########
         // Preparamos la consulta SQL
         $tabla = 'estados';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTADOS" ##########
         $estados = array(
             array(1,"Aprobado"),
@@ -2891,7 +2979,7 @@
         foreach ($estados as $estado) {
             $sql='INSERT INTO '.$tabla.' (id, name) 
                 VALUES ('.$estado[0].',"'.$estado[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "ENTIDADES SUBSIDIARIAS" ##########
         // Preparamos la consulta SQL
@@ -2899,13 +2987,13 @@
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTADOS" ##########
         $entidades = array(
             array(1,"Prosperidad Social"),
@@ -2917,7 +3005,7 @@
         foreach ($entidades as $entidad) {
             $sql='INSERT INTO '.$tabla.' (id, name) 
                 VALUES ('.$entidad[0].',"'.$entidad[1].'")';
-            insertar();		
+            insertarRegistros();		
         }
     //########## CREAR UNA TABLA DE "ESTUDIANTES" ##########
         // Preparamos la consulta SQL                                                                                                      
@@ -2960,6 +3048,7 @@
                     idEstadoUltimoGrado int(2) NOT NULL,
                     observaciones varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     idInformePedagogico int(2),
+                    diagnostico varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id),
                     FOREIGN KEY(idMunicipioNacimiento) REFERENCES municipios (id),
                     FOREIGN KEY(idDepartamentoNacimiento) REFERENCES departamentos (id),
@@ -2985,7 +3074,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTUDIANTES" ##########
         $estudiantes = array(
             array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,
@@ -3017,7 +3106,7 @@
                     '.$estudiante[19].','.$estudiante[20].','.$estudiante[21].','.$estudiante[22].','.$estudiante[23].','.$estudiante[24].','.$estudiante[25].',"'.$estudiante[26].'",'.$estudiante[27].',
                     '.$estudiante[28].','.$estudiante[29].','.$estudiante[30].','.$estudiante[31].',"'.$estudiante[32].'",'.$estudiante[33].'
                 )';
-            insertar();		
+            insertarRegistros();		
         }  
     //########## CREAR UNA TABLA DE "TERAPIAS RECIBIDAS" ##########
         // Preparamos la consulta SQL
@@ -3025,7 +3114,7 @@
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     idEstudiante int(2) NOT NULL,
                     idOpcion int(2) NOT NULL,
                     idTerapia int(2) NOT NULL,
@@ -3039,14 +3128,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "VINCULADO A OTRAS INSTITUCIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'vinculOtrasInst';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     idEstudiante int(2) NOT NULL,
                     idOpciones int(2) NOT NULL,
                     razon varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -3056,7 +3145,7 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "CONSUMOS" ##########
         // Preparamos la consulta SQL
         $tabla = 'consumos';
@@ -3075,14 +3164,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "ASISTENCIA A PROGRAMAS COMPLEMENTARIOS" ##########
         // Preparamos la consulta SQL
         $tabla = 'asistenciaProgramasComplementarios';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int NOT NULL AUTO_INCREMENT,
                     idEstudiante int(2) NOT NULL,
                     idProgramaComplementario int(2) NOT NULL,
                     idOpcion int(2) NOT NULL,
@@ -3094,14 +3183,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "TRANSPORTE ESTUDIANTE" ##########
         // Preparamos la consulta SQL
         $tabla = 'transporteEstudiantes';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int(2) NOT NULL AUTO_INCREMENT,
                     idEstudiante int(2) NOT NULL,
                     idMedioTransporte int(2) NOT NULL,
                     tiempoViaje int(2) NOT NULL,
@@ -3112,14 +3201,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "PIAR" ##########
         // Preparamos la consulta SQL
         $tabla = 'piar';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int(2) NOT NULL AUTO_INCREMENT,
                     fechaCreacion date NOT NULL,
                     idEstudiante int(2) NOT NULL,
                     descripcionGeneralEstud varchar(200) NOT NULL,
@@ -3129,14 +3218,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "AJUSTES RAZONABLES" ##########
         // Preparamos la consulta SQL
         $tabla = 'ajustesRazonables';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int(2) NOT NULL AUTO_INCREMENT,
                     idPiar int(2) NOT NULL,
                     idPeridoXarea int(2) NOT NULL,
                     objetivo1 varchar(200) NOT NULL,
@@ -3157,14 +3246,14 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
+        crearTabla();
     //########## CREAR UNA TABLA DE "RECOMENDACIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'recomendaciones';
         $sql=
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
-                    id int(2) NOT NULL,
+                    id int(2) NOT NULL AUTO_INCREMENT,
                     idPiar int(2) NOT NULL,
                     idActores int(2) NOT NULL,
                     acciones varchar(5000) NOT NULL,
@@ -3175,103 +3264,188 @@
                 )
             ';
         //Ejecutar
-        ejecutarConsulta();
-    //################### CREAR UNA TABLA DE "USUARIOS". ###################
-        //Preparar consulta SQL
-        $tabla='usuarios';
+        crearTabla();
+    //########## CREAR UNA TABLA DE "DISCAPACIDADES" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'discapacidades';
         $sql=
             '
-                CREATE TABLE IF NOT EXISTS '.$tabla.'(			
-                    usuarioID int NOT NULL AUTO_INCREMENT,
-                    foto varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    usuarioCED int(11) NOT NULL,
-                    usuario varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    contrasena varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    correo varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    nombres varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    apellidos varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-                    defUsuario int NOT NULL ,
-                    permiso int(1) NOT NULL,
-                    PRIMARY KEY(usuarioID)
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    discapacidad varchar(60) NOT NULL,
+                    PRIMARY KEY(id)
                 )
             ';
+        //Ejecutar
+        crearTabla();
+        $discapacidades = array("Discapacidad Física","Discapacidad Auditiva","Discapacidad Visual","Sordoceguera",
+                                "Discapacidad Intelectual","Discapacidad Psicosocial (Mental)",
+                                "Trastorno del Espectro Autista -TEA-","Discapacidad Múltiple");
         
-        //Ejecutar	
-        ejecutarConsulta();
+        foreach ($discapacidades as $discapacidad){
+            $sql='INSERT INTO '.$tabla.' (discapacidad) VALUES ("'.$discapacidad.'")';
+            insertarRegistros();		
+        }
+    //########## CREAR UNA TABLA DE "CTE" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'ctes';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    cte varchar(60) NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        crearTabla();
+        $ctes = array("Capacidades excepcionales","Talento excepcional en ciencias naturales o básicas",
+                    "Talento excepcional en artes o letras","Talento excepcional en actividad física, ejercicio y deporte",
+                    "Talento excepcional en ciencias sociales y/o humanas","Talento excepcional en tecnología",
+                    "Talento excepcional en liderazgo social y emprendimiento");
         
-        //################### CONTENIDO DE PRUEBA PARA LA TABLA "USUARIOS". ###################
-        $usuarios = array( 
-
-            //(responsableCED, usuario, contrasena, nombres, apellidos, defUsuario, permiso)
-            /*
-                Niveles de usuarios
-                    
-                    0	Visitante 	//Usuario visitante (No tiene bienes a cargos, no administra)
-                    1	Usuario 	//User resp [sug. add, sug. mod, sug. del], bienes propios unic. No admin. (Doc, Aux no conf.)
-                    2	Usuario 	//User no resp de bienes. Admin bás. [sug. add, sug. mod, sug. del], todos los bienes. (SSO)
-                    3	Usuario 	//User resp de bienes y Admin bás. [sug. add, sug. mod, sug. del], todos los bienes. (Docente apoyo inventario)
-                    4	Usuario 	//User resp de bienes y Admin avdc. [add, mod, del], todos los bienes.(Coord., Secret., Aux. de Confianza)
-                    5	Usuario 	//Usuario SuperAdministrador Frontend (Rector)	
-                    6	Usuario 	//Usuario SuperAdministrador Frontend y Backend (Desarrollador) 
-            */
-
-            array("71379517.jpg",71379517,71379517,"eduInclusiva","bhagam19@gmail.com","Adolfo León","Ruiz Hernández",1,6),
-            array("12345.jpg",12345,12345,"admin12345","micorreo@micorreo.com","Super","Admin IE",1,6),
-            array("71481707.jpg",71481707,71481707,"12345","dorianrodrigo@gmail.com","Dorian Rodrigo","Ruiz Hernández",1,6),
+        foreach ($ctes as $cte){
+            $sql='INSERT INTO '.$tabla.' (cte) VALUES ("'.$cte.'")';
+            insertarRegistros();		
+        }
+    //########## CREAR UNA TABLA DE "TAC" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'tacs';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    tac varchar(60) NOT NULL,
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        crearTabla();
+        $tacs = array("TEAE: Lectura",
+                    "TEAE: Escritura",
+                    "TEAE: Cálculo",
+                    "TDAH: Hiperactiva/Impulsiva",
+                    "TDAH: Falta de Aatención",
+                    "TDAH: Combinada",
+                    "TEAE y TDAH");
+        
+        foreach ($tacs as $tac){
+            $sql='INSERT INTO '.$tabla.' (tac) VALUES ("'.$tac.'")';
+            insertarRegistros();		
+        }
+    //########## CREAR UNA TABLA DE "NIVELES DE RECONOCIMIENTO" ##########
+        // Preparamos la consulta SQL
+            $tabla = 'nivelesReconocimiento';
+            $sql=
+                '
+                    CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                        id int(2) NOT NULL AUTO_INCREMENT,
+                        nivelesReconocimiento varchar(60) NOT NULL,
+                        PRIMARY KEY(id)
+                    )
+                ';
+            //Ejecutar
+            crearTabla();
+            $niveles = array("Detección/Nominación",
+                            "Diagnóstico/Tamizaje",
+                            "Certificado de discapacidad/Evaluación individual/Pruebas desempeño",
+                            "Registro SIMAT 5A-6A (con soportes válidos)");
+            
+            foreach ($niveles as $nivel){
+                $sql='INSERT INTO '.$tabla.' (nivelesReconocimiento) VALUES ("'.$nivel.'")';
+                insertarRegistros();		
+            }
+    //########## CREAR UNA TABLA DE "ALERTAS" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'alertas';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    idEstudiante int(6) NOT NULL,
+                    idDocenteIdentificador int(6) NOT NULL,
+                    idArea int(6) NOT NULL,
+                    idDiscapacidad int(6) NOT NULL,
+                    porcentajeDiscapacidad int(6) NOT NULL,
+                    idCte int(6) NOT NULL,
+                    porcentajeCte int(6) NOT NULL,
+                    idTac int(6) NOT NULL,
+                    porcentajeTac int(6) NOT NULL,
+                    fechaAlerta date NOT NULL,
+                    PRIMARY KEY(id),
+                    FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                    FOREIGN KEY(idDocenteIdentificador) REFERENCES usuarios (usuarioID),
+                    FOREIGN KEY(idArea) REFERENCES areas (id),
+                    FOREIGN KEY(idDiscapacidad) REFERENCES discapacidades (id),
+                    FOREIGN KEY(idCte) REFERENCES ctes (id),
+                    FOREIGN KEY(idTac) REFERENCES tacs (id)
+                )
+            ';
+        //Ejecutar
+        crearTabla();
+        $alertas = array(
+            array(1,1,1,1,70,1,10,1,90,"2018-01-01"),
+        /*    array(),
+            array(),
+            array(),
+            array(),
+            array("),*/
             );
         
-        foreach ($usuarios as $usuario){
-            $sql='INSERT INTO '.$tabla.' (foto,usuarioCED, usuario, contrasena, correo, nombres, apellidos, defUsuario, permiso) 
-                VALUES ("'.$usuario[0].'",'.$usuario[1].','.$usuario[2].',"'.$usuario[3].'","'.$usuario[4].'","'.$usuario[5].'","'.$usuario[6].'",'.$usuario[7].','.$usuario[8].')';
-            insertar();		
-        }	
-
-
-
-
-    //################### CREAR UNA TABLA DE LOGS. ###################
-        
-        //Preparar
-        $tabla='logs';
+        foreach ($alertas as $alerta){
+            $sql='INSERT INTO '.$tabla.' (idEstudiante, idDocenteIdentificador, idArea, idDiscapacidad,
+                porcentajeDiscapacidad, idCte, porcentajeCte, idTac, porcentajeTac, fechaAlerta) 
+                VALUES ('.$alerta[0].','.$alerta[1].','.$alerta[2].','.$alerta[3].','.$alerta[4].',
+                '.$alerta[5].','.$alerta[6].','.$alerta[7].','.$alerta[8].',"'.$alerta[9].'")';
+            insertarRegistros();		
+        }
+    //########## CREAR UNA TABLA DE "IDENTIFICACIONES" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'identificaciones';
         $sql=
             '
-                CREATE TABLE IF NOT EXISTS '.$tabla.'(
-                id int NOT NULL AUTO_INCREMENT,
-                utc int,
-                anio varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                mes varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                dia varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                hora varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                minuto varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                segundo varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                ip varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                navegador varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                idUsuario int(2) NOT NULL,
-                contrasena varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                pagVisitada varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-                PRIMARY KEY(id),
-                FOREIGN KEY(idUsuario) REFERENCES usuarios (usuarioID)
-            )';		
-        //Ejecutar	
-        ejecutarConsulta();
-            
-        //################### CONTENIDO DE PRUEBA PARA LA TABLA DE LOGS. ###################
-        
-        //Preparar
-        $tabla='logs';
-        $sql=
-            '
-                INSERT INTO '.$tabla.' (utc, anio, mes, dia, hora, minuto, segundo, ip, navegador, idUsuario, contrasena,pagVisitada)
-                VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
+                CREATE TABLE IF NOT EXISTS '.$tabla.' (
+                    id int(2) NOT NULL AUTO_INCREMENT,
+                    idEstudiante int(6) NOT NULL,
+                    idDiscapacidad int(6) NOT NULL,
+                    idNivelDiscapacidad int(6) NOT NULL,
+                    idCte int(6) NOT NULL,
+                    idNivelCte int(6) NOT NULL,
+                    idTac int(6) NOT NULL,
+                    idNivelTac int(6) NOT NULL,
+                    fechaIdentificacion date NOT NULL,
+                    PRIMARY KEY(id),
+                    FOREIGN KEY(idEstudiante) REFERENCES estudiantes (id),
+                    FOREIGN KEY(idDiscapacidad) REFERENCES discapacidades (id),
+                    FOREIGN KEY(idNivelDiscapacidad) REFERENCES nivelesReconocimiento (id),
+                    FOREIGN KEY(idCte) REFERENCES ctes (id),
+                    FOREIGN KEY(idNivelCte) REFERENCES nivelesReconocimiento (id),
+                    FOREIGN KEY(idTac) REFERENCES tacs (id),
+                    FOREIGN KEY(idNivelTac) REFERENCES nivelesReconocimiento (id)
+                )
             ';
-        insertar();
-  //Cerrar
-        mysqli_close($cnx);
+        //Ejecutar
+        crearTabla();
+        $identificaciones = array(
+            array(1,1,4,3,2,3,2,"2018-01-01"),
+        /*    array(),
+            array(),
+            array(),
+            array(),
+            array("),*/
+            );
         
-        echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='../../index.php'>Volver</a> </div>";
-
-        
-
-        ?>
+        foreach ($identificaciones as $identificacion){
+            $sql='INSERT INTO '.$tabla.' (idEstudiante, idDiscapacidad, idNivelDiscapacidad, idCte, idNivelCte,
+                    idTac, idNivelTac, fechaIdentificacion) VALUES ('.$identificacion[0].','.$identificacion[1].',
+                    '.$identificacion[2].','.$identificacion[3].','.$identificacion[4].','.$identificacion[5].',
+                    '.$identificacion[6].',"'.$identificacion[7].'")';
+            insertarRegistros();		
+        }
+    
+  
+    mysqli_close($cnx);//Cerramos la conexión.     
+    echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='../../index.php'>Volver</a> </div>";
+?>
 	</body>
 </html>
