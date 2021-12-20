@@ -35,8 +35,14 @@
 						<li class="li"><a id="admon" onclick="mostrarSubMenu()"><img src="../appsArt/adminOnPasiva.png"></a></li>                        							
 							<ul class="submenuAdmon">
 								<li class="li"><a href="?pg=$p01'.crypt($p01,"$2y$10$".$salt).'">Usuarios</a></li>
-								<li class="li"><a href="?pg=$p02'.crypt($p01,"$2y$10$".$salt).'">Estudiantes</a></li>
-								<li class="li"><a href="?pg=$p03'.crypt($p01,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p02'.crypt($p02,"$2y$10$".$salt).'">Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p03'.crypt($p03,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=discapacidades">Discapacidades</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=ctes">Capacidades y Talentos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=tacs">Transtornos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=nivelesReconocimiento">Niveles de Reconocimiento</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=alertas">Alertas</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=identificaciones">Identificaciones</a></li>
 							</ul>
 						
 					</ul>				
