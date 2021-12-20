@@ -35,8 +35,14 @@
 						<li class="li"><a id="admon" onclick="mostrarSubMenu()"><img src="../appsArt/adminOnPasiva.png"></a></li>                        							
 							<ul class="submenuAdmon">
 								<li class="li"><a href="?pg=$p01'.crypt($p01,"$2y$10$".$salt).'">Usuarios</a></li>
-								<li class="li"><a href="?pg=$p02'.crypt($p01,"$2y$10$".$salt).'">Estudiantes</a></li>
-								<li class="li"><a href="?pg=$p03'.crypt($p01,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p02'.crypt($p02,"$2y$10$".$salt).'">Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p03'.crypt($p03,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
+								<li class="li"><a href="?pg=$p04'.crypt($p04,"$2y$10$".$salt).'"></a>Discapacidades</li>
+								<li class="li"><a href="?pg=$p05'.crypt($p05,"$2y$10$".$salt).'"></a>Capacidades y Talentos</li>
+								<li class="li"><a href="?pg=$p06'.crypt($p06,"$2y$10$".$salt).'"></a>Transtornos</li>
+								<li class="li"><a href="?pg=$p07'.crypt($p07,"$2y$10$".$salt).'"></a>Niveles de Reconocimiento</li>
+								<li class="li"><a href="?pg=$p08'.crypt($p08,"$2y$10$".$salt).'"></a>Alertas</li>
+								<li class="li"><a href="?pg=$p09'.crypt($p09,"$2y$10$".$salt).'"></a>Identificaciones</li>
 							</ul>
 						
 					</ul>				

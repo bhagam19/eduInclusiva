@@ -6,10 +6,12 @@
 	$p01='adm/02-vst/02-crudUsuarios/00-crudUsuarios.php';
 	$p02='adm/02-vst/02-crudInfoGralEstud/00-verInfoGralEstud.php';
 	$p03='adm/02-vst/02-crudInfoGralEstud/10-crudEstudiantes.php';
-	$p04='biblioTaparto/index.php';
-	$p05='pollaMundialista/index.php';
-	$p06='creaExamen/index.php';
-	$p07='ironManProject/index.html';
+	$p04='adm/02-vst/04-crudDiscapacidades/00-crudDiscapacidades.php';
+	$p05='adm/02-vst/05-crudCTE/00-crudCTE.php';
+	$p06='adm/02-vst/06-crudTAC/00-crudTAC.php';
+	$p07='adm/02-vst/07-crudNivelesReconocimiento/00-crudNivelesReconocimiento.php';
+	$p08='adm/02-vst/08-crudAlertas/00-crudAlertas.php';
+	$p09='adm/02-vst/09-crudIdentificaciones/00-crudIdentificaciones.php';
 	$pagina = isset($_GET['pg']) ? $_GET['pg'] : 'adm/02-vst/00-crudPpal/04-bienvenida.php';
 	$numPag=substr($pagina, 0, 4);	
 	switch ($numPag) {		
