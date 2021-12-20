@@ -37,12 +37,12 @@
 								<li class="li"><a href="?pg=$p01'.crypt($p01,"$2y$10$".$salt).'">Usuarios</a></li>
 								<li class="li"><a href="?pg=$p02'.crypt($p02,"$2y$10$".$salt).'">Estudiantes</a></li>
 								<li class="li"><a href="?pg=$p03'.crypt($p03,"$2y$10$".$salt).'">Crud Estudiantes</a></li>
-								<li class="li"><a href="?pg=$p04'.crypt($p04,"$2y$10$".$salt).'">Discapacidades</a></li>
-								<li class="li"><a href="?pg=$p05'.crypt($p05,"$2y$10$".$salt).'">Capacidades y Talentos</a></li>
-								<li class="li"><a href="?pg=$p06'.crypt($p06,"$2y$10$".$salt).'">Transtornos</a></li>
-								<li class="li"><a href="?pg=$p07'.crypt($p07,"$2y$10$".$salt).'">Niveles de Reconocimiento</a></li>
-								<li class="li"><a href="?pg=$p08'.crypt($p08,"$2y$10$".$salt).'">Alertas</a></li>
-								<li class="li"><a href="?pg=$p09'.crypt($p09,"$2y$10$".$salt).'">Identificaciones</a></li>
+								<li class="li"><a href="?pg=$p04'.crypt($p04,"$2y$10$".$salt).'&tabla=discapacidades">Discapacidades</a></li>
+								<li class="li"><a href="?pg=$p05'.crypt($p05,"$2y$10$".$salt).'&tabla=ctes">Capacidades y Talentos</a></li>
+								<li class="li"><a href="?pg=$p06'.crypt($p06,"$2y$10$".$salt).'&tabla=tacs">Transtornos</a></li>
+								<li class="li"><a href="?pg=$p07'.crypt($p07,"$2y$10$".$salt).'&tabla=nivelesReconocimiento">Niveles de Reconocimiento</a></li>
+								<li class="li"><a href="?pg=$p08'.crypt($p08,"$2y$10$".$salt).'&tabla=alertas">Alertas</a></li>
+								<li class="li"><a href="?pg=$p09'.crypt($p09,"$2y$10$".$salt).'&tabla=identificaciones">Identificaciones</a></li>
 							</ul>
 						
 					</ul>				
