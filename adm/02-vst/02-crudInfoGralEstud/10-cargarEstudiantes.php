@@ -21,7 +21,7 @@
         <div class="items">Nuevo:</div>
         <div class="items"><input class="submit upload" type="file" name"foto" id="foto" style="width:120px"></div>
     ';
-    $tbl="usuarios";
+    $tbl="usuarios";	
     $cns=mysqli_query($cnx,"SHOW COLUMNS FROM ".$tbl);
     $campos = array();
     while($fl=mysqli_fetch_row($cns)){
@@ -38,7 +38,7 @@
                             <option>Seleccione...</option>
                             <option value=1>SÍ</option>
                             <option value=0>NO</option>
-                            </select>        
+                            </select>
         </div>
         <div class='items'><select name='permiso' id='permiso' onchange='cambiarFondoInput(this.id)'>
                             <option>Seleccione...</option>
