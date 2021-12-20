@@ -13,7 +13,7 @@
 		$codigo=$_SESSION['permiso'];
 		if($codigo==6){
 			$respuesta="";
-			$tbl="discapacidades";	
+			$tbl=$_REQUEST['tabla'];	
 			$cns=$cnx->query("SHOW COLUMNS FROM ".$tbl);
 			$campos = array();
 			while($fl=mysqli_fetch_row($cns)){
@@ -22,7 +22,7 @@
 			echo'
 				<div id="baseDeDatos">
 					<div class="baseDeDatos">
-						<div class="tituloBD">ADMINISTRACIÓN DE DISCAPACIDADES</div>
+						<div class="tituloBD">ADMINISTRACIÓN DE '.strtoupper($tbl).'</div>
 						<div id="reestablecerTabla">
 							    <form enctype="multipart/form-data" action="" method="POST">
                                     <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
