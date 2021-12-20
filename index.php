@@ -23,11 +23,14 @@
 		<title>EduInclusiva</title>
 		<link rel="shortcut icon" href="../appsArt/DUA.png"/>
 		<link rel="stylesheet" media="screen" type="text/css" href="adm/css/index.css"/>
+		<link rel="stylesheet" media="screen" type="text/css" href="adm/css/alertify.css"/>
 		<script type="text/javascript" src="../jquery/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   		<script type="text/javascript" src="adm/js/00-Ppal.js"></script>
 		<script type="text/javascript" src="adm/js/01-login.js"></script>
+		<script type="text/javascript" src="adm/js/02-usuarios.js"></script>
+		<script type="text/javascript" src="adm/js/alertify.js"></script>
   	<script>
 			$(function(){
 				//alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height);				
