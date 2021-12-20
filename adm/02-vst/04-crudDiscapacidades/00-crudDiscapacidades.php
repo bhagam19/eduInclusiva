@@ -15,7 +15,7 @@
 			echo'
 				<div id="baseDeDatos">
 					<div class="baseDeDatos">
-						<div class="tituloBD">ADMINISTRACIÓN DE USUARIOS</div>
+						<div class="tituloBD">ADMINISTRACIÓN DE DISCAPACIDADES</div>
 						<div id="reestablecerTabla">
 							    <form enctype="multipart/form-data" action="" method="POST">
                                     <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
