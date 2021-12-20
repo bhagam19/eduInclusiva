@@ -11,7 +11,7 @@
 	<div class="appsContenidoCinta">
 		<ul>
 			<li>EduInclusiva</li>
-			<li>Version: 0.0.3</li>
+			<li>Version: 0.0.16</li>
 			<li>Creado por: RH+ © 2021</a></li>
 		</ul>	
 	</div>
