@@ -5,7 +5,7 @@
 	<body>
 <?php
     include('./cnx.php'); //Establecemos la conexion.
-    echo "<div> <a href='../../index.php'>Volver</a><br><br></div>";
+    echo "<div> <a href='../../index.php'>Volver</a> || <a href='borrarBD.php'>Reiniciar BD</a> <br><br></div>";
     echo "<div> <H1>===== RESUMEN DE INSTALACIÓN ===== </H1><br><br></div>";
     //########## Creamos las funciones crearTabla() e insertarRegistros(). ###################		
         function crearTabla(){
@@ -3445,7 +3445,7 @@
     
   
     mysqli_close($cnx);//Cerramos la conexión.     
-    echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='../../index.php'>Volver</a> </div>";
+    echo "<div> ===== INSTALACIÓN FINALIZADA =====<br><br> <a href='../../index.php'>Volver</a> || <a href='borrarBD.php'>Reiniciar BD</a> </div>";
 ?>
 	</body>
 </html>
