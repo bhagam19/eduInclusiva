@@ -1,4 +1,4 @@
-<head>
+<!--<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/pestannas/pestannas.css" />
     <script type="text/javascript" src="../../js/pestannas/cambiarPestanna.js"></script>
@@ -6,7 +6,7 @@
     <title></title>
 </head>
 
-<body>
+<body>-->
     <div class="contenedor">
         <div class="titulo">INFORMACIÓN DEL ESTUDIANTE</div>
         <div id="pestanas">
