@@ -1,8 +1,8 @@
 <!--<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/pestannas/pestannas.css" />
-    <script type="text/javascript" src="../../js/pestannas/cambiarPestanna.js"></script>
-    <script type="text/javascript" src="../../js/pestannas/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
+    <script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
+    <script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
     <title></title>
 </head>
 
@@ -820,4 +820,8 @@ $row=mysqli_fetch_row($query1);
 </div>
 <!--</body>
 
+<<<<<<< HEAD
 </html>-->
+=======
+</html>
+>>>>>>> 1c15562aa767fe2359c94cc231d9dad7da8bd362

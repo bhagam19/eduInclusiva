@@ -639,7 +639,7 @@ input:focus {
 }
 .tablaBD tbody{
 	position: relative;
-	top:0px;
+	top:15px;
 }
 .tablaBD tbody tr{
 	border-radius: 25px;
