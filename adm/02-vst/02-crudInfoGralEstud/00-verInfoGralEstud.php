@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/pestannas/pestannas.css" />
@@ -821,6 +818,6 @@ $row=mysqli_fetch_row($query1);
             }
         ?>
 </div>
-</body>
+<!--</body>
 
-</html>
+</html>-->
