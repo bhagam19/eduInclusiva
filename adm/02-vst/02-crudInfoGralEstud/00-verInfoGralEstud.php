@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
+<!--<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
     <script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
@@ -9,7 +6,7 @@
     <title></title>
 </head>
 
-<body>
+<body>-->
     <div class="contenedor">
         <div class="titulo">INFORMACIÓN DEL ESTUDIANTE</div>
         <div id="pestanas">
@@ -821,6 +818,10 @@ $row=mysqli_fetch_row($query1);
             }
         ?>
 </div>
-</body>
+<!--</body>
 
+<<<<<<< HEAD
+</html>-->
+=======
 </html>
+>>>>>>> 1c15562aa767fe2359c94cc231d9dad7da8bd362

@@ -1,6 +1,6 @@
 body {
     font-size: 16px;
-    background: darkgrey;
+    /*background: darkgrey;*/
     width: 100vw;
     height: 50vw;
 
@@ -10,8 +10,9 @@ body {
     width: 80%;
     height: 80%;
     margin: 2% auto;
-    background: black;
-    color: bisque;
+    /*background: black;*/
+    /*color: bisque;*/
+    color: #459afc;
     padding: 20px 15px;
     border-radius: 10px;
     box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.8);
@@ -39,27 +40,28 @@ body {
     float: left;
     text-align: center;
     margin: 0px 2px -2px -0px;
-    background: darkgrey;
+    /*background: darkgrey;*/
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border: 2px solid bisque;
-    border-bottom: dimgray;
+    border: 2px solid #459afc;;
+    border-bottom: none;
     padding: 0px 20px 0px 20px;
 }
 
 #pestanas a:link{
     text-decoration: none;
-    color: bisque;
+    /*color: bisque;*/
+    color: #459afc;
 }
 #pestanas td>span.heads{
-  color: rgb(3, 3, 3) !important;
+  /*color: rgb(3, 3, 3) !important;*/
 }
 #contenidopestanas{
     clear: both;  
-    background: dimgray;
+    /*background: dimgray;*/
     border-radius: 5px;
     border-top-left-radius: 0px;
-    border: 2px solid bisque;
+    border: 2px solid #459afc;;
     width: 98%;
     height: 90%;
 }
@@ -68,7 +70,7 @@ body {
   padding: 20px 20px 20px 20px;
 }
 
-#pestanas #pestana1, #cpestana1{
+/*#pestanas #pestana1, #cpestana1{
   background: #047;
 }
 
@@ -90,7 +92,7 @@ body {
 
 #pestanas #pestana6, #cpestana6{
   background: #407;
-}
+}*/
 
 table{
     border-collapse: collapse;

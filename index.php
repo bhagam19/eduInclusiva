@@ -22,6 +22,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=0.6, maximun-scale=1.0, minimun-scale=0.2"/>
 		<title>EduInclusiva</title>
 		<link rel="shortcut icon" href="../appsArt/DUA.png"/>
+		<link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
 		<link rel="stylesheet" media="screen" type="text/css" href="adm/css/index.css"/>
 		<link rel="stylesheet" media="screen" type="text/css" href="adm/css/alertify.css"/>
 		<script type="text/javascript" src="../jquery/jquery.min.js"></script>
@@ -31,6 +32,8 @@
 		<script type="text/javascript" src="adm/js/01-login.js"></script>
 		<script type="text/javascript" src="adm/js/02-usuarios.js"></script>
 		<script type="text/javascript" src="adm/js/alertify.js"></script>
+		<script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
+    	<script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
   	<script>
 			$(function(){
 				//alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height);				
