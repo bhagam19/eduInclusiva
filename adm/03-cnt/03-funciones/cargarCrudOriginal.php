@@ -9,15 +9,15 @@
 				Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
 				<br><br>			
 			';
-	}else{
+	}else{		
 		$codigo=$_SESSION['permiso'];
 		if($codigo==6){
 			$respuesta="";
 			$tbl=$_REQUEST['tabla'];	
 			$cns=$cnx->query("SHOW COLUMNS FROM ".$tbl);
-			$_SESSION['campos'] = array();
+			$campos = array();
 			while($fl=mysqli_fetch_row($cns)){
-				$_SESSION['campos'][] = "{$fl[0]}\n";
+				$campos[] = "{$fl[0]}\n";
 			}
 			echo'
 				<div id="baseDeDatos">
@@ -35,9 +35,9 @@
 							<thead >
 								<tr class="stickyHead1">
 				';
-			for($i=0;$i<count($_SESSION['campos']);$i++){
+			for($i=0;$i<count($campos);$i++){
 				echo'
-									<th class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="">'.$_SESSION['campos'][$i].'</th>					
+									<th class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="">'.$campos[$i].'</th>					
 				';
 			}
 			echo'				
@@ -46,11 +46,9 @@
 								<tr class="stickyHead2">
 
 				';
-				for($i=0;$i<count($_SESSION['campos']);$i++){
+				for($i=0;$i<count($campos);$i++){
 					echo'
-									<td class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="text-align:center"><img src="../appsArt/ordenarAZOn.png" title="Ordenar A-Z" 
-									onclick="ordenarUsuario(\''.$_SESSION['campos'][$i].'\',0)"/><img class="imgOrden" src="../appsArt/ordenarZAOn.png" title="Ordenar Z-A" 
-									onclick="ordenarUsuario(\''.$_SESSION['campos'][$i].'\',1)"/></td>						
+									<td class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="text-align:center"><img src="../appsArt/ordenarAZOn.png" title="Ordenar A-Z" onclick="ordenarUsuario(\''.$campos[$i].'\',0)"/><img class="imgOrden" src="../appsArt/ordenarZAOn.png" title="Ordenar Z-A" onclick="ordenarUsuario(\''.$campos[$i].'\',1)"/></td>						
 					';
 				}
 			echo'
@@ -60,8 +58,8 @@
 								</tr>   								
    							</thead>
    							<tbody id="actualizable"> 							   
-   			';
-			include('adm/03-cnt/03-funciones/cargarTabla1.php');
+   			';			
+			include('adm/03-cnt/03-funciones/cargarTabla.php');
 			echo'				
                             </tbody>	
 						</table>
