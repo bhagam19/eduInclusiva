@@ -8,7 +8,7 @@
             $consulta1="SELECT * FROM $tabla WHERE id=$id";
         break;         
         case 'innerJoinx2':
-            $consulta1="SELECT ".$t2.".".$p22." 
+            $consulta1="SELECT ".$clmnSeleccionar." 
                         FROM ".$t1." 
                         INNER JOIN ".$t2." 
                         ON ".$t2.".".$p21." = ".$t1.".".$p12." 

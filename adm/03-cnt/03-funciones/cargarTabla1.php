@@ -1,22 +1,36 @@
 <?php
+	//error_reporting(0);
 	$respuesta="";
 	for ($i=0;$i<count($_SESSION['campos']);$i++){
 		$campos[$i]=$_SESSION['campos'][$i];
 	}
 	$case="esfk";
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-	echo $consulta1;
+	//echo "<br><br>".$consulta1;
+	$query2=$query1;
 	if ($cont1!=0) {
-		while($fila1=mysqli_fetch_array($query1)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
+		$j=0;
+		while($fila1=mysqli_fetch_array($query2)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
 			$fk=$fila1[0];
 			$tblRef=$fila1[1];
 			$campoRef=$fila1[2];
-			$cns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
-			$nomCampoRef= array();
-			while($fl=mysqli_fetch_row($cns)){
-				$nomCampoRef = "{$fl[0]}\n";
+			include dirname(__FILE__).'../../../01-mdl/cnx.php';
+			$clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
+			/*echo "<br>";
+			echo "<br>";
+			//var_dump($clmns);
+			echo "<br>";
+			echo "<br>";*/
+			$todosCampos=array();
+			$nomCampoRef;
+			$i=0;
+			echo "<br><br>".$j.": ".$fk." ".$tblRef." ".$campoRef." "."<br>";
+			echo "<br><br>".$j.": llega hasta acáxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>";
+			while($fl=mysqli_fetch_row($clmns)){
+				$todosCampos[$i] = "{$fl[0]}\n";
+				$i++;
 			}
-			echo $fk." ".$tblRef." ".$campoRef."<br>";
+			echo $j.": ".$fk." ".$tblRef." ".$campoRef." ".$todosCampos[1]."<br>";
 			$case="innerJoinx2";
 			$id=1;
 			$t1=$tbl;
@@ -24,10 +38,19 @@
 			$p12=$fk;
 			$t2=$tblRef;
 			$p21=$campoRef;
-			$p22="nombre1";
-			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';		
+			if ($tblRef!="estudiantes" && $tblRef!="usuarios") {
+				$clmnSeleccionar=$t2.".".$todosCampos[1];
+			}elseif($tblRef=="estudiantes"){
+				$clmnSeleccionar=$t2.".".trim($todosCampos[1]).", ".$t2.".".trim($todosCampos[2]).", ".$t2.".".trim($todosCampos[3]).", ".$t2.".".trim($todosCampos[4]);
+			}elseif($tblRef=="usuarios"){
+				$clmnSeleccionar=$t2.".".trim($todosCampos[6]).", ".$t2.".".trim($todosCampos[7]);
+			}
+			echo "<br><br>".$clmnSeleccionar;
+			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+			//echo "<br><br>".$consulta1;
+			$j++;	
 		}
-		echo $consulta1;
+		//echo $consulta1;
 		echo "<br><br><br><br>";
 	}else{
 		if (isset($_REQUEST['campo'])){
@@ -44,9 +67,9 @@
 				}
 			}
 		}else{
+			include dirname(__FILE__).'../../../01-mdl/cnx.php';
 			$sql01=$cnx->query("SELECT * FROM ".$tbl);
 		}
-		//$respuesta="";
 		$respuesta.='	
 			<tr class="stickyHead3">							
 				<td class="sticky1">Nuevo:</td>
