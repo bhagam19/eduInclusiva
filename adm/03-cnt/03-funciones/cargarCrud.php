@@ -2,6 +2,26 @@
 	//$paginaLogs="../bdUsuarios/01-bdUsuarios";//para escribir los Logs
 	//$linkLogs="Usuarios";//para escribir los Logs
 	//include('../bdLogs/01-bdEscribirLogs.php');
+	function esFK($campoAVerificar,$c){
+        global $camposFK;
+        global $contenidosFK;
+        global $flq1;
+        global $campos;
+        $check="";
+        $checkj=-1;
+        for ($jfk=0;$jfk<count($camposFK);$jfk++) {            
+            if ($campoAVerificar==$camposFK[$jfk]) {
+                $check="isFK";
+                $checkj=$jfk;
+            }      
+        };        
+        if($check=="isFK"){
+            $contenidoDelCampo= $contenidosFK[$checkj];
+        }else{
+            $contenidoDelCampo=$flq1[trim($campos[$c])];
+        } 
+		return $contenidoDelCampo;   
+    } 
 	if(!isset($_SESSION['usuario'])){		
 		echo 
 			'
@@ -14,56 +34,12 @@
 		if($codigo==6){
 			$respuesta="";
 			$tbl=$_REQUEST['tabla'];
-			$case="columnas";
+			global $campos;			
+			$case="columnas";			
 			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-			global $campos;
 			while($fl=mysqli_fetch_row($query1)){
 				$campos[] = $fl[0];
-			}
-			$case="esfk";
-			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-			//echo "<br><br>".$consulta1;
-			$query2=$query1;
-			if ($cont1!=0) {
-				$j=0;
-				while($fila1=mysqli_fetch_array($query2)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
-					$fk=$fila1[0];
-					$tblRef=$fila1[1];
-					$campoRef=$fila1[2];
-					include dirname(__FILE__).'../../../01-mdl/cnx.php';
-					$clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
-					$todosCampos=array();
-					$nomCampoRef;
-					$i=0;
-					echo "<br><br>".$j.": ".$fk." ".$tblRef." ".$campoRef." "."<br>";
-					echo "<br><br>".$j.": llega hasta acáxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>";
-					while($fl=mysqli_fetch_row($clmns)){
-						$todosCampos[$i] = "{$fl[0]}\n";
-						$i++;
-					}
-					echo $j.": ".$fk." ".$tblRef." ".$campoRef." ".$todosCampos[1]."<br>";
-					$case="innerJoinx2";
-					$id=1;
-					$t1=$tbl;
-					$p11="id";
-					$p12=$fk;
-					$t2=$tblRef;
-					$p21=$campoRef;
-					if ($tblRef!="estudiantes" && $tblRef!="usuarios") {
-						$clmnSeleccionar=$t2.".".$todosCampos[1];
-					}elseif($tblRef=="estudiantes"){
-						$clmnSeleccionar=$t2.".".trim($todosCampos[1]).", ".$t2.".".trim($todosCampos[2]).", ".$t2.".".trim($todosCampos[3]).", ".$t2.".".trim($todosCampos[4]);
-					}elseif($tblRef=="usuarios"){
-						$clmnSeleccionar=$t2.".".trim($todosCampos[6]).", ".$t2.".".trim($todosCampos[7]);
-					}
-					echo "<br><br>".$clmnSeleccionar;
-					include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-					//echo "<br><br>".$consulta1;
-					$j++;	
-				}
-				//echo $consulta1;
-				echo "<br><br><br><br>";
-			}
+			}			
 			echo'
 				<div id="baseDeDatos">
 					<div class="baseDeDatos">
@@ -110,7 +86,17 @@
 /*********************************************************************************************************************************************************************
 ****************************************************************  ACÁ COMIENZA EL TBODY (ACTUALIZABLE)  **************************************************************
 **********************************************************************************************************************************************************************/
-			include('adm/03-cnt/03-funciones/cargarTabla1.php');
+				$case="esfk";
+				include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+				//echo "<br><br>".$consulta1;
+				$query2=$query1;
+				if ($cont1!=0) {
+					//cargarTablaFK1.php
+					include('adm/03-cnt/03-funciones/cargarTablaFK1.php');
+				}else{
+					//cargarTablaSencilla1.php
+					include('adm/03-cnt/03-funciones/cargarTabla1.php');
+				}			
 			echo'				
                             </tbody>	
 						</table>
