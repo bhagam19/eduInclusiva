@@ -32,17 +32,22 @@ html {
 	width: 99%;	
 	background:#020a22;
 	background-image:url("appsArt/fondo.jpg");
+	overflow:hidden;
 }
 #appsContenedorGlobal {
-	position: absolute;
-	top: 0px;
+	position: fixed;
+	top: 0;
 	left: 0;
-	width:100%;
-	height:100%;	
-	overflow:hidden;
-	/*background: rgb(52,111,176);
-	background: radial-gradient(circle, rgba(52,111,176,1) 0%, rgba(63,72,117,1) 100%);*/
+	width: 100%;
+	height: 50px;
+	margin: 0 auto;
+	border:1px solid var(--Off);	
+	background: var(--fondo03);
+	border-radius: 15px 0px 15px 0px;
+	z-index: 3;	
+	user-select: none;
 }
+/*==== Encabezado ====*/
 #appsEncabezadoGral {
 	position: fixed;
 	top: 0;
@@ -407,7 +412,7 @@ input:focus {
 }
 /*=======Menú Navegación==========*/
 .menuNavegacion {
-	position: absolute;
+	position: fixed;
 	display: inline-block;
 	top: 55px;
 	width: 34px;
@@ -531,12 +536,12 @@ input:focus {
 }
 #h2 {
 	position: relative;
-	top: 180px;
+	top: 280px;
+	margin: 0 auto;
 	text-align: center;
 	color: var(--OnActivo);
 	text-shadow: 0px 0px 10px var(--OnActivo);
-	z-index: 3;
-	
+	z-index: 3;	
 }
 /*====Encabezado para Reestablecer Tablas====*/
 #reestablecerTabla{	
@@ -571,8 +576,38 @@ input:focus {
 #reestablecerTabla a{
 	text-decoration:none;
 }
+/*====Encabezado para los Filtros====*/
+#gridFiltros{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: 100px auto;
+	grid-template-rows: 40px 40px 40px 40px;
+	gap:2px;
+	width:20%;	
+	background:var(--fondoOff09);	
+	margin: 50px 50px;
+	border-radius: 10px;
+	box-shadow: 2px 1px 5px 1px var(--luzOn);
+}
+#gridFiltros:hover{
+	color: var(--OnActivo);
+	text-shadow: 0px 0px 10px var(--OnActivo);
+	box-shadow: 2px 1px 15px 1px var(--OnActivo);	
+	border:1px solid var(--OnActivo);
+	background: #375879;
+}
+#gridFiltros .itemsGrid {
+	display: flex;	
+	padding:2px 5px;
+	font-weight: bold;
+	font-size: 1.5em;
+	align-items: left;
+	font-weight:bolder;
+	text-align:center;
+	color:var(--OnPasivo);
+  }
 /*====Tablas====*/
-.contenedorTablar{
+.contenedorTabla{
 	position:absolute;
 	top:80px;
 	left:30px;
