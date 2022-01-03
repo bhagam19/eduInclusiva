@@ -2,17 +2,8 @@
 	//error_reporting(0);
 	$respuesta="";
 	$campo;
-	/*if (isset($_REQUEST['campo'])){
-		$campo=$_REQUEST['campo'];
-		if (isset($_REQUEST['direccion'])){
-			$direccion=$_REQUEST['direccion'];			
-			$case=$direccion;
-			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-		}
-	}else{*/
-		$case="todo";
-		include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-	//}
+	$case="todo";
+	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 	$respuesta.='	
 		<tr class="stickyHead3">							
 			<td class="sticky1">Nuevo:</td>
@@ -53,7 +44,5 @@
 		</tr>
 		";		
 	}
-	mysqli_free_result($query1);
 	echo $respuesta;
-	mysqli_close($cnx);
 ?>

@@ -32,11 +32,6 @@
 					$campoRef=$fila1[2];
 					include dirname(__FILE__).'../../../01-mdl/cnx.php';
 					$clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
-					/*echo "<br>";
-					echo "<br>";
-					//var_dump($clmns);
-					echo "<br>";
-					echo "<br>";*/
 					$todosCampos=array();
 					$nomCampoRef;
 					$i=0;
@@ -80,7 +75,7 @@
                                     <input type="submit" value="Carga Rápida / Reestablecer BD" />
                                 </form>						
 						</div>	
-						<div class="contenedorTablar">					
+						<div class="contenedorTabla">					
 						<table class="tablaBD">
 							<thead >
 								<tr class="stickyHead1">
@@ -113,7 +108,7 @@
    							<tbody id="actualizable"> 							   
    			';
 /*********************************************************************************************************************************************************************
-****************************************************************ACÁ COMIENZA EL TBODY*********************************************************************************
+****************************************************************  ACÁ COMIENZA EL TBODY (ACTUALIZABLE)  **************************************************************
 **********************************************************************************************************************************************************************/
 			include('adm/03-cnt/03-funciones/cargarTabla1.php');
 			echo'				
