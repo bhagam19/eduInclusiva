@@ -1,15 +1,15 @@
 <?php
     $j=0;    
     while($flq2=mysqli_fetch_row($query2)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
-        //$rc=count($flq2);
+        $rc=count($flq2);
         //echo "<br>Está contando ".$rc." celdas.<br>";
         $fk=$flq2[0];
         $tblRef=$flq2[1];
         $campoRef=$flq2[2];
         $camposFK[]=$fk;
         $indiceFk = array_search("$fk", $campos);
-        //echo "<br><br> ".$j.": \$query2 contiene el nombre de los campos con FK = ".$fk." || ".$tblRef." || ".$campoRef." || "."<br>";
-        //echo "<br> El índice del campo '".$fk."' en la tabla '".$tbl."' es: ".$indiceFk;
+        echo "<br><br> ".$j.": \$query2 contiene el nombre de los campos con FK = ".$fk." || ".$tblRef." || ".$campoRef." || "."<br>";
+        echo "<br> El índice del campo '".$fk."' en la tabla '".$tbl."' es: ".$indiceFk;
         include dirname(__FILE__).'../../../01-mdl/cnx.php';
         $clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
         $todosCampos=array();
@@ -19,7 +19,7 @@
             $todosCampos[$i] = $fl[0];
             $i++;
         }
-        //echo $j.": ".$fk." ".$tblRef." ".$campoRef." ".$todosCampos[1]."<br>";
+        echo "<br><br> ".$j.": ".$fk." ".$tblRef." ".$campoRef." ".$todosCampos[1]."<br>";
         $case="innerJoinx2";
         $id=1;
         $t1=$tbl;
@@ -36,7 +36,7 @@
         }
         //echo "<br><br>".$clmnSeleccionar;
         include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-        //echo "<br><br> La consulta SQL que realiza es: <br>".$consulta1."<br>";
+        echo "<br><br> La consulta SQL que realiza es: <br>".$consulta1."<br>";
         $contenido="";
         $cFK=0;
         while($fl=mysqli_fetch_row($query1)) {
@@ -44,19 +44,22 @@
             //echo "<br>Está contando ".$rc." celdas.<br>";
             $contenido="";
             for($r=0; $r<$rc; $r++) { 
-                $contenido.=$fl[$r]." ";                
-            }            
+                $contenido.=$fl[$r]." ";
+            } 
+            $contenidosFK[$j]=$contenido;
+            echo "<br>".$contenido;           
             $cFK++;
         }
-        $contenidosFK[$j]=$contenido;
-        //echo "<br>".$contenido;
-        //echo "<br><br> =====================".$j.": llega hasta acá =====================<br><br><br>";        
+        
+        
+        echo "<br><br> =====================".$j.": llega hasta acá =====================<br><br><br>";        
         $j++;	
     }
     echo "<br><br><br><br>";    
     //#################### Aquí inicia el html #############
     //#################### En esta fila se incluye el formulario para nuevos registros. #############
     //#################### Entonces, no aplica para las tablas con FK. Por lo tanto debe borrarse, luego, de este archivo. #############
+    /*
     $respuesta.='	
 		<tr class="stickyHead3">							
 			<td class="sticky1">Nuevo:</td>
@@ -70,6 +73,7 @@
 			<td class="img"><img src="../appsArt/okOn.png" title="Guardar" onclick="registrarDiscapacidad()"/></td>
 		</tr> 
 	';
+    */
     //#################### Las tablas con FK, como sería el caso para este archivo "cargarTablaFK1.php", inician realmente aquí. #############
     $case="todo";
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';

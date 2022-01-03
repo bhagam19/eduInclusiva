@@ -2,11 +2,14 @@
 	//$paginaLogs="../bdUsuarios/01-bdUsuarios";//para escribir los Logs
 	//$linkLogs="Usuarios";//para escribir los Logs
 	//include('../bdLogs/01-bdEscribirLogs.php');
-	function esFK($campoAVerificar,$c){
-        global $camposFK;
-        global $contenidosFK;
-        global $flq1;
-        global $campos;
+	//global $campos;	
+	$tbl=$_REQUEST['tabla'];
+	$respuesta="";
+	function esFK($campoAVerificar,$c){ 
+		global $camposFK;
+		global $contenidosFK;
+		global $flq1;		 
+		global $campos;      
         $check="";
         $checkj=-1;
         for ($jfk=0;$jfk<count($camposFK);$jfk++) {            
@@ -23,19 +26,14 @@
 		return $contenidoDelCampo;   
     } 
 	if(!isset($_SESSION['usuario'])){		
-		echo 
-			'
-				Lo siento. No tienes permisos suficientes.<br><br>
-				Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
-				<br><br>			
-			';
-	
-		}else{
+		echo '
+			Lo siento. No tienes permisos suficientes.<br><br>
+			Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
+			<br><br>			
+		';
+	}else{
 		$codigo=$_SESSION['permiso'];
-		if($codigo==6){
-			$respuesta="";
-			$tbl=$_REQUEST['tabla'];
-			global $campos;			
+		if($codigo==6){									
 			$case="columnas";			
 			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 			while($fl=mysqli_fetch_row($query1)){
@@ -62,24 +60,24 @@
 **********************************************************************************************************************************************************************/
 			for($i=0;$i<count($campos);$i++){
 				echo'
-									<th class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="">'.$campos[$i].'</th>					
+									<th class="sticky'.($i+1).'" class="encabezadoTabla" style="">'.strtoupper($campos[$i]).'</th>					
 				';
 			}
 			echo'				
-									<th class="" class="encabezadoTablaUsuarios" style="">Acciones</th>
+									<th class="" class="encabezadoTabla" style="">ACCIONES</th>
 								</tr>
 								<tr class="stickyHead2">
 
 				';
 				for($i=0;$i<count($campos);$i++){
 					echo"
-									<td class='sticky".($i+1)."' class='encabezadoTablaUsuarios' style='text-align:center'><img src='../appsArt/ordenarAZOn.png' title='Ordenar A-Z' 
+									<td class='sticky".($i+1)."' class='encabezadoTabla' style='text-align:center'><img src='../appsArt/ordenarAZOn.png' title='Ordenar A-Z' 
 									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"ASC\")'/><img class='imgOrden' src='../appsArt/ordenarZAOn.png' title='Ordenar Z-A' 
 									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"DESC\")'/></td>						
 					";
 				}
 			echo'
-									<td class="encabezadoTablaUsuarios" style="text-align:center"></td>			
+									<td class="encabezadoTabla" style="text-align:center"></td>			
 								</tr>   								
    							</thead>
    							<tbody id="actualizable"> 							   

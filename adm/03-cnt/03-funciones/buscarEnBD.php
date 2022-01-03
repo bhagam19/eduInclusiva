@@ -17,8 +17,8 @@
             $consulta1="SELECT ".$clmnSeleccionar." 
                         FROM ".$t1." 
                         INNER JOIN ".$t2." 
-                        ON ".$t2.".".$p21." = ".$t1.".".$p12." 
-                        WHERE ".$t1.".".$p11." = ".$id
+                        ON ".$t2.".".$p21." = ".$t1.".".$p12/*." 
+                        WHERE ".$t1.".".$p11." = ".$id*/
             ;
         break;       
         case 'innerJoinx3':

@@ -3383,8 +3383,15 @@
         crearTabla();
         $alertas = array(
             array(1,1,1,1,70,1,10,1,90,"2018-01-01"),
+<<<<<<< HEAD
             array(2,2,2,3,40,3,30,2,50,"2010-11-25"),
             /*array(),
+=======
+            array(1,2,2,3,50,4,20,2,50,"2019-05-23"),
+            array(1,3,4,2,40,2,20,3,50,"2021-08-24"),
+        /*    array(),
+            array(),
+>>>>>>> fdeaafceb50a6cacbc7da8121eb00be23bdb4fd9
             array(),
             array(),
             array("),*/
@@ -3426,6 +3433,8 @@
         crearTabla();
         $identificaciones = array(
             array(1,1,4,3,2,3,2,"2018-01-01"),
+            array(1,2,3,2,4,2,1,"2019-04-03"),
+            array(1,3,2,1,1,4,4,"2021-03-13")
         /*    array(),
             array(),
             array(),
