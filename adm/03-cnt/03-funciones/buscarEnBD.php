@@ -1,8 +1,14 @@
 <?php
     include dirname(__FILE__).'../../../01-mdl/cnx.php';
     switch ($case){
+        case 'AZ':
+            $consulta1="SELECT * FROM ".$tbl." ORDER BY ".$campo." ASC";
+        break;
+        case 'ZA':
+            $consulta1="SELECT * FROM ".$tbl." ORDER BY ".$campo." DESC";
+        break;
         case 'todo':
-            $consulta1="SELECT * FROM $tabla";
+            $consulta1="SELECT * FROM $tbl";
         break;
         case 'id':
             $consulta1="SELECT * FROM $tabla WHERE id=$id";

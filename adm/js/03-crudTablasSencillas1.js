@@ -1,4 +1,5 @@
 function eliminarRegistros(id, tbl, flag, campos){
+    //alert("eliminarRegistros");
     alertify.confirm("¿Con seguridad desea eliminar el registro No. "+id+" de la tabla: "+tbl+"?",
         function() {
             let url = 'adm/03-cnt/03-funciones/eliminarRegistros.php';
