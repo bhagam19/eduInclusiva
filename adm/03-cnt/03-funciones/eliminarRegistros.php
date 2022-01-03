@@ -13,7 +13,7 @@ function isValidJSON($str) {
  }
 include dirname(__FILE__).'../../../01-mdl/cnx.php';
 $consulta="DELETE FROM ".$tbl." WHERE id=".$registroID;
-echo "<br>".$consulta."<br>";
+//echo "<br>".$consulta."<br>";
 try {
     $cnx->query($consulta);
 } catch (Exception $e) {

@@ -1,11 +1,11 @@
 <?php
     include dirname(__FILE__).'../../../01-mdl/cnx.php';
     switch ($case){
-        case 'AZ':
-            $consulta1="SELECT * FROM ".$tbl." ORDER BY ".$campo." ASC";
+        case "columnas":
+            $consulta1="SHOW COLUMNS FROM ".$tbl;
         break;
-        case 'ZA':
-            $consulta1="SELECT * FROM ".$tbl." ORDER BY ".$campo." DESC";
+        case 'direccion':
+            $consulta1="SELECT * FROM ".$tbl." ORDER BY ".$campo." ".$direccion;
         break;
         case 'todo':
             $consulta1="SELECT * FROM $tbl";

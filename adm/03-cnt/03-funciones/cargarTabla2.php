@@ -13,8 +13,9 @@
 	if (strlen($json_params) > 0 && isValidJSON($json_params)){
 		$decoded_params = json_decode($json_params);
 		$tbl = $decoded_params->tbl;
-		$flag = $decoded_params->flag;
 		$campos = $decoded_params->campos;
+		$campo = $decoded_params->campo;
+		$direccion = $decoded_params->direccion;
 	}
 	/*for ($i=0;$i<count($campos);$i++){
 		$campo = rtrim($campos[$i],'\n');
@@ -29,22 +30,8 @@
 			echo $fila1[0]."<br>";			
 		}
 	}else{
-		if (isset($_REQUEST['campo'])){
-			$campo=$_REQUEST['campo'];
-			if (isset($_REQUEST['direccion'])){
-				$direccion=$_REQUEST['direccion'];			
-				switch ($direccion) {
-					case 0:
-						$sql01=$cnx->query("SELECT * FROM ".$tbl." ORDER BY ".$campo." ASC");
-					break;
-					case 1:
-						$sql01=$cnx->query("SELECT * FROM ".$tbl." ORDER BY ".$campo." DESC");
-					break;
-				}
-			}
-		}else{
-			$sql01=$cnx->query("SELECT * FROM ".$tbl);
-		}
+		$case="direccion";
+		include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 		$respuesta.='	
 			<tr class="stickyHead3">							
 				<td class="sticky1">Nuevo:</td>
@@ -58,7 +45,7 @@
 				<td class="img"><img src="../appsArt/okOn.png" title="Guardar" onclick="registrarDiscapacidad()"/></td>
 			</tr> 
 		';
-		while($fila1=mysqli_fetch_array($sql01)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
+		while($fila1=mysqli_fetch_array($query1)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
 			$respuesta.='
 				<tr>
 			';
@@ -84,8 +71,6 @@
 			</tr>
 			";		
 		}
-		mysqli_free_result($sql01);
 		echo $respuesta;
-		mysqli_close($cnx);
 	}
 ?>

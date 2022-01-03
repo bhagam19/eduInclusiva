@@ -13,11 +13,12 @@
 		$codigo=$_SESSION['permiso'];
 		if($codigo==6){
 			$respuesta="";
-			$tbl=$_REQUEST['tabla'];	
-			$cns=$cnx->query("SHOW COLUMNS FROM ".$tbl);
+			$tbl=$_REQUEST['tabla'];
+			$case="columnas";
+			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 			global $campos;
-			while($fl=mysqli_fetch_row($cns)){
-				$campos[] = "{$fl[0]}\n";
+			while($fl=mysqli_fetch_row($query1)){
+				$campos[] = $fl[0];
 			}
 			$case="esfk";
 			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
@@ -85,7 +86,7 @@
 								<tr class="stickyHead1">
 				';
 /*********************************************************************************************************************************************************************
-****************************************************************ACÁ COMIENZA EL TBODY*********************************************************************************
+****************************************************************ACÁ COMIENZA EL ENCABEZADO*********************************************************************************
 **********************************************************************************************************************************************************************/
 			for($i=0;$i<count($campos);$i++){
 				echo'
@@ -99,11 +100,11 @@
 
 				';
 				for($i=0;$i<count($campos);$i++){
-					echo'
-									<td class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="text-align:center"><img src="../appsArt/ordenarAZOn.png" title="Ordenar A-Z" 
-									onclick="ordenarUsuario(\''.$campos[$i].'\',\'AZ\')"/><img class="imgOrden" src="../appsArt/ordenarZAOn.png" title="Ordenar Z-A" 
-									onclick="ordenarUsuario(\''.$campos[$i].'\',\'ZA\')"/></td>						
-					';
+					echo"
+									<td class='sticky".($i+1)."' class='encabezadoTablaUsuarios' style='text-align:center'><img src='../appsArt/ordenarAZOn.png' title='Ordenar A-Z' 
+									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"ASC\")'/><img class='imgOrden' src='../appsArt/ordenarZAOn.png' title='Ordenar Z-A' 
+									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"DESC\")'/></td>						
+					";
 				}
 			echo'
 									<td class="encabezadoTablaUsuarios" style="text-align:center"></td>			

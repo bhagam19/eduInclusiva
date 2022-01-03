@@ -2,17 +2,17 @@
 	//error_reporting(0);
 	$respuesta="";
 	$campo;
-	if (isset($_REQUEST['campo'])){
+	/*if (isset($_REQUEST['campo'])){
 		$campo=$_REQUEST['campo'];
 		if (isset($_REQUEST['direccion'])){
 			$direccion=$_REQUEST['direccion'];			
 			$case=$direccion;
 			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 		}
-	}else{
+	}else{*/
 		$case="todo";
 		include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-	}
+	//}
 	$respuesta.='	
 		<tr class="stickyHead3">							
 			<td class="sticky1">Nuevo:</td>
@@ -47,7 +47,8 @@
 		$respuesta.="	
 			<td class='img'>
 				
-				<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$fila1[trim($campos[0])].", \"".trim($tbl)."\", 1, ".json_encode($campos).")'/>
+				<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$fila1[trim($campos[0])].", \"".trim($tbl)."\", ".json_encode($campos).")'/>
+				<!--<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros2()'/>-->
 			</td>			
 		</tr>
 		";		
