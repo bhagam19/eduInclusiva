@@ -609,12 +609,12 @@ input:focus {
 /*====Tablas====*/
 .contenedorTabla{
 	position:absolute;
-	top:80px;
+	top:100px;
 	left:30px;
 	padding-top: 20px;
 	max-width: 98%;
 	max-height: 98%;
-	overflow: scroll;
+	overflow: scroll;	
 }
 ::-webkit-scrollbar {
 	width: 5px;
@@ -642,7 +642,7 @@ input:focus {
 	color: var(--OnPasivo);
 }
 .tablaBD{
-	table-layout: fixed;	
+	table-layout: absolute;	
 	position: relative;
 	top:-30px;
 	left:0px;
@@ -652,7 +652,7 @@ input:focus {
 	text-align:center;
 	border-collapse: collapse;
 	border-radius: 1em;	
-	background:var(--fondoOff09);	
+	background:var(--fondoOff09);
 }
 .tablaBD thead{	
 	position: relative;
