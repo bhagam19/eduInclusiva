@@ -3078,12 +3078,9 @@
         crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTUDIANTES" ##########
         $estudiantes = array(
-            array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,
-            2,40,"Calle de la esquinita azul en el parque",2,6045555555,"pepitoperez@correo.com",2,1,10,
-            1,2,2,2,2,1,4,"Abuela, mamá y hemanos",1,
-            1,1,10,2,"Tiene muchas observaciones",1),
-        /*    array(2,"Abuela(o)"),
-            array(3,"Madre"),
+            array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,2,40,"Calle de la esquinita azul en el parque",2,6045555555,"pepitoperez@correo.com",2,1,10,1,2,2,2,2,1,4,"Abuela, mamá y hemanos",1,1,1,10,2,"Tiene muchas observaciones",1),
+            array("Fulanito", "Fausto", "De Tal", "Palo", 474, 2, "2010-01-03", 11, 1, 1202325658, 2, 40, "Una dirección válida", 3, 45623526, "fulanito@correo.com", 1, 1, 6, 1, 4, 1, 1, 1, 1, 6, "hernas", 1, 2, 2, 5, 1,"asdfasdf asdf asdf asdf asdf asdf asdfa sdf asdf sdfa sdfasdf asdf asdf asdf asdf asdfasdfasdf sdf asdf asdf asdf asdfa sdf asdf asdfa sdfasdfasdfa asdfasdfasdf asdfasdf asdf asdfasdf asdfasdf asdf sdfasdfasdf asdf asdf asdf asdf asdfasdfasdf sdf asdf asdf asdf asdfa sdf asdf asdfa sdfasdfasdfa asdfasdf asdf asdf asdf asdf asdf asdfa sdf asdf sdfa sdfasdfasdf asdf asdf asdf asdfasdfasdf sdfasdf asdf asdf asdfasdf asdfasdfa sdfasdfasdfa asdfasdfasdfasdfasdf asdf asdfasdf asdfasdf asdf sdfasdfasdf",1),
+            /*array(3,"Madre"),
             array(4,"Padre"),
             array(5,"Tía(o)"),
             array(6,"Hermana(o)"),
@@ -3386,8 +3383,8 @@
         crearTabla();
         $alertas = array(
             array(1,1,1,1,70,1,10,1,90,"2018-01-01"),
-        /*    array(),
-            array(),
+            array(2,2,2,3,40,3,30,2,50,"2010-11-25"),
+            /*array(),
             array(),
             array(),
             array("),*/

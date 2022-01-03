@@ -29,7 +29,8 @@
 				Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
 				<br><br>			
 			';
-	}else{
+	
+		}else{
 		$codigo=$_SESSION['permiso'];
 		if($codigo==6){
 			$respuesta="";
