@@ -5,7 +5,7 @@
 	//global $campos;	
 	$tbl=$_REQUEST['tabla'];
 	$respuesta="";
-	function esFK($campoAVerificar,$c){ 
+	function esFK($campoAVerificar,$d1,$d2){ 
 		global $camposFK;
 		global $contenidosFK;
 		global $flq1;		 
@@ -16,12 +16,12 @@
             if ($campoAVerificar==$camposFK[$jfk]) {
                 $check="isFK";
                 $checkj=$jfk;
-            }      
+            }
         };        
         if($check=="isFK"){
-            $contenidoDelCampo= $contenidosFK[$checkj];
+            $contenidoDelCampo= $contenidosFK[$checkj][$d1];
         }else{
-            $contenidoDelCampo=$flq1[trim($campos[$c])];
+            $contenidoDelCampo=$flq1[trim($campos[$d2])];
         } 
 		return $contenidoDelCampo;   
     } 

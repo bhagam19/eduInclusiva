@@ -108,11 +108,9 @@ function mostrarFormCargueExcel(){
 	  }  
 }
 function reinstalarBD(){
-
 	var confirmar=confirm("¿Realmente desea reinstalar la Base de Datos?\n\nEsta acción no se puede deshacer.");
-
 	if(confirmar){		
-		window.open("/inventarioIET/03-borrarTablas.php");
+		window.open("/eduInclusiva/adm/01-mdl/borrarBD.php");
 		// var xmlhttp = new XMLHttpRequest();
 		// xmlhttp.open("GET","../borrarTablas.php",false);
 		// xmlhttp.send();
@@ -120,7 +118,6 @@ function reinstalarBD(){
 	}else{
 		alert("No se reinstaló la Base de Datos.");
 	}
-
 }
 function ucwords(f){
     return f.replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1){

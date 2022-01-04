@@ -31,8 +31,8 @@ html {
 	font-family: calibri, asap;
 	width: 99%;	
 	background:#020a22;
-	background-image:url("appsArt/fondo.jpg");
-	overflow:hidden;
+	background-image:url("appsArt/fondo.jpg");	
+	overflow: scroll;
 }
 #appsContenedorGlobal {
 	position: fixed;
@@ -487,7 +487,7 @@ input:focus {
 	left:45px;
 	width:100%;
 	height: auto;
-	margin: 0 auto;
+	margin: auto 0;
 	text-align: center;
 	font-family: arial, serif;	
 	font-size:14px;
@@ -495,8 +495,6 @@ input:focus {
 	color: var(--OnPasivo);
 	z-index: 1;
 	user-select: none;
- 	/*overflow: scroll;*/
-	
 }
 /*====Página Bienvenida====*/
 #boton {
@@ -610,9 +608,10 @@ input:focus {
   }
 /*====Tablas====*/
 .contenedorTabla{
-	position:absolute;
+	position:relative;
 	top:100px;
 	left:30px;
+	margin:auto;
 	padding-top: 20px;
 	max-width: 98%;
 	max-height: 98%;

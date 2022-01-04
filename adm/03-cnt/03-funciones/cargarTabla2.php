@@ -15,8 +15,11 @@
 		$tbl = $decoded_params->tbl;
 		$campos = $decoded_params->campos;
 		$campo = $decoded_params->campo;
-		$direccion = $decoded_params->direccion;
+		$direccion = $decoded_params->direccion; 	
 	}
+	/*foreach($campos as $valor){
+		echo "<br><br>".$valor."<br><br>";
+	}*/
 	/*for ($i=0;$i<count($campos);$i++){
 		$campo = rtrim($campos[$i],'\n');
 		$respuesta.= "<br>campos[".$i."] es igual a: ".$campos[$i]."<br>";
@@ -64,9 +67,8 @@
 				}
 			}
 			$respuesta.="	
-				<td class='img'>
-					
-					<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$fila1[trim($campos[0])].", \"".trim($tbl)."\", 1, ".json_encode($campos).")'/>
+				<td class='img'>					
+					<img src='../appsArt/eliminarOn.png' title='Eliminar' 	onclick='eliminarRegistros(".$fila1[trim($campos[0])].", \"".trim($tbl)."\", ".json_encode($campos).")'/>
 				</td>			
 			</tr>
 			";		

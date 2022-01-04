@@ -17,8 +17,7 @@
             $consulta1="SELECT ".$clmnSeleccionar." 
                         FROM ".$t1." 
                         INNER JOIN ".$t2." 
-                        ON ".$t2.".".$p21." = ".$t1.".".$p12/*." 
-                        WHERE ".$t1.".".$p11." = ".$id*/
+                        ON ".$t2.".".$p21." = ".$t1.".".$p12." ".$condiciones." ORDER BY ".$t1.".id ASC"
             ;
         break;       
         case 'innerJoinx3':
@@ -84,7 +83,12 @@
             ";
         break;
     }
-    $query1 = $cnx->query($consulta1);
-    $cont1=mysqli_num_rows($query1);
+    try{
+        $query1 = $cnx->query($consulta1);
+        @$cont1=mysqli_num_rows($query1);
+    }catch(PDOException $e){
+        echo "Error: ".$e->getMessage();
+        $cont1=0;
+    }
     mysqli_close($cnx);  
 ?>

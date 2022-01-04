@@ -24,7 +24,16 @@ function hacerFetch(url, data, flag){
     .then(texto => {
         return texto.text();
     }).then(textoInText=> {
-            console.log(textoInText);
+            //console.log(textoInText);+
+            //alert(textoInText.trim());
+            numError=textoInText.trim().substr(0,4);
+            //alert(numError);
+            if (numError=="1451"){
+                final=textoInText.trim().indexOf("`",98);
+                final=final - 98;
+                nomTabla=textoInText.trim().substr(98,final);
+                alert("No se puede borrar este registro, porque está siendo referenciado por la tabla '"+nomTabla+"'.");
+            }            
             if (flag == 1){
             document.getElementById("actualizable").innerHTML=""
             document.getElementById("actualizable").innerHTML=textoInText.trim();
@@ -50,7 +59,7 @@ function eliminarRegistros(id, tbl, campos){
             };
             flag=0;
             hacerFetch(url, data, flag);
-            cargarActualizable(tbl, campos, 'id', 'AZ');
+            cargarActualizable(tbl, campos, 'id', 'ASC');
         },
         function() {
             alertify.error('Eliminación cancelada.');

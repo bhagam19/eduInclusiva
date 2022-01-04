@@ -39,7 +39,6 @@
 			<td class='img'>
 				
 				<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$fila1[trim($campos[0])].", \"".trim($tbl)."\", ".json_encode($campos).")'/>
-				<!--<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros2()'/>-->
 			</td>			
 		</tr>
 		";		
