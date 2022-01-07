@@ -12,7 +12,9 @@ function mostrarMenu(){
 				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
 				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/bdOn.png">' + 'Reinstalar BD');
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Familiar');				
+				$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Hogar');
+				$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Salud');
+				$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Educativo');
 			});
 		});
 	}else{		
@@ -21,7 +23,9 @@ function mostrarMenu(){
 				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
 				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Reinstalar BD');				
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Familiar');				
+				$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Hogar');
+				$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Salud');
+				$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Educativo');
 			});
 		});
 	}
@@ -35,16 +39,24 @@ function ocultarMenu(){
 		$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
 		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
 		$('.submenuAdmon').css({"display":"none"});
-		$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
-		$('.submenuFliar').css({"display":"none"});		
+		$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuHogar').css({"display":"none"});
+		$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuSalud').css({"display":"none"});
+		$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuEducativo').css({"display":"none"});
 	}else{	
 		$('.menuNavegacion').css({"border-right":"none"});	
 		$('.submenuAdmon').css({"display":"none"});
-		$('.submenuFliar').css({"display":"none"});
+		$('.submenuHogar').css({"display":"none"});
+		$('.submenuSalud').css({"display":"none"});
+		$('.submenuEducativo').css({"display":"none"});
 		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
 		$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
 		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
-		$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
 		$('.menuNavegacion').animate({width:'35px'},"fast");
 		$('.li').animate({width:'30px'},"fast");
 	}

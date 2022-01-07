@@ -44,13 +44,44 @@
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=alertas">Alertas</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=identificaciones">Identificaciones</a></li>
 							</ul>
-						<li class="li"><a id="fliar" onclick="mostrarSubMenu(\'.submenuFliar\')"><img src="../appsArt/familiaOnPasiva.png"></a></li>                        							
-							<ul class="submenuFliar">  								
+						<li class="li"><a id="hogar" onclick="mostrarSubMenu(\'.submenuHogar\')"><img src="../appsArt/familiaOnPasiva.png"></a></li>                        							
+							<ul class="submenuHogar">  								
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=madres">Madres</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=padres">padres</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=cuidadores">Cuidadores</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=centrosDEproteccion">Centros de Protección</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=entornoFamiliar">Entorno Familiar</a></li>
+							</ul>
+						<li class="li"><a id="salud" onclick="mostrarSubMenu(\'.submenuSalud\')"><img src="../appsArt/familiaOnPasiva.png"></a></li>                        							
+							<ul class="submenuSalud">  								
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=regimenes">Regimenes</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=eps">EPS</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=frecuencias">Frecuencias</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=diagnosticos">Diagnósticos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=terapia">Terapias</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=tratamientos">Tratamientos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=medicamentos">Medicamentos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=apoyosAbarreras">Apoyos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=afiliaciones">Afiliaciones</a></li>
+							</ul>
+						<li class="li"><a id="educativo" onclick="mostrarSubMenu(\'.submenuEducativo\')"><img src="../appsArt/familiaOnPasiva.png"></a></li>                        							
+							<ul class="submenuEducativo">  								
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=continentes">Continentes</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=paises">Paises</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=departamentos">Departamentos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=municipios">Municipios</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=instEducativas">Instituciones Educativas</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=sedes">Sedes</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=jornadas">Jornadas</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=jornadasXsede">Jornadas por Sede</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=grados">Grados</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=gradosXjornada">Grados por Jornada</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=grupos">Grupos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=gruposXgrado">Grupos por Grado</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=areas">Áreas</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=areasXgrupo">Áreas por Grupo</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=periodos">Periodos</a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=periodosXarea">Periodos por Área</a></li>
 							</ul>
 					</ul>				
 				</div>
