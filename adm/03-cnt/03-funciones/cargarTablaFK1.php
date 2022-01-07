@@ -68,7 +68,7 @@
 			if($d2==0){
 				$respuesta.='
 				<!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
-                <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>					
+                <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
 				';
 			}else{
 				$respuesta.='

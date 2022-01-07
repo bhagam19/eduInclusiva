@@ -87,8 +87,9 @@
 **********************************************************************************************************************************************************************/
 				$case="esfk";
 				include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-				//echo "<br><br>".$consulta1;
+				//echo "<br>".$consulta1."<br>";
 				$query2=$query1;
+				//echo "<br>".$cont1."<br>";
 				if ($cont1!=0) {
 					//cargarTablaFK1.php
 					include('adm/03-cnt/03-funciones/cargarTablaFK1.php');

@@ -33,6 +33,9 @@
 			echo $fila1[0]."<br>";			
 		}
 	}else{
+/*********************************************************************************************************************************************************************
+***********************************************  ACÁ COMIENZA EL FORMULARIO PARA EL NUEVO REGISTRO (CREATE)  *********************************************************
+**********************************************************************************************************************************************************************/
 		$case="direccion";
 		include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 		$respuesta.='	
@@ -44,10 +47,13 @@
 				<td class="sticky'.($i+1).'"><input type="text" name"'.$campos[$i].'" id="'.$campos[$i].'" style="" onkeyup="cambiarFondoInput(this.id)"></td>					
 			';
 		}
-		$respuesta.='
-				<td class="img"><img src="../appsArt/okOn.png" title="Guardar" onclick="registrarDiscapacidad()"/></td>
+		$respuesta.="
+				<td class='img'><img src='../appsArt/okOn.png' title='Guardar' onclick='crearRegistro(\"".trim($tbl)."\", ".json_encode($campos).")'/></td>
 			</tr> 
-		';
+		";
+/*********************************************************************************************************************************************************************
+****************************************************************  ACÁ COMIENZA EL LISTADO DE REGISTROS  **************************************************************
+**********************************************************************************************************************************************************************/
 		while($fila1=mysqli_fetch_array($query1)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
 			$respuesta.='
 				<tr>

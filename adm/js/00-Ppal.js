@@ -10,18 +10,18 @@ function mostrarMenu(){
 		$('.menuNavegacion').animate({width:'420px'},"fast",function(){
 			$('.li').animate({width:'410px'},"fast",function(){
 				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
-				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
+				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/bdOn.png">' + 'Reinstalar BD');
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
+				$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Familiar');				
 			});
 		});
 	}else{		
 		$('.menuNavegacion').animate({width:'180px'},"fast",function(){
 			$('.li').animate({width:'160px'},"fast",function(){
 				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
-				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
+				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Reinstalar BD');				
 				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');				
+				$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Familiar');				
 			});
 		});
 	}
@@ -32,41 +32,43 @@ function ocultarMenu(){
 		$('.menuNavegacion').css({"border-right":"none"});
 		$('.li').animate({width:'45px'},"fast");
 		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
-		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+		$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
 		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
 		$('.submenuAdmon').css({"display":"none"});
-		$('#reiniciarBD').html('<img style="width:40px;height:40px" src="../art/reiniciar.svg">');		
+		$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuFliar').css({"display":"none"});		
 	}else{	
 		$('.menuNavegacion').css({"border-right":"none"});	
 		$('.submenuAdmon').css({"display":"none"});
+		$('.submenuFliar').css({"display":"none"});
 		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
-		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
-		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');		
-		$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">');	
+		$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
+		$('#fliar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
 		$('.menuNavegacion').animate({width:'35px'},"fast");
 		$('.li').animate({width:'30px'},"fast");
 	}
 }
-function mostrarSubMenu(){
+function mostrarSubMenu(submenu){
 	if(screen.width<800){
-		if($('.submenuAdmon').css("display")==="none"){
-			$('.submenuAdmon').slideDown();
-			$('.submenuAdmon').css({"display":"block"});
+		if($(submenu).css("display")==="none"){
+			$(submenu).slideDown();
+			$(submenu).css({"display":"block"});
 			$('.menuNavegacion').animate({width:'480px'},"fast");
 		}else{
-			$('.submenuAdmon').css({"display":"block"});
-			$('.submenuAdmon').slideUp("fast",function(){
+			$(submenu).css({"display":"block"});
+			$(submenu).slideUp("fast",function(){
 			$('.menuNavegacion').animate({width:'420px'},"fast");
 			});
 		}	
 	}else{
-		if($('.submenuAdmon').css("display")==="none"){
-			$('.submenuAdmon').slideDown();
-			$('.submenuAdmon').css({"display":"block"});
+		if($(submenu).css("display")==="none"){
+			$(submenu).slideDown();
+			$(submenu).css({"display":"block"});
 			$('.menuNavegacion').animate({width:'210px'},"fast");
 		}else{
-			$('.submenuAdmon').css({"display":"block"});
-			$('.submenuAdmon').slideUp("fast",function(){
+			$(submenu).css({"display":"block"});
+			$(submenu).slideUp("fast",function(){
 			$('.menuNavegacion').animate({width:'180px'},"fast");
 			});
 		}	
