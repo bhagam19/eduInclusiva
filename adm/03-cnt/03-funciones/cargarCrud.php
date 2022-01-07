@@ -97,7 +97,7 @@
 					//cargarTablaSencilla1.php
 					include('adm/03-cnt/03-funciones/cargarTabla1.php');
 				}			
-			echo'				
+			echo'
                             </tbody>	
 						</table>
 						</div>
