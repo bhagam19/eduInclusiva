@@ -1,4 +1,5 @@
 function cargarActualizable(tbl, campos, campo, direccion){
+    //alert(tbl+", "+direccion+", "+campo+", "+campos);
     url = 'adm/03-cnt/03-funciones/cargarTabla2.php';
             data = {
                 tbl: tbl,
@@ -20,6 +21,7 @@ function hacerFetch(url, data, flag){
         }
     );
     //fetch().then({}).then({}).catch();
+    
     fetch(request)
     .then(texto => {
         return texto.text();
@@ -102,4 +104,50 @@ function crearRegistro(tbl, campos){
         hacerFetch(url, data, flag);
         cargarActualizable(tbl, campos, 'id', 'ASC');
     }   
+}
+function actualizarInputRegistro(tdId,numReg,campo,inpId,tbl,campos){
+    //alert(tdId+", "+numReg+", "+campo+", "+inpId+", "+tbl+", "+campos);
+	//cancelarAccionUsuarios();
+	var td=document.getElementById(tdId);
+    var texto="";	
+	inicio=td.innerHTML.indexOf(">");    
+	texto=td.innerHTML.substring(inicio+1,td.innerHTML.length);
+    texto=texto.trim();
+    var contenido="";
+    var contenido =	'<input type="text" id="'+inpId+'" value="'+texto+'" style="width:150px;height:15px;">'+" "+
+		   			'<input type="image" title="Aceptar" style="width:15px;height:15px;position:relative;top:4px;border-radius:50px;!important" src="../appsArt/okOn.png" onclick="actualizarRegistro('+numReg+','+inpId+'.value,\''+campo+'\',\''+tbl+'\', \''+campos+'\')">'+" "+
+    				'<input type="image" title="Cancelar" style="width:15px;height:15px;position:relative;top:4px;border-radius:50px;!important" src="../appsArt/cancelarOn.png" onclick="cancelarAccion()">';
+	td.innerHTML=contenido;
+	td.onclick="";
+	var obj =document.getElementById(inpId);
+	obj.focus();
+	if(obj.value!=""){
+		obj.value+="";
+	}	
+}
+function actualizarRegistro(id,valor,campo,tbl,campos){
+	//alert(tbl+", "+id+", "+valor+", "+campo+", "+campos);
+    let url = 'adm/03-cnt/03-funciones/actualizarRegistro.php';
+    let data = {
+        tbl: tbl,
+        registroID: id,
+        valor: valor,
+        campo: campo,
+    };
+    //alert("aqui");
+    flag=0;
+    hacerFetch(url, data, flag);
+    var campos = campos.split(",");
+    //alert("Los campos son: " +campos);
+    cargarActualizable(tbl, campos, 'id', 'ASC');
+}
+function cancelarAccion(){
+    alert('Se cancela la accion');
+	/*
+    var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("GET","adm/03-cnt/02-crudUsuarios/00-cargarUsuarios.php",false);
+	xmlhttp.send();
+	document.getElementById("actualizable").innerHTML=""
+	document.getElementById("actualizable").innerHTML=xmlhttp.responseText.trim();
+    */
 }

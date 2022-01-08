@@ -56,7 +56,7 @@
     //#################### Las tablas con FK, como sería el caso para este archivo "cargarTablaFK1.php", inician realmente aquí. #############
     $case="todo";
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-    //echo "<br><br>".$consulta1; 
+    echo "<br><br>".$consulta1; 
     $d1=0;
     while($flq1=mysqli_fetch_array($query1)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
 		$respuesta.='

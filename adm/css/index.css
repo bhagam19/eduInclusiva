@@ -32,7 +32,7 @@ html {
 	width: 99%;	
 	background:#020a22;
 	background-image:url("appsArt/fondo.jpg");	
-	overflow: scroll;
+	overflow:hidden;
 }
 #appsContenedorGlobal {
 	position: fixed;
@@ -45,7 +45,7 @@ html {
 	background: var(--fondo03);
 	border-radius: 15px 0px 15px 0px;
 	z-index: 3;	
-	user-select: none;
+	user-select: none;	
 }
 /*==== Encabezado ====*/
 #appsEncabezadoGral {
@@ -415,11 +415,10 @@ input:focus {
 	position: fixed;
 	display: inline-block;
 	top: 55px;
-	width: 34px;
+	width: 35px;
 	padding: 5px;	
 	line-height: 18px;
 	background: var(--fondoOff09);
-	overflow: hidden;
 	z-index: 3;
 	user-select: none;
 }
@@ -475,7 +474,7 @@ input:focus {
 .menuNavegacion .menu .activado > a {
 	background: green;
 }
-.submenuAdmon {
+.submenu {
 	display: none;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
@@ -486,7 +485,6 @@ input:focus {
 	top:55px;
 	left:45px;
 	width:100%;
-	height: auto;
 	margin: auto 0;
 	text-align: center;
 	font-family: arial, serif;	
@@ -609,12 +607,12 @@ input:focus {
 /*====Tablas====*/
 .contenedorTabla{
 	position:relative;
-	top:100px;
+	top:40px;
 	left:30px;
 	margin:auto;
+	max-width:96%;	
+	max-height:730px;
 	padding-top: 20px;
-	max-width: 98%;
-	max-height: 98%;
 	overflow: scroll;
 }
 ::-webkit-scrollbar {
@@ -645,7 +643,7 @@ input:focus {
 .tablaBD{
 	table-layout: auto;	
 	position: relative;
-	top:-30px;
+	top:-20px;
 	left:0px;
 	width: 100%;
 	font-weight: normal;
@@ -656,8 +654,7 @@ input:focus {
 	background:var(--fondoOff09);
 }
 .tablaBD thead{	
-	position: relative;
-	top:10px;
+	top:0px;
 	height:20px;	
 	padding:5px;
 	font-size:18px;
@@ -674,8 +671,7 @@ input:focus {
 	background: #375879;
 }
 .tablaBD tbody{
-	position: relative;
-	top:15px;
+	top:0px;
 }
 .tablaBD tbody tr{
 	border-radius: 25px;
@@ -725,12 +721,12 @@ input:focus {
 }
 .stickyHead2{
 	position:sticky;
-	top:11px;
+	top:31px;
 	z-index: 2;
 }
 .stickyHead3{
 	position:sticky;
-	top:36px;
+	top:58px;
 	z-index: 2;
 }
 .sticky1{
@@ -739,7 +735,7 @@ input:focus {
 }
 .sticky2{
 	position:sticky;
-	left:64px;
+	left:54px;
 }
 .tablaBD thead .stickyHead1, .tablaBD thead .stickyHead2{	
 	background:#375879;

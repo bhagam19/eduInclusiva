@@ -28,7 +28,7 @@
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
 	include dirname(__FILE__).'../../../01-mdl/cnx.php';
 	if ($cont1!=0) {
-		echo "<br><br><br><br>";
+		//echo "<br><br><br><br>";
 		while($fila1=mysqli_fetch_array($query1)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
 			echo $fila1[0]."<br>";			
 		}
@@ -64,12 +64,12 @@
 					<td class="sticky'.($i+1).'" id"">'.$fila1[trim($campos[$i])].'</td>					
 					';
 				}else{
-					$respuesta.='
-						<td class="sticky'.($i+1).'" style="text-align:left">
-							<img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$fila1[trim($campos[$i])].',\'nombres\',\'nombresAct'.$fila1[trim($campos[$i])].'\')">
-							'.$fila1[trim($campos[$i])].'
-						</td>				
-					';				
+					$respuesta.="
+					<td class='sticky".($i+1)."' style='text-align:left' id='".trim($campos[$i]).$fila1[trim($campos[0])]."'>
+						<img style='width:10px;height:10px;!important' title='Click para modificar' src='../appsArt/editarOn.png' onclick='actualizarInputRegistro(this.parentNode.id,".$fila1[trim($campos[0])].",\"".trim($campos[$i])."\",\"".trim($campos[$i])."Act".$fila1[trim($campos[0])]."\",\"".$tbl."\",".json_encode($campos).")'>
+						".$fila1[trim($campos[$i])]."
+					</td>				
+				";				
 				}
 			}
 			$respuesta.="	

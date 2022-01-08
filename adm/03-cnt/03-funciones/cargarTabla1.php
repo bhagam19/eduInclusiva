@@ -33,12 +33,12 @@
 				<td class="sticky'.($i+1).'" id"">'.$fila1[trim($campos[$i])].'</td>					
 				';
 			}else{
-				$respuesta.='
-					<td class="sticky'.($i+1).'" style="text-align:left">
-						<img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$fila1[trim($campos[$i])].',\'nombres\',\'nombresAct'.$fila1[trim($campos[$i])].'\')">
-						'.$fila1[trim($campos[$i])].'
+				$respuesta.="
+					<td class='sticky".($i+1)."' style='text-align:left' id='".trim($campos[$i]).$fila1[trim($campos[0])]."'>
+						<img style='width:10px;height:10px;!important' title='Click para modificar' src='../appsArt/editarOn.png' onclick='actualizarInputRegistro(this.parentNode.id,".$fila1[trim($campos[0])].",\"".trim($campos[$i])."\",\"".trim($campos[$i])."Act".$fila1[trim($campos[0])]."\",\"".$tbl."\",".json_encode($campos).")'>
+						".$fila1[trim($campos[$i])]."
 					</td>				
-				';				
+				";				
 			}
 		}
 		$respuesta.="	

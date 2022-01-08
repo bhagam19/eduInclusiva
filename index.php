@@ -48,7 +48,7 @@
 		</script>
 	</head>
 	<body >
-		<div id="appsContenedorGlobal">			
+		<div id="appsContenedorGlobal" onmouseenter="ocultarMenu()">			
 			<?php
 				include('adm/02-vst/00-crudPpal/00-estructuraPermisos.php');
 			?>
