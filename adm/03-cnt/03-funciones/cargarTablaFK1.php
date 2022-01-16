@@ -1,6 +1,6 @@
 <?php
     $j=0;    
-    while($flq2=mysqli_fetch_row($query2)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
+    while($flq2=mysqli_fetch_row($query2)){   //$flq2 es un arr. multidemensional que contiene los registros devueltos por la consulta hecha.
         $rc=count($flq2);
         //echo "<br>Está contando ".$rc." celdas.<br>";
         $fk=$flq2[0];
@@ -13,7 +13,7 @@
         include dirname(__FILE__).'../../../01-mdl/cnx.php';
         $clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
         $todosCampos=array();
-        $nomCampoRef; //Al parecer esta variable no se está utilizando. Revisar si se puede eliminar.
+        //$nomCampoRef; //Al parecer esta variable no se está utilizando. Revisar si se puede eliminar.
         $i=0;
         while($fl=mysqli_fetch_row($clmns)){
             $todosCampos[$i] = $fl[0];
@@ -58,7 +58,7 @@
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
     //echo "<br><br>".$consulta1; 
     $d1=0;
-    while($flq1=mysqli_fetch_array($query1)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
+    while($flq1=mysqli_fetch_array($query1)){
 		$respuesta.='
 			<tr>
 		';

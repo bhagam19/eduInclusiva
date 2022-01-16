@@ -106,9 +106,9 @@
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=asistenciaProgramasComplementarios">Asistencia a Programas Complementarios</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=aspiraAlGrado">Aspira al Grado</a></li>
 								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=estados">Estados</a></li>
-								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla="></a></li>
-								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla="></a></li>
-								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla="></a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla=estudiantes">Estudiantes</a></li>
+								<!--<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla="></a></li>
+								<li class="li"><a href="?pg=$pag'.crypt($pag,"$2y$10$".$salt).'&tabla="></a></li>-->
 							</ul>
 						<li class="li"><a id="piar" onclick="mostrarSubMenu(\'.submenuPiar\')"><img src="../appsArt/familiaOnPasiva.png"></a></li>                        							
 							<ul class="submenuPiar  submenu">

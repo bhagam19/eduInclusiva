@@ -5,8 +5,8 @@ function mostrarFormularios(clase){
 }
 function mostrarMenu(){		
 	$('.menuNavegacion').css({"border-right":"1px solid #80c0fc"});
-	$('.menuNavegacion').animate({width:'180px'},"fast",function(){
-		$('.li').animate({width:'160px'},"fast",function(){
+	$('.menuNavegacion').animate({width:'200px'},"fast",function(){
+		$('.li').animate({width:'180px'},"fast",function(){
 			$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
 			$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Reinstalar BD');				
 			$('#personas').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Personas');
@@ -63,7 +63,7 @@ function ocultarMenu(){
 	$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/educativoOnPasiva.png">');
 	$('#piar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');	
 	$('.li').animate({width:'30px'},"fast");
-	$('.menuNavegacion').animate({width:'35px'},"fast");
+	$('.menuNavegacion').animate({width:'45px'},"fast");
 	/*	
 	if(screen.width<800){
 		$('.menuNavegacion').animate({width:'50px'},"fast"); 

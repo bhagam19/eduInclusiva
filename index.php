@@ -18,7 +18,7 @@
 ?>
 <html>
 	<head>
-    <meta http-equiv="Content-Type" content="text/html; charset='UTF-8'" />
+    	<meta http-equiv="Content-Type" content="text/html; charset='UTF-8'" />
 		<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=0.6, maximun-scale=1.0, minimun-scale=0.2"/>
 		<title>EduInclusiva</title>
 		<link rel="shortcut icon" href="../appsArt/DUA.png"/>
@@ -35,7 +35,7 @@
 		<script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
     	<script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="adm/js/03-crudTablasSencillas1.js"></script>
-  	<script>
+  		<script>
 			$(function(){
 				//alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height);				
 				document.getElementById("contenedor").style.width = (screen.width*0.97)+ "px";
@@ -48,7 +48,7 @@
 		</script>
 	</head>
 	<body >
-		<div id="appsContenedorGlobal" onmouseenter="ocultarMenu()">			
+		<div id="appsContenedorGlobal" >			
 			<?php
 				include('adm/02-vst/00-crudPpal/00-estructuraPermisos.php');
 			?>
