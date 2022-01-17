@@ -1,12 +1,4 @@
-<!--<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="adm/css/pestannas/pestannas.css" />
-    <script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
-    <script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
-    <title></title>
-</head>
-
-<body>-->
+<!--<body>-->
     <div class="contenedor">
         <div class="titulo">INFORMACIÓN DEL ESTUDIANTE</div>
         <div id="pestanas">
@@ -34,7 +26,17 @@
         include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
         return $query1;
     }
-    $id=1;
+    function isValidJSON($str) {
+		json_decode($str);
+		return json_last_error() == JSON_ERROR_NONE;
+	}
+	
+	$json_params = file_get_contents("php://input");
+	
+	if (strlen($json_params) > 0 && isValidJSON($json_params)){
+		$decoded_params = json_decode($json_params);
+		$id = $decoded_params->id;	
+	}
     $query=buscarEnBD("id", "estudiantes", $id);
     while($row=mysqli_fetch_row($query)){
 ?>
@@ -354,6 +356,7 @@
 ?>
                         <tr>
 <?php
+    //echo $medicamentos[0];
     include dirname(__FILE__).'../../../03-cnt/03-funciones/extraerTextos.php';
 ?>                      
                             <td rowspan=<?=count($medicaments)?>>Horarios:</td>

@@ -59,26 +59,49 @@
     //echo "<br><br>".$consulta1; 
     $d1=0;
     while($flq1=mysqli_fetch_array($query1)){
-		$respuesta.='
-			<tr>
-		';
-		for($d2=0;$d2<count($campos);$d2++){
-            $campoAVerificar=$campos[$d2];
-            $retorno=esFK($campoAVerificar,$d1,$d2);
-			if($d2==0){
-				$respuesta.='
-				<!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
-                <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
-				';
-			}else{
-				$respuesta.='
-					<td class="sticky'.($d2+1).'" style="text-align:left">
-						<img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
-						'.$retorno.'
-					</td>				
-				';				
-			}
-		}
+        if ($tbl="estudiantes"){
+            $respuesta.='
+			    <tr id="fila" onclick="mostrarDatosEstudiantes('.$flq1[0].')">
+		    ';
+            for($d2=0;$d2<count($campos);$d2++){
+                $campoAVerificar=$campos[$d2];
+                $retorno=esFK($campoAVerificar,$d1,$d2);
+                if($d2==0){
+                    $respuesta.='
+                    <!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
+                    <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
+                    ';
+                }else{
+                    $respuesta.='
+                        <td class="sticky'.($d2+1).'" style="text-align:left">
+                            <img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
+                            '.$retorno.'
+                        </td>				
+                    ';				
+                }
+            }
+        }else{
+            $respuesta.='
+                <tr>
+            ';
+            for($d2=0;$d2<count($campos);$d2++){
+                $campoAVerificar=$campos[$d2];
+                $retorno=esFK($campoAVerificar,$d1,$d2);
+                if($d2==0){
+                    $respuesta.='
+                    <!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
+                    <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
+                    ';
+                }else{
+                    $respuesta.='
+                        <td class="sticky'.($d2+1).'" style="text-align:left">
+                            <img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
+                            '.$retorno.'
+                        </td>				
+                    ';				
+                }
+            }
+        }
 		$respuesta.="	
 			<td class='img'>				
 				<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$flq1[0].", \"".trim($tbl)."\", ".json_encode($campos).")'/>

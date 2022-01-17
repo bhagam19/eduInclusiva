@@ -26,7 +26,7 @@ function hacerFetch(url, data, flag){
     .then(texto => {
         return texto.text();
     }).then(textoInText=> {
-            //console.log(textoInText);
+            console.log(textoInText);
             //alert(textoInText.trim());
             numError=textoInText.trim().substr(0,4);
             //alert(numError);

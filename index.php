@@ -35,6 +35,7 @@
 		<script type="text/javascript" src="adm/js/pestannas/cambiarPestanna.js"></script>
     	<script type="text/javascript" src="adm/js/pestannas/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="adm/js/03-crudTablasSencillas1.js"></script>
+		<script type="text/javascript" src="adm/js/04-cargarCrudEstudiantes.js"></script>
   		<script>
 			$(function(){
 				//alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height);				
