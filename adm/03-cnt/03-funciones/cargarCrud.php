@@ -2,23 +2,43 @@
 	//$paginaLogs="../bdUsuarios/01-bdUsuarios";//para escribir los Logs
 	//$linkLogs="Usuarios";//para escribir los Logs
 	//include('../bdLogs/01-bdEscribirLogs.php');
+	//global $campos;	
+	$tbl=$_REQUEST['tabla'];
+	$respuesta="";
+	function esFK($campoAVerificar,$d1,$d2){ 
+		global $camposFK;
+		global $contenidosFK;
+		global $flq1;		 
+		global $campos;      
+        $check="";
+        $checkj=-1;
+        for ($jfk=0;$jfk<count($camposFK);$jfk++) {            
+            if ($campoAVerificar==$camposFK[$jfk]) {
+                $check="isFK";
+                $checkj=$jfk;
+            }
+        };        
+        if($check=="isFK"){
+            $contenidoDelCampo= $contenidosFK[$checkj][$d1];
+        }else{
+            $contenidoDelCampo=$flq1[trim($campos[$d2])];
+        } 
+		return $contenidoDelCampo;   
+    } 
 	if(!isset($_SESSION['usuario'])){		
-		echo 
-			'
-				Lo siento. No tienes permisos suficientes.<br><br>
-				Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
-				<br><br>			
-			';
-	}else{		
+		echo '
+			Lo siento. No tienes permisos suficientes.<br><br>
+			Si crees que deberías poder ingresar a esta opción, ponte en contacto con el administrador.
+			<br><br>			
+		';
+	}else{
 		$codigo=$_SESSION['permiso'];
-		if($codigo==6){
-			$respuesta="";
-			$tbl=$_REQUEST['tabla'];	
-			$cns=$cnx->query("SHOW COLUMNS FROM ".$tbl);
-			$campos = array();
-			while($fl=mysqli_fetch_row($cns)){
-				$campos[] = "{$fl[0]}\n";
-			}
+		if($codigo==6){									
+			$case="columnas";			
+			include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+			while($fl=mysqli_fetch_row($query1)){
+				$campos[] = $fl[0];
+			}			
 			echo'
 				<div id="baseDeDatos">
 					<div class="baseDeDatos">
@@ -30,37 +50,57 @@
                                     <input type="submit" value="Carga Rápida / Reestablecer BD" />
                                 </form>						
 						</div>	
-						<div class="contenedorTablar">					
+						<div class="contenedorTabla">					
 						<table class="tablaBD">
 							<thead >
 								<tr class="stickyHead1">
 				';
+/*********************************************************************************************************************************************************************
+****************************************************************  ACÁ COMIENZA EL ENCABEZADO  ************************************************************************
+**********************************************************************************************************************************************************************/
 			for($i=0;$i<count($campos);$i++){
 				echo'
-									<th class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="">'.$campos[$i].'</th>					
+									<th class="sticky'.($i+1).'" class="encabezadoTabla" style="">'.strtoupper($campos[$i]).'</th>					
 				';
 			}
 			echo'				
-									<th class="" class="encabezadoTablaUsuarios" style="">Acciones</th>
+									<th class="" class="encabezadoTabla" style="">ACCIONES</th>
 								</tr>
 								<tr class="stickyHead2">
 
 				';
+				/*********************************************************************************************************************************************************************
+				****************************************************************  ACÁ COMIENZA EL ORDENADO DE LOS REGISTROS  *********************************************************
+				**********************************************************************************************************************************************************************/
 				for($i=0;$i<count($campos);$i++){
-					echo'
-									<td class="sticky'.($i+1).'" class="encabezadoTablaUsuarios" style="text-align:center"><img src="../appsArt/ordenarAZOn.png" title="Ordenar A-Z" onclick="ordenarUsuario(\''.$campos[$i].'\',0)"/><img class="imgOrden" src="../appsArt/ordenarZAOn.png" title="Ordenar Z-A" onclick="ordenarUsuario(\''.$campos[$i].'\',1)"/></td>						
-					';
+					echo"
+									<td class='sticky".($i+1)."' class='encabezadoTabla' style='text-align:center'><img src='../appsArt/ordenarAZOn.png' title='Ordenar A-Z' 
+									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"ASC\")'/><img class='imgOrden' src='../appsArt/ordenarZAOn.png' title='Ordenar Z-A' 
+									onclick='ordenarRegistros(\"".$tbl."\",".json_encode($campos).", \"".$campos[$i]."\", \"DESC\")'/></td>						
+					";
 				}
 			echo'
-   								
-   									
-									<td class="encabezadoTablaUsuarios" style="text-align:center"></td>			
+									<td class="encabezadoTabla" style="text-align:center"></td>			
 								</tr>   								
    							</thead>
    							<tbody id="actualizable"> 							   
-   			';			
-			include('adm/03-cnt/03-funciones/cargarTabla.php');
-			echo'				
+   			';
+/*********************************************************************************************************************************************************************
+****************************************************************  ACÁ COMIENZA EL TBODY (ACTUALIZABLE)  **************************************************************
+**********************************************************************************************************************************************************************/
+				$case="esfk";
+				include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
+				//echo "<br>".$consulta1."<br>";
+				$query2=$query1;
+				//echo "<br>".$cont1."<br>";
+				if ($cont1!=0) {
+					//cargarTablaFK1.php
+					include('adm/03-cnt/03-funciones/cargarTablaFK1.php');
+				}else{
+					//cargarTablaSencilla1.php
+					include('adm/03-cnt/03-funciones/cargarTabla1.php');
+				}			
+			echo'
                             </tbody>	
 						</table>
 						</div>

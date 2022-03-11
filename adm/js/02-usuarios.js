@@ -1,5 +1,4 @@
-function ordenarUsuario(campo,direccion){
-	//alert(filtro);	
+function ordenarUsuario(campo, direccion){
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET","adm/03-cnt/02-crudUsuarios/00-cargarUsuarios.php?campo="+campo+"&direccion="+direccion,false);
 	xmlhttp.send();

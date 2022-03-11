@@ -141,6 +141,42 @@
                 VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
             ';
         insertarRegistros();
+    //########## CREAR UNA TABLA DE "PRUEBA" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'prueba';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    nombre varchar(20) NOT NULL,
+                    num1 int(2) NOT NULL,
+                    num2 int(2),
+                    num3 int(2),
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        crearTabla();
+        //########## INGRESAR CONTENIDO A LA TABLA "GRADOS POR JORNADA" ##########
+        $gradosXjornada = array(
+            array("Preescolar",0,1,2),
+            array("Primero",0,1,2),
+            array("Segundo",0,1,2),
+            array("Tercero",0,1,2),
+            array("Cuarto",0,1,2),
+            array("Quinto",0,1,2),
+            array("Sexto",0,1,2),
+            array("Séptimo",0,1,2),
+            array("Octavo",0,1,2),
+            array("Noveno",0,1,2),
+            array("Décimo",0,1,2),
+            array("Once",0,1,2),
+        );        
+        foreach ($gradosXjornada as $gradoXjornada){
+            $sql='INSERT INTO '.$tabla.' (nombre, num1, num2, num3) 
+                VALUES ("'.$gradoXjornada[0].'", '.$gradoXjornada[1].','.$gradoXjornada[2].','.$gradoXjornada[3].')';
+            insertarRegistros();		
+        }      
     //########## CREAR UNA TABLA DE "OPCIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'opciones';
@@ -2966,7 +3002,7 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
                     id int NOT NULL AUTO_INCREMENT,
-                    name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    name varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
@@ -2989,7 +3025,7 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
                     id int NOT NULL AUTO_INCREMENT,
-                    name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    name varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
@@ -3078,12 +3114,9 @@
         crearTabla();
         //########## INGRESAR CONTENIDO A LA TABLA "ESTUDIANTES" ##########
         $estudiantes = array(
-            array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,
-            2,40,"Calle de la esquinita azul en el parque",2,6045555555,"pepitoperez@correo.com",2,1,10,
-            1,2,2,2,2,1,4,"Abuela, mamá y hemanos",1,
-            1,1,10,2,"Tiene muchas observaciones",1),
-        /*    array(2,"Abuela(o)"),
-            array(3,"Madre"),
+            array("Pepito","Pedrito","Pérez","Porras",91,2,"1978/12/08",42,3,71481707,2,40,"Calle de la esquinita azul en el parque",2,6045555555,"pepitoperez@correo.com",2,1,10,1,2,2,2,2,1,4,"Abuela, mamá y hemanos",1,1,1,10,2,"Tiene muchas observaciones",1),
+            array("Fulanito", "Fausto", "De Tal", "Palo", 474, 2, "2010-01-03", 11, 1, 1202325658, 2, 40, "Una dirección válida", 3, 45623526, "fulanito@correo.com", 1, 1, 6, 1, 4, 1, 1, 1, 1, 6, "hernas", 1, 2, 2, 5, 1,"asdfasdf asdf asdf asdf asdf asdf asdfa sdf asdf sdfa sdfasdf asdf asdf asdf asdf asdfasdfasdf sdf asdf asdf asdf asdfa sdf asdf asdfa sdfasdfasdfa asdfasdfasdf asdfasdf asdf asdfasdf asdfasdf asdf sdfasdfasdf asdf asdf asdf asdf asdfasdfasdf sdf asdf asdf asdf asdfa sdf asdf asdfa sdfasdfasdfa asdfasdf asdf asdf asdf asdf asdf asdfa sdf asdf sdfa sdfasdfasdf asdf asdf asdf asdfasdfasdf sdfasdf asdf asdf asdfasdf asdfasdfa sdfasdfasdfa asdfasdfasdfasdfasdf asdf asdfasdf asdfasdf asdf sdfasdfasdf",1),
+            /*array(3,"Madre"),
             array(4,"Padre"),
             array(5,"Tía(o)"),
             array(6,"Hermana(o)"),
@@ -3386,6 +3419,9 @@
         crearTabla();
         $alertas = array(
             array(1,1,1,1,70,1,10,1,90,"2018-01-01"),
+            array(2,2,2,3,40,3,30,2,50,"2010-11-25"),
+            array(1,2,2,3,50,4,20,2,50,"2019-05-23"),
+            array(1,3,4,2,40,2,20,3,50,"2021-08-24"),
         /*    array(),
             array(),
             array(),
@@ -3429,6 +3465,8 @@
         crearTabla();
         $identificaciones = array(
             array(1,1,4,3,2,3,2,"2018-01-01"),
+            array(1,2,3,2,4,2,1,"2019-04-03"),
+            array(1,3,2,1,1,4,4,"2021-03-13")
         /*    array(),
             array(),
             array(),
