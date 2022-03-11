@@ -48,7 +48,6 @@ function hacerFetch(url, data, flag){
 function ordenarRegistros(tbl, campos, campo, direccion){
     cargarActualizable(tbl, campos, campo, direccion);
 }
-
 function eliminarRegistros(id, tbl, campos){
     alertify.confirm("¿Con seguridad desea eliminar el registro No. "+id+" de la tabla: "+tbl+"?",
         function() {

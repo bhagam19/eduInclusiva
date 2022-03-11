@@ -31,12 +31,7 @@
 				<div id="menuNavegacion" class="menuNavegacion" onmouseenter="mostrarMenu()" onmouseleave="ocultarMenu()"> 
 					<ul class="menu" >						
 						<li class="li"><a id="home" href="?pg=$pzz'.crypt($pzz,"$2y$10$".$salt).'"><img src="../appsArt/homeOnPasiva.png"></a></li>
-						<li class="li"><a id="verBD" onclick="mostrarSubMenu()"><img src="../appsArt/bdOnPasiva.png"></a></li>
-						<ul class="submenuAdmon">
-							<li class="li"><a href="">Instalar BD</a></li>
-							<!--<li class="li"><a href="?pg=$p00'.crypt($p00,"$2y$10$".$salt).'">Reiniciar BD</a></li>-->
-							<li class="li"><a id="reiniciarBD" href="#" onClick="reinstalarBD()" style="cursor:pointer"><img src="../appsArt/reiniciar.svg"></a></li>
-						</ul>
+						<li class="li"><a id="reiniciarBD" href="#" onclick="reinstalarBD()"><img src="../appsArt/bdOnPasiva.png"></a></li>						
 						<li class="li"><a id="admon" onclick="mostrarSubMenu()"><img src="../appsArt/adminOnPasiva.png"></a></li>                        							
 							<ul class="submenuAdmon">
 								<li class="li"><a href="?pg=$p01'.crypt($p01,"$2y$10$".$salt).'">Usuarios</a></li>
