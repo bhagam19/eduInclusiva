@@ -141,6 +141,42 @@
                 VALUES (-0000000005,2021,11,09,12,00,00,"127.0.0.1","chrome",1,"**********","<a href=http://../principal.php>principal</a>")			
             ';
         insertarRegistros();
+    //########## CREAR UNA TABLA DE "PRUEBA" ##########
+        // Preparamos la consulta SQL
+        $tabla = 'prueba';
+        $sql=
+            '
+                CREATE TABLE IF NOT EXISTS '.$tabla.'(
+                    id int NOT NULL AUTO_INCREMENT,
+                    nombre varchar(20) NOT NULL,
+                    num1 int(2) NOT NULL,
+                    num2 int(2),
+                    num3 int(2),
+                    PRIMARY KEY(id)
+                )
+            ';
+        //Ejecutar
+        crearTabla();
+        //########## INGRESAR CONTENIDO A LA TABLA "GRADOS POR JORNADA" ##########
+        $gradosXjornada = array(
+            array("Preescolar",0,1,2),
+            array("Primero",0,1,2),
+            array("Segundo",0,1,2),
+            array("Tercero",0,1,2),
+            array("Cuarto",0,1,2),
+            array("Quinto",0,1,2),
+            array("Sexto",0,1,2),
+            array("Séptimo",0,1,2),
+            array("Octavo",0,1,2),
+            array("Noveno",0,1,2),
+            array("Décimo",0,1,2),
+            array("Once",0,1,2),
+        );        
+        foreach ($gradosXjornada as $gradoXjornada){
+            $sql='INSERT INTO '.$tabla.' (nombre, num1, num2, num3) 
+                VALUES ("'.$gradoXjornada[0].'", '.$gradoXjornada[1].','.$gradoXjornada[2].','.$gradoXjornada[3].')';
+            insertarRegistros();		
+        }      
     //########## CREAR UNA TABLA DE "OPCIONES" ##########
         // Preparamos la consulta SQL
         $tabla = 'opciones';
@@ -2966,7 +3002,7 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
                     id int NOT NULL AUTO_INCREMENT,
-                    name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    name varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';
@@ -2989,7 +3025,7 @@
             '
                 CREATE TABLE IF NOT EXISTS '.$tabla.' (
                     id int NOT NULL AUTO_INCREMENT,
-                    name varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+                    name varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
                     PRIMARY KEY(id)
                 )
             ';

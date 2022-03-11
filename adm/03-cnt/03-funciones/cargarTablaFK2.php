@@ -1,6 +1,6 @@
 <?php
     $j=0;    
-    while($flq2=mysqli_fetch_row($query2)){   //$flq2 es un arr. multidemensional que contiene los registros devueltos por la consulta hecha.
+    while($flq2=mysqli_fetch_row($query2)){   //$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
         $rc=count($flq2);
         //echo "<br>Está contando ".$rc." celdas.<br>";
         $fk=$flq2[0];
@@ -13,7 +13,7 @@
         include dirname(__FILE__).'../../../01-mdl/cnx.php';
         $clmns=$cnx->query("SHOW COLUMNS FROM ".$tblRef);
         $todosCampos=array();
-        //$nomCampoRef; //Al parecer esta variable no se está utilizando. Revisar si se puede eliminar.
+        $nomCampoRef; //Al parecer esta variable no se está utilizando. Revisar si se puede eliminar.
         $i=0;
         while($fl=mysqli_fetch_row($clmns)){
             $todosCampos[$i] = $fl[0];
@@ -56,52 +56,29 @@
     //#################### Las tablas con FK, como sería el caso para este archivo "cargarTablaFK1.php", inician realmente aquí. #############
     $case="todo";
 	include dirname(__FILE__).'../../../03-cnt/03-funciones/buscarEnBD.php';
-    //echo "<br><br>".$consulta1; 
+    echo "<br><br>".$consulta1; 
     $d1=0;
-    while($flq1=mysqli_fetch_array($query1)){
-        if ($tbl="estudiantes"){
-            $respuesta.='
-			    <tr id="fila" onclick="mostrarDatosEstudiantes('.$flq1[0].')">
-		    ';
-            for($d2=0;$d2<count($campos);$d2++){
-                $campoAVerificar=$campos[$d2];
-                $retorno=esFK($campoAVerificar,$d1,$d2);
-                if($d2==0){
-                    $respuesta.='
-                    <!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
-                    <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
-                    ';
-                }else{
-                    $respuesta.='
-                        <td class="sticky'.($d2+1).'" style="text-align:left">
-                            <img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
-                            '.$retorno.'
-                        </td>				
-                    ';				
-                }
-            }
-        }else{
-            $respuesta.='
-                <tr>
-            ';
-            for($d2=0;$d2<count($campos);$d2++){
-                $campoAVerificar=$campos[$d2];
-                $retorno=esFK($campoAVerificar,$d1,$d2);
-                if($d2==0){
-                    $respuesta.='
-                    <!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
-                    <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
-                    ';
-                }else{
-                    $respuesta.='
-                        <td class="sticky'.($d2+1).'" style="text-align:left">
-                            <img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
-                            '.$retorno.'
-                        </td>				
-                    ';				
-                }
-            }
-        }
+    while($flq1=mysqli_fetch_array($query1)){//$fila1 es un arr. multidemensional que contiene arr. con cada registro de cada tabla.
+		$respuesta.='
+			<tr>
+		';
+		for($d2=0;$d2<count($campos);$d2++){
+            $campoAVerificar=$campos[$d2];
+            $retorno=esFK($campoAVerificar,$d1,$d2);
+			if($d2==0){
+				$respuesta.='
+				<!--<td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>-->
+                <td class="sticky'.($d2+1).'" id"">'.$retorno.'</td>
+				';
+			}else{
+				$respuesta.='
+					<td class="sticky'.($d2+1).'" style="text-align:left">
+						<img style="width:10px;height:10px;!important" title="Click para modificar" src="../appsArt/editarOn.png" onclick="actualizarInputUsuario(this.parentNode.id,'.$retorno.',\'nombres\',\'nombresAct'.$retorno.'\')">
+						'.$retorno.'
+					</td>				
+				';				
+			}
+		}
 		$respuesta.="	
 			<td class='img'>				
 				<img src='../appsArt/eliminarOn.png' title='Eliminar' onclick='eliminarRegistros(".$flq1[0].", \"".trim($tbl)."\", ".json_encode($campos).")'/>

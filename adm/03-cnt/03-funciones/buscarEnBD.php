@@ -79,7 +79,7 @@
                 SELECT COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM information_schema.KEY_COLUMN_USAGE 
                 WHERE information_schema.KEY_COLUMN_USAGE.TABLE_SCHEMA = 'Adolfo_eduinclusiva' 
                 AND information_schema.KEY_COLUMN_USAGE.TABLE_NAME = '".$tbl."'
-                AND information_schema.KEY_COLUMN_USAGE.CONSTRAINT_NAME != 'PRIMARY'
+                AND information_schema.KEY_COLUMN_USAGE.CONSTRAINT_NAME like '%ibfk%'
             ";
         break;
     }

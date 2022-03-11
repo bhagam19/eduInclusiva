@@ -23,7 +23,7 @@
                                     <input type="submit" value="Carga Rápida / Reestablecer BD" />
                                 </form>						
 						</div>	
-						<div class="contenedorTablar">					
+						<div class="contenedorTabla">					
 						<table class="tablaBD">
 							<thead >
 								<tr class="stickyHead1">
