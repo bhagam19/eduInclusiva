@@ -4,25 +4,10 @@
 		include dirname(__FILE__).'../../01-crudLogin/00-formularioLogin.php';
 		include dirname(__FILE__).'../../01-crudLogin/06-formularioNuevoUsuario.php';
 		echo'
-			<div id="appsContenedor">';
-				/*$datosApp=array(
-					array("","appsArt/planeador.png","Planeador"),
-					array("","appsArt/DUA.png","EduInclusiva")
-				);
-				foreach ($datosApp as $App) {
-					echo '
-						<div id="boton">
-							<a><img src='.$App[1].'><p>'.$App[2].'</p></a>
-						</div> 
-					';
-				}
-				*/
-		echo'
-			</div>
 			<div id="parche">
 			</div>
 			<div id="h2">
-				<H2>¡Inicia sesión y apoya la inclusión escolar!</H2>
+				<H2>¡Inicia sesión y has parte de la educación inclusiva!</H2>
 			</div>
 		';
 	}else{

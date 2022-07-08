@@ -25,13 +25,12 @@
 	color:#e6ff07;
 	color:#8bff07;
 	color:#02aa64;
-
   }
 html {
 	font-family: calibri, asap;
 	width: 99%;	
 	background:#020a22;
-	background-image:url("appsArt/fondo.jpg");	
+  background-image:url("appsArt/fondo.jpg");
 	overflow:hidden;
 }
 #appsContenedorGlobal {
@@ -44,8 +43,8 @@ html {
 	border:1px solid var(--Off);	
 	background: var(--fondo03);
 	border-radius: 15px 0px 15px 0px;
-	z-index: 3;	
-	user-select: none;	
+	z-index: 3;
+	user-select: none;
 }
 /*==== Encabezado ====*/
 #appsEncabezadoGral {
@@ -609,6 +608,8 @@ input:focus {
   }
 /*====Tablas====*/
 .contenedorTabla{
+	position:absolute;
+	top:100px;
 	position:relative;
 	top:40px;
 	left:30px;
@@ -616,7 +617,9 @@ input:focus {
 	max-width:96%;	
 	max-height:730px;
 	padding-top: 20px;
-	overflow: scroll;
+	max-width: 98%;
+	max-height: 98%;
+	overflow: scroll;	
 }
 ::-webkit-scrollbar {
 	width: 5px;
@@ -644,7 +647,7 @@ input:focus {
 	color: var(--OnPasivo);
 }
 .tablaBD{
-	table-layout: auto;	
+	table-layout: absolute;	
 	position: relative;
 	top:-20px;
 	left:0px;
