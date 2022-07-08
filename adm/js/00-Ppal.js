@@ -5,72 +5,125 @@ function mostrarFormularios(clase){
 }
 function mostrarMenu(){		
 	$('.menuNavegacion').css({"border-right":"1px solid #80c0fc"});
+	$('.menuNavegacion').animate({width:'200px'},"fast",function(){
+		$('.li').animate({width:'180px'},"fast",function(){
+			$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
+			$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Reinstalar BD');				
+			$('#personas').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Personas');
+			$('#categorias').html('<img style="width:25px;height:25px" src="../appsArt/categoriasOn.png">' + 'Categorias');
+			$('#Reportes').html('<img style="width:25px;height:25px" src="../appsArt/reportesOn.png">' + 'Reportes');
+			$('#general').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Información General');
+			$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Hogar');
+			$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/saludOn.png">' + 'Entorno Salud');
+			$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/educativoOn.png">' + 'Entorno Educativo');
+			$('#piar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'PIAR');
+		});
+	});
+	/*
 	if(screen.width<800){
 		//alert(screen.width);
 		$('.menuNavegacion').animate({width:'420px'},"fast",function(){
 			$('.li').animate({width:'410px'},"fast",function(){
 				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
-				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
-				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');
+				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/bdOn.png">' + 'Reinstalar BD');
+				$('#personas').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Personas');
+				$('#categorias').html('<img style="width:25px;height:25px" src="../appsArt/categoriasOn.png">' + 'Categorias');
+				$('#Reportes').html('<img style="width:25px;height:25px" src="../appsArt/reportesOn.png">' + 'Reportes');
+				$('#general').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Información General');
+				$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'Entorno Hogar');
+				$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/saludOn.png">' + 'Entorno Salud');
+				$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/educativoOn.png">' + 'Entorno Educativo');
+				$('#piar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOn.png">' + 'PIAR');
 			});
 		});
 	}else{		
-		$('.menuNavegacion').animate({width:'180px'},"fast",function(){
-			$('.li').animate({width:'160px'},"fast",function(){
-				$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOn.png">' + 'Inicio');
-				$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOn.png">' + 'Ver Base de Datos');
-				$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOn.png">' + 'Adminstración BD');
-				$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../art/reiniciar.svg">' + 'Reinstalar BD');				
-			});
-		});
+		
 	}
+	*/
 }
 function ocultarMenu(){
+	$('.menuNavegacion').css({"border-right":"none"});
+	$('.menuNavegacion').css({'overflow-y':'hidden'});
+	$('.submenuPersonas').css({"display":"none"});
+	$('.submenuCategorias').css({"display":"none"});
+	$('.submenuReportes').css({"display":"none"});
+	$('.submenuGeneral').css({"display":"none"});
+	$('.submenuHogar').css({"display":"none"});
+	$('.submenuSalud').css({"display":"none"});
+	$('.submenuEducativo').css({"display":"none"});
+	$('.submenuPIAR').css({"display":"none"});
+	$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
+	$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+	$('#personas').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
+	$('#categorias').html('<img style="width:25px;height:25px" src="../appsArt/categoriasOnPasiva.png">');
+	$('#Reportes').html('<img style="width:25px;height:25px" src="../appsArt/reportesOnPasiva.png">');
+	$('#general').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
+	$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+	$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/saludOnPasiva.png">');
+	$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/educativoOnPasiva.png">');
+	$('#piar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');	
+	$('.li').animate({width:'30px'},"fast");
+	$('.menuNavegacion').animate({width:'45px'},"fast");
+	/*	
 	if(screen.width<800){
 		$('.menuNavegacion').animate({width:'50px'},"fast"); 
 		$('.menuNavegacion').css({"border-right":"none"});
+		$('.menuNavegacion').css({'overflow-y':'hidden'});
 		$('.li').animate({width:'45px'},"fast");
 		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
-		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
-		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
-		$('.submenuAdmon').css({"display":"none"});
-		$('#reiniciarBD').html('<img style="width:40px;height:40px" src="../art/reiniciar.svg">');		
-	}else{	
-		$('.menuNavegacion').css({"border-right":"none"});	
-		$('.submenuAdmon').css({"display":"none"});
-		$('#home').html('<img style="width:25px;height:25px" src="../appsArt/homeOnPasiva.png">');
-		$('#verBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
-		$('#admon').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');		
-		$('#reiniciarBD').html('<img style="width:15px;height:15px" src="../art/reiniciar.svg">');	
-		$('.menuNavegacion').animate({width:'35px'},"fast");
-		$('.li').animate({width:'30px'},"fast");
+		$('#reiniciarBD').html('<img style="width:25px;height:25px" src="../appsArt/bdOnPasiva.png">');
+		$('#personas').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
+		$('.submenuPersonas').css({"display":"none"});
+		$('#categorias').html('<img style="width:25px;height:25px" src="../appsArt/categoriasOnPasiva.png">');
+		$('.submenuCategorias').css({"display":"none"});
+		$('#Reportes').html('<img style="width:25px;height:25px" src="../appsArt/reportesOnPasiva.png">');
+		$('.submenuReportes').css({"display":"none"});
+		$('#general').html('<img style="width:25px;height:25px" src="../appsArt/adminOnPasiva.png">');
+		$('.submenuGeneral').css({"display":"none"});
+		$('#hogar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuHogar').css({"display":"none"});
+		$('#salud').html('<img style="width:25px;height:25px" src="../appsArt/saludOnPasiva.png">');
+		$('.submenuSalud').css({"display":"none"});
+		$('#educativo').html('<img style="width:25px;height:25px" src="../appsArt/educativoOnPasiva.png">');
+		$('.submenuEducativo').css({"display":"none"});
+		$('#piar').html('<img style="width:25px;height:25px" src="../appsArt/familiaOnPasiva.png">');
+		$('.submenuPIAR').css({"display":"none"});
+	}else{			
 	}
+	*/
 }
-function mostrarSubMenu(){
+function mostrarSubMenu(submenu){	
+	if($(submenu).css("display")==="none"){
+		$(submenu).slideDown();
+		$(submenu).css({"display":"block"});
+		$('.menuNavegacion').animate({width:'210px'},"fast");
+	}else{
+		$(submenu).css({"display":"block"});
+		$(submenu).slideUp("fast",function(){
+		$('.menuNavegacion').animate({width:'180px'},"fast");
+		});
+	}	
+	if(submenu==".submenuEducativo"){
+		$('.menuNavegacion').css({'overflow-y':'scroll'});
+	}
+	/*
 	if(screen.width<800){
-		if($('.submenuAdmon').css("display")==="none"){
-			$('.submenuAdmon').slideDown();
-			$('.submenuAdmon').css({"display":"block"});
+		if($(submenu).css("display")==="none"){
+			$(submenu).slideDown();
+			$(submenu).css({"display":"block"});
 			$('.menuNavegacion').animate({width:'480px'},"fast");
 		}else{
-			$('.submenuAdmon').css({"display":"block"});
-			$('.submenuAdmon').slideUp("fast",function(){
+			$(submenu).css({"display":"block"});
+			$(submenu).slideUp("fast",function(){
 			$('.menuNavegacion').animate({width:'420px'},"fast");
 			});
+		}
+		if(submenu==".submenuEducativo"){
+			$('.menuNavegacion').css({'overflow':'scroll'});
 		}	
-	}else{
-		if($('.submenuAdmon').css("display")==="none"){
-			$('.submenuAdmon').slideDown();
-			$('.submenuAdmon').css({"display":"block"});
-			$('.menuNavegacion').animate({width:'210px'},"fast");
-		}else{
-			$('.submenuAdmon').css({"display":"block"});
-			$('.submenuAdmon').slideUp("fast",function(){
-			$('.menuNavegacion').animate({width:'180px'},"fast");
-			});
-		}	
+	}else{		
 	}
+	*/
 }
 /*
 $(document).ready(function(){
@@ -108,11 +161,9 @@ function mostrarFormCargueExcel(){
 	  }  
 }
 function reinstalarBD(){
-
 	var confirmar=confirm("¿Realmente desea reinstalar la Base de Datos?\n\nEsta acción no se puede deshacer.");
-
 	if(confirmar){		
-		window.open("/inventarioIET/03-borrarTablas.php");
+		window.open("/eduInclusiva/adm/01-mdl/borrarBD.php");
 		// var xmlhttp = new XMLHttpRequest();
 		// xmlhttp.open("GET","../borrarTablas.php",false);
 		// xmlhttp.send();
@@ -120,7 +171,6 @@ function reinstalarBD(){
 	}else{
 		alert("No se reinstaló la Base de Datos.");
 	}
-
 }
 function ucwords(f){
     return f.replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1){

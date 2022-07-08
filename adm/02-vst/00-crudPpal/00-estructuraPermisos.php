@@ -45,7 +45,7 @@
 			include dirname(__FILE__).'../../01-crudLogin/02-formularioNuevaContrasena.php';
 			include dirname(__FILE__).'/03-menuNavegacion.php';
 			echo'
-				<div id="contenedor">
+				<div id="contenedor" onmouseenter="ocultarMenu()">
 			';
 			include($pagina);
 			echo'
